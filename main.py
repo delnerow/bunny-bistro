@@ -11,7 +11,7 @@ display = pygame.display.set_mode((500, 500))
 image = pygame.image.load('exemplo.png')
 
 # colocando image surface no display surface
-display.blit(image,(100,100))
+display.blit(image,(1000,1000))
 
 pygame.time.wait(5000)
 
