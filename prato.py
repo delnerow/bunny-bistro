@@ -37,7 +37,9 @@ class Prato:
             self.receita=pratos[self.ingredientes]
         else:
             self.receita="invalido"
+        return self.receita
+            
     # 
     # busca uma receita com os
     # ingredientes atuais
-    #
+    # e retorna oq for achado
