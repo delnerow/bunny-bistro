@@ -11,7 +11,7 @@ class Maquina:
     # e sabendo qual o gameController
     
     def ocupar(self, bandeja):
-        if prato is not None:
+        if bandeja is not None:
             self.prato_atual.ingredientes= bandeja.ingredientes
             bandeja.ingredientes=[]
     #
