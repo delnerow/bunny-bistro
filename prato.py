@@ -1,6 +1,6 @@
 
 #muito basico, da pra trocar as strings por números no futuro e melhorar o desempenho
-pratos={("tomateC","cebolaC"):"Caponata de Tomate", ("graoCB","farinhaB","leiteB"):"hamburguer",("brocolisCBF","farinhaBF","leiteBF"):"quiche"}
+pratos={("tomateC","cebolaC"):"Caponata", ("graoCB","farinhaB","leiteB"):"hamburguer",("brocolisCBF","farinhaBF","leiteBF"):"quiche"}
 
 # DISCLAIMER:
 # Pensei em duas dinâmicas: o prato sempre tem ingredientes e vc leva o prato as maquinas
@@ -24,17 +24,9 @@ class Prato:
     # adiciona um ingrediente ao prato
     #
     
-    def prepara_ingrediente(self, tecnica):
-        for i in range(len(self.ingredientes)):
-            self.ingredientes[i]=self.ingredientes[i]+tecnica
-    # 
-    # atualiza todos os ingredientes apos
-    # cortar, bater ou fornear
-    #
-    
     def validar_receita(self):
         if tuple(self.ingredientes) in pratos:
-            self.receita=pratos[self.ingredientes]
+            self.receita=pratos[tuple(self.ingredientes)]
         else:
             self.receita="invalido"
         return self.receita

@@ -2,42 +2,40 @@ maquinas={"tabua":"C", "batedeira":"B","forno":"F"}
 from prato import Prato
 from gameController import GameController
 class Maquina:
-    def _init(self,tipo, gc):
+    def __init__(self,tipo):
         self.tipo=tipo
         self.prato_atual= Prato() #acho que isso inicializa como vazia
-        self.gc=gc
     #
     # inicializa uma máqina com tipo definido
     # e desocupada, (acho q pode virar bool)
     # e sabendo qual o gameController
     
-    def ocupar(self):
-        if self.gc.holderPrato is not None:
-            self.prato_atual= self.gc.holderPrato
-            self.gc.holderPrato=None
+    def ocupar(self, bandeja):
+        if prato is not None:
+            self.prato_atual.ingredientes= bandeja.ingredientes
+            bandeja.ingredientes=[]
     #
-    # rouba prato do gameController
+    # esvazia ingredientes da bandeja
     # e ocupa a máquina
     #
     
     def cook(self):
         if(self.prato_atual is not None):
-            self.prato_atual
-            cooked = False
+            cooked = True
             #lançar minigame
             if cooked:
                 for i in range(len(self.prato_atual.ingredientes)):
-                   self.prato_atual.ingredientes[i]=self.prato_atual.ingredientes.append(maquinas[self.tipo]) 
+                   self.prato_atual.ingredientes[i]=self.prato_atual.ingredientes[i]+maquinas[self.tipo]
     #
     # atualiza estados dos ingredientes do prato atual
     # 
     #
     
-    def free(self):
-        if self.gc.holderPrato is not None and self.prato_atual is not None:
-            self.gc.holderPrato=self.prato_atual
+    def free(self, bandeja):
+        if bandeja != None and self.prato_atual !=  bandeja:
+            bandeja.ingredientes=self.prato_atual.ingredientes
             self.prato_atual= Prato()
     #
-    # retorna prato ao GameController
+    # retorna ingredientes a bandeja
     # e se desocupa
     #
