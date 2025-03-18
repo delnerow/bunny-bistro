@@ -24,6 +24,13 @@ class Prato:
     # adiciona um ingrediente ao prato
     #
     
+    def limpar_comida(self):
+        self.ingredientes = []
+        self.receita = ""
+    # 
+    # esvazia o prato
+    #   
+     
     def validar_receita(self):
         if tuple(self.ingredientes) in pratos:
             self.receita=pratos[tuple(self.ingredientes)]

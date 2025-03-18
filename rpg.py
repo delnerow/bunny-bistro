@@ -29,14 +29,13 @@ def printIngredientes():
         print("")
     print(" = ", bandeja.validar_receita())
 while len(balcao)>0:
-    os.system('cls')
+    #os.system('cls')
     print("Score:", score)   
     print("[t] Tábua de Corte")
     print("[b] Batedeira")
     print("[f] Forno")
     print("[n] Novo Prato")
     print("[i] Ingredientes")
-    print("[b] Atender balcão")
     printIngredientes()
     printCliente()
     action = input("o que coelhinho deseja fazer?")
@@ -54,7 +53,7 @@ while len(balcao)>0:
         forno.cook()
         forno.free(bandeja)
     elif action == "n":
-        bandeja = Prato()
+        bandeja.limpar_comida()
     elif action == "i":
         print("[1] Tomate")
         print("[2] Cebola")
@@ -69,4 +68,4 @@ while len(balcao)>0:
         score = score + balcao[int(action)].comer(bandeja) 
         del balcao[int(action)]
 os.system('cls')
-print("boa camara, conseguiu ", score)
+print("boa camarada, conseguiu ", score)
