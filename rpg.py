@@ -1,5 +1,6 @@
 from cliente import Clientes
-from maquina import Maquina
+from ingrediente import Cebola, Tomate, Grao, Brocolis, Leite, Farinha
+from maquina import Maquina, Batedeira, Forno, Tabua
 from prato import Prato
 import os
 
@@ -13,9 +14,9 @@ altair = Clientes(0, "hamburguer","amongus")
 beto = Clientes(0, "quiche","don quixote")
 balcao =[carlos,jose,altair,beto]
 
-tabua = Maquina("tabua")
-batedeira = Maquina("batedeira")
-forno = Maquina("forno")
+tabua = Tabua()
+batedeira = Batedeira()
+forno = Forno()
 
 def printCliente():
     print("=====Clientes=====")
@@ -25,11 +26,11 @@ def printCliente():
 def printIngredientes():
     print("=====Prato atual=====")
     for c in bandeja.ingredientes:
-        print(c, end='')
+        print(c.nome+"("+str(c.estadoNumerico())+")", end='')
         print("")
     print(" = ", bandeja.validar_receita())
 while len(balcao)>0:
-    #os.system('cls')
+    os.system('cls')
     print("Score:", score)   
     print("[t] Tábua de Corte")
     print("[b] Batedeira")
@@ -41,16 +42,12 @@ while len(balcao)>0:
     action = input("o que coelhinho deseja fazer?")
     if action == "t":
         tabua.ocupar(bandeja)
-        tabua.cook()
         tabua.free(bandeja)
-        
     elif action == "b":
         batedeira.ocupar(bandeja)
-        batedeira.cook()
         batedeira.free(bandeja)
     elif action == "f":
         forno.ocupar(bandeja)
-        forno.cook()
         forno.free(bandeja)
     elif action == "n":
         bandeja.limpar_comida()
@@ -62,7 +59,13 @@ while len(balcao)>0:
         print("[5] Farinha")
         print("[6] Grão de Bico")
         action = input("o que coelhinho deseja fazer?")
-        conversaofodase={"1":"tomate","2":"cebola","3":"brocolis","4":"leite","5":"farinha","6":"grao"}
+        tomate = Tomate()
+        cebola = Cebola()
+        brocolis = Brocolis()
+        leite = Leite()
+        farinha = Farinha()
+        grao = Grao()
+        conversaofodase={"1":tomate,"2":cebola,"3":brocolis,"4":leite,"5":farinha,"6":grao}
         bandeja.add_ingrediente(conversaofodase[action])
     else:
         score = score + balcao[int(action)].comer(bandeja) 

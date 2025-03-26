@@ -1,6 +1,12 @@
 
-#muito basico, da pra trocar as strings por números no futuro e melhorar o desempenho
-pratos={("tomateC","cebolaC"):"Caponata", ("graoCB","farinhaB","leiteB"):"hamburguer",("brocolisCBF","farinhaBF","leiteBF"):"quiche"}
+#Código numérico para relacionar receitas
+pratos={(1,1,0,0,0,0):"Caponata", (0,0,4,2,2,0):"hamburguer",(0,0,0,6,6,7):"quiche"}
+# Código das receitas (T de tomate, C de cebola... / C de corte, B de bater e A de assar...)
+# TCGFLB       C B A  CB CA BA CBA
+# 000000       1 2 3  4  5  6  7
+# Caponata: 110000
+# Hamburguer: 004220
+# Quiche : 000667
 
 # DISCLAIMER:
 # Pensei em duas dinâmicas: o prato sempre tem ingredientes e vc leva o prato as maquinas
@@ -32,8 +38,11 @@ class Prato:
     #   
      
     def validar_receita(self):
-        if tuple(self.ingredientes) in pratos:
-            self.receita=pratos[tuple(self.ingredientes)]
+        receitaNumerica=[0,0,0,0,0,0]
+        for ingrediente in self.ingredientes:
+            receitaNumerica[ingrediente.indiceNumerico]=ingrediente.estadoNumerico()
+        if tuple(receitaNumerica) in pratos:
+            self.receita=pratos[tuple(receitaNumerica)]
         else:
             self.receita="invalido"
         return self.receita
