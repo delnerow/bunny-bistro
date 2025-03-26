@@ -1,46 +1,90 @@
-maquinas={"tabua":"C", "batedeira":"B","forno":"F"}
 from prato import Prato
-from gameController import GameController
+
 class Maquina:
-    def __init__(self,tipo):
-        self.tipo=tipo
+    def __init__(self):
         self.prato_atual= Prato()
+        self.ocupada=False
     #
-    # inicializa uma máqina com tipo definido
-    # e desocupada, (acho q pode virar bool)
-    # e sabendo qual o gameController
+    # inicializa uma máqina (superclasse)
+    # e desocupada
+    # 
     
     def ocupar(self, bandeja):
-        if bandeja.ingredientes != []:
-            self.prato_atual.ingredientes= bandeja.ingredientes
-            bandeja.limpar_comida()
+        if(not self.ocupada):
+            if bandeja.ingredientes != []:
+                self.prato_atual.ingredientes= bandeja.ingredientes
+                bandeja.limpar_comida()
+                self.__operar()
+            else:
+                print("Erro: nada na bandeja")
         else:
-            print("Erro: nada na bandeja")
+            print("Erro: máquina ocupada")
+        
     #
     # esvazia ingredientes da bandeja
-    # e ocupa a máquina
+    # ocupa a máquina
+    # começa a operar
+    #
+    
+    def __operar(self):
+        if(self.prato_atual.ingredientes != []):
+            #lançar minigame
+            success = True
+            if success:
+                self.cook()
+            else:
+                print("Erro: falhou no minigame")   
+                
+    # Iniciaria minigame para ver se irá realmente cozinhar
+    # e começa a cozinhar
     #
     
     def cook(self):
-        if(self.prato_atual.ingredientes != []):
-            cooked = True
-            #lançar minigame
-            if cooked:
-                for i in range(len(self.prato_atual.ingredientes)):
-                   self.prato_atual.ingredientes[i]=self.prato_atual.ingredientes[i]+maquinas[self.tipo]
-            else:
-                print("Erro: nada para cozinhar")
-    # atualiza estados dos ingredientes do prato atual
+        
+        raise NotImplementedError("Subclasses must implement this method")
     # 
+    # Cada subclasse tem o seu próprio
+    # dependendo da maquina da cozinha
     #
     
     def free(self, bandeja):
-        if bandeja.ingredientes!=[] and self.prato_atual.ingredientes !=  []:
+        if bandeja.ingredientes==[] and self.prato_atual.ingredientes !=  []:
             bandeja.ingredientes=self.prato_atual.ingredientes
             self.prato_atual.limpar_comida()
         else:
             print("Erro: bandeja cheia/maquina já vazia")
     #
-    # retorna ingredientes a bandeja
+    # retorna ingredientes à bandeja
     # e se desocupa
+    #
+class Tabua(Maquina):
+    def __init__(self):
+        super().__init__()
+    def cook(self):
+        for i in range(len(self.prato_atual.ingredientes)):
+            self.prato_atual.ingredientes[i].cortar()
+    #
+    # tabua de corte
+    # ela corta
+    #
+               
+class Batedeira(Maquina):
+    def __init__(self):
+        super().__init__()
+    def cook(self):
+        for i in range(len(self.prato_atual.ingredientes)):
+            self.prato_atual.ingredientes[i].bater()
+    #
+    # batedeira
+    # ela bate
+    #
+class Forno(Maquina):
+    def __init__(self):
+        super().__init__()
+    def cook(self):
+        for i in range(len(self.prato_atual.ingredientes)):
+            self.prato_atual.ingredientes[i].assar()
+    #
+    # forno
+    # ele assa
     #
