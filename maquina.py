@@ -31,7 +31,7 @@ class Maquina:
             #lançar minigame
             success = True
             if success:
-                self.cook()
+                self.cozinhar()
             else:
                 print("Erro: falhou no minigame")   
                 
@@ -39,7 +39,7 @@ class Maquina:
     # e começa a cozinhar
     #
     
-    def cook(self):
+    def cozinhar(self):
         
         raise NotImplementedError("Subclasses must implement this method")
     # 
@@ -60,7 +60,7 @@ class Maquina:
 class Tabua(Maquina):
     def __init__(self):
         super().__init__()
-    def cook(self):
+    def cozinhar(self):
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].cortar()
     #
@@ -71,7 +71,7 @@ class Tabua(Maquina):
 class Batedeira(Maquina):
     def __init__(self):
         super().__init__()
-    def cook(self):
+    def cozinhar(self):
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].bater()
     #
@@ -81,7 +81,7 @@ class Batedeira(Maquina):
 class Forno(Maquina):
     def __init__(self):
         super().__init__()
-    def cook(self):
+    def cozinhar(self):
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].assar()
     #
