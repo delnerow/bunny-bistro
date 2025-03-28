@@ -45,9 +45,17 @@ class Prato:
             self.receita=pratos[tuple(receitaNumerica)]
         else:
             self.receita="invalido"
-        return self.receita
-            
+        return self.receita 
     # 
     # busca uma receita com os
     # ingredientes atuais
     # e retorna oq for achado
+    #
+    
+    
+    def esta_vazio(self):
+        return self.ingredientes == []
+    # 
+    # retorna se o prato esta vazio
+    #
+            

@@ -3,17 +3,18 @@ from prato import Prato
 class Maquina:
     def __init__(self):
         self.prato_atual= Prato()
-        self.ocupada=False
+        self.__ocupada=False
     #
     # inicializa uma máqina (superclasse)
     # e desocupada
     # 
     
     def ocupar(self, bandeja):
-        if(not self.ocupada):
-            if bandeja.ingredientes != []:
+        if(not self.__ocupada):
+            if not bandeja.esta_vazio():
                 self.prato_atual.ingredientes= bandeja.ingredientes
                 bandeja.limpar_comida()
+                self.__ocupada= True
                 self.__operar()
             else:
                 print("Erro: nada na bandeja")
@@ -27,7 +28,7 @@ class Maquina:
     #
     
     def __operar(self):
-        if(self.prato_atual.ingredientes != []):
+        if(not self.prato_atual.esta_vazio()):
             #lançar minigame
             success = True
             if success:
@@ -48,9 +49,10 @@ class Maquina:
     #
     
     def free(self, bandeja):
-        if bandeja.ingredientes==[] and self.prato_atual.ingredientes !=  []:
+        if bandeja.ingredientes==[] and not self.prato_atual.esta_vazio():
             bandeja.ingredientes=self.prato_atual.ingredientes
             self.prato_atual.limpar_comida()
+            self.__ocupada=False
         else:
             print("Erro: bandeja cheia/maquina já vazia")
     #
