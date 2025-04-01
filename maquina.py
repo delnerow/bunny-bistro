@@ -1,15 +1,21 @@
 from prato import Prato
-
+from ClickSprite import ClickableSprite
+import pygame
 class Maquina:
-    def __init__(self):
+    def __init__(self,gc,image,x,y):
         self.prato_atual= Prato()
         self.__ocupada=False
+        self.gc=gc
+        self.sprite = ClickableSprite(image,x,y,self.ocupar)
+        
     #
     # inicializa uma máqina (superclasse)
     # e desocupada
     # 
     
-    def ocupar(self, bandeja):
+    def ocupar(self):
+        bandeja = self.gc.holderPrato
+        print("ocupar")
         if(not self.__ocupada):
             if not bandeja.esta_vazio():
                 self.prato_atual.ingredientes= bandeja.ingredientes
@@ -48,11 +54,13 @@ class Maquina:
     # dependendo da maquina da cozinha
     #
     
-    def free(self, bandeja):
+    def free(self):
+        bandeja=self.gc.holderPrato
         if bandeja.ingredientes==[] and not self.prato_atual.esta_vazio():
             bandeja.ingredientes=self.prato_atual.ingredientes
             self.prato_atual.limpar_comida()
             self.__ocupada=False
+            self.gc.printarPrato()
         else:
             print("Erro: bandeja cheia/maquina já vazia")
     #
@@ -60,32 +68,41 @@ class Maquina:
     # e se desocupa
     #
 class Tabua(Maquina):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,gc,x,y):
+        self.image=pygame.image.load('images/tabua.png').convert_alpha();
+        super().__init__(gc,self.image,x,y)
     def cozinhar(self):
+        print("cozinhar")
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].cortar()
+        self.free()
     #
     # tabua de corte
     # ela corta
     #
                
 class Batedeira(Maquina):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,gc,x,y):
+        self.image=pygame.image.load('images/batedeira.png').convert_alpha();
+        self.image= pygame.transform.scale(self.image, (150, 150))
+        super().__init__(gc,self.image,x,y)
     def cozinhar(self):
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].bater()
+        self.free()
     #
     # batedeira
     # ela bate
     #
 class Forno(Maquina):
-    def __init__(self):
-        super().__init__()
+    def __init__(self,gc,x,y):
+        self.image=pygame.image.load('images/forno.png').convert_alpha()
+        self.image= pygame.transform.scale(self.image, (150, 150))
+        super().__init__(gc,self.image,x,y)
     def cozinhar(self):
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].assar()
+        self.free()
     #
     # forno
     # ele assa
