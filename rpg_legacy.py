@@ -4,7 +4,16 @@ from maquina import Maquina, Batedeira, Forno, Tabua
 from prato import Prato
 import os
 
-
+#a
+# 
+# USE O DEMOCLICKSPRITE.PY
+# 
+# Obsoleto, pois imagems foram adicionadas aos objetos
+# Não roda
+# 
+# 
+# 
+# 
 bandeja = Prato()
 score=0
 
