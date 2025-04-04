@@ -10,15 +10,17 @@ from maquina import Batedeira, Forno, Tabua
 
 pygame.init()
 screen = pygame.display.set_mode((800, 600))
+#iniciando objetos
 coelinho = GameController()
+
 tabua = Tabua(coelinho,50,50)
 forno = Forno(coelinho,50,230)
-
 batedeira = Batedeira(coelinho,50,400)
+
 tomate = Tomate(coelinho, 400,100)
 cebola = Cebola(coelinho,400,300)
 
-#sprite = ClickableSprite(pygame.image.load('images/tabua.png').convert_alpha(), 50, 50, on_click)
+#fazendo os sprites renderizarem
 group = pygame.sprite.Group()
 group.add(tabua.sprite)
 group.add(forno.sprite)
@@ -31,7 +33,7 @@ while running:
     for event in events:
         if event.type == pygame.QUIT:
             running = False
- 
+    # update dos sprites
     group.update(events)
     screen.fill((255, 255, 255))
     group.draw(screen)

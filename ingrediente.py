@@ -19,6 +19,8 @@ class Ingrediente:
     # o índice no código carteado de receita
     # bools indicando o estado culinário do ingrediente
     #
+    # DISCLAIMER: talvez um ingrediente sprite n seja o mesmo que um ingrediente no prato
+    #
     def cortar(self):
         self.__cortado= True
         self.estadoReceita.append(1)
@@ -46,7 +48,7 @@ class Ingrediente:
         
     #
     # um ingrediente clicado informa o GameController dessa escolha
-    #
+    # altera um parâmetro do gameController (ou será melhor uma função só para isso?)
     
     def __clonar__(self, memo):
         # just create a new instance 
@@ -60,23 +62,37 @@ class Ingrediente:
         return estado
     #
     # definindo qual o estado culinário do ingrediente
-    # 
+    # transformando lista de algarismos num número
     #
 class Tomate(Ingrediente):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images/tomate.png').convert_alpha();
         super().__init__("Tomate", 0,gc,self.image,x,y)  
-    def __clonar__(self):
-        # just create a new instance 
+    #
+    # carrega imagem do sprite
+    # define nome e índice na lei da receita
+    #
+    
+    def __clonar__(self): 
         return Tomate(self.gc,0,0) 
- 
+    #
+    # cria nova instância de Tomate
+    #
+
 class Cebola(Ingrediente):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images/cebola.png').convert_alpha();
-        super().__init__("Cebola", 1,gc,self.image,x,y)   
+        super().__init__("Cebola", 1,gc,self.image,x,y)  
+    #
+    # carrega imagem do sprite
+    # define nome e índice na lei da receita
+    #
+     
     def __clonar__(self):
-        # just create a new instance 
         return Cebola(self.gc,0,0)  
+    #
+    # cria nova instância de Ceebola
+    #
 
 class Grao(Ingrediente):
     def __init__(self):
