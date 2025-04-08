@@ -19,9 +19,9 @@ class Level:
         self.player = Player()
 
         #as máquinas da cozinha
-        self.tabua = maquina.Tabua(gc, 200, 400)
-        self.batedeira = maquina.Batedeira(gc, 200, 300)
-        self.forno = maquina.Forno(gc, 200, 200)
+        self.tabua = maquina.Tabua(gc, 50, 400)
+        self.batedeira = maquina.Batedeira(gc, 200, 80)
+        self.forno = maquina.Forno(gc, 425, 80)
 
         self.maquinasGroup = pygame.sprite.Group()
         self.maquinasGroup.add(self.tabua.sprite)
