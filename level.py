@@ -2,6 +2,7 @@ import pygame, sys
 from player import Player
 from ui import UI
 import maquina
+from armazem import Geladeira
 
 class Level:
     def __init__(self, gc):
@@ -28,6 +29,12 @@ class Level:
         self.maquinasGroup.add(self.batedeira.sprite)
         self.maquinasGroup.add(self.forno.sprite)
 
+        #despensa
+        self.geladeira = Geladeira(self.screen)
+
+        self.despensaGroup = pygame.sprite.Group()
+        self.despensaGroup.add(self.geladeira.sprite)
+
     def run(self):
         while True:
             events = pygame.event.get()
@@ -46,6 +53,7 @@ class Level:
         # Atualiza a lógica do jogo aqui
         self.player.update()
         self.maquinasGroup.update(events)
+        self.despensaGroup.update(events)
 
     def print(self):
         # Desenha o fundo
@@ -53,9 +61,13 @@ class Level:
 
         #imprime as máquinas na tela
         self.maquinasGroup.draw(self.screen)
+        self.despensaGroup.draw(self.screen)
 
         #imprime o coelho na tela
         self.screen.blit(self.player.skin, self.player.screenposition)
+
+        #imprime a interface
+        self.geladeira.print()
 
         # Atualiza a tela
         pygame.display.flip()
