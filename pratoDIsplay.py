@@ -10,7 +10,6 @@ class PratoDisplay():
         self.SLOT_SIZE = 64
         self.PADDING = 10
         self.START_X = 20
-        self.START_Y = 50
 
 
     def update_ingrediente(self, ingredientes):
@@ -19,9 +18,8 @@ class PratoDisplay():
     def display(self, x, y):
         self.screen.blit(self.image, (x, y))
         self.group.draw(self.screen)
-        x = self.START_X
         for item in self.items:
-            self.screen.blit(item.surface, (x, self.START_Y))
+            self.screen.blit(item.surface, (x, self.y))
             x += self.SLOT_SIZE + self.PADDING
     
     def update(self, events):

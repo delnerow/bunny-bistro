@@ -60,7 +60,8 @@ class Level:
         self.maquinasGroup.update(events)
         self.armazemGroup.update(events)
         self.pratoDisplay.update_ingrediente(self.player.prato.ingredientes)
-
+        if(self.player.prato.ingredientes != []):
+            print(self.player.prato.ingredientes[0].nome)
         self.geladeira.update(events)
         self.despensa.update(events)
         self.pratoDisplay.update(events)
@@ -79,7 +80,7 @@ class Level:
         #imprime a interface
         self.geladeira.print()
         self.despensa.print()
-        self.pratoDisplay.display(500,500)
+        self.pratoDisplay.display(700,300)
 
         # Atualiza a tela
         pygame.display.flip()
