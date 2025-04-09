@@ -62,7 +62,7 @@ class Level:
         self.pratoDisplay.update_ingrediente(self.player.prato.ingredientes)
         self.geladeira.update(events)
         self.despensa.update(events)
-        self.pratoDisplay.update(events)
+        #self.pratoDisplay.update(events)
 
     def print(self):
         # Desenha o fundo
@@ -78,7 +78,7 @@ class Level:
         #imprime a interface
         self.geladeira.print()
         self.despensa.print()
-        self.pratoDisplay.display(700,300)
+        self.pratoDisplay.display(700,430)
 
         # Atualiza a tela
         pygame.display.flip()

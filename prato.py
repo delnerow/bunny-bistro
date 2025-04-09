@@ -16,7 +16,7 @@ interface={1:"cortado",2:"batido",3:"assado",12:"cortado e batido",13:"cortado e
 # atualiza ele e depois retorna ao prato. adotei essa última
 # 
 
-#TODO
+
 #proibir de pegar mais de um ingrediente
 
 class Prato:
