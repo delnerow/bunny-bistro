@@ -12,7 +12,8 @@ class GameController:
         self.screen = pygame.display.set_mode((16*64, 9*64))
         self.holderPrato = Prato()
         self.time=0
-        self.level = Level(self, self.screen)
+        self.player = Player()
+        self.level = Level(self, self.screen, self.player)
 
     #
     def printarPrato(self):

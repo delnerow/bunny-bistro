@@ -5,7 +5,7 @@ import maquina
 from armazem import Geladeira, Despensa
 
 class Level:
-    def __init__(self, gc, screen):
+    def __init__(self, gc, screen, player):
         pygame.display.set_caption("tituloo")
         self.clock = pygame.time.Clock()
         self.background = pygame.image.load("images\cozinha_demo.png").convert_alpha()
@@ -17,7 +17,7 @@ class Level:
         self.ui = UI() 
 
         #o nosso player
-        self.player = Player()
+        self.player = player
 
         #as máquinas da cozinha
         self.tabua = maquina.Tabua(gc, 64*3.5,64*5)
