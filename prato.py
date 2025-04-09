@@ -30,6 +30,7 @@ class Prato:
     
     def add_ingrediente(self, ingrediente):
         self.ingredientes.append(ingrediente)
+        print("works")
     # 
     # adiciona um ingrediente ao prato
     #

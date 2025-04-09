@@ -14,7 +14,7 @@ class Maquina:
     # 
     
     def ocupar(self):
-        bandeja = self.gc.holderPrato
+        bandeja = self.gc.player.prato
         print("ocupar")
         if(not self.__ocupada):
             if not bandeja.esta_vazio():
@@ -55,7 +55,7 @@ class Maquina:
     #
     
     def free(self):
-        bandeja=self.gc.holderPrato
+        bandeja=self.gc.player.prato
         if bandeja.ingredientes==[] and not self.prato_atual.esta_vazio():
             bandeja.ingredientes=self.prato_atual.ingredientes
             self.prato_atual.limpar_comida()

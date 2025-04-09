@@ -37,6 +37,8 @@ class Geladeira(Armazem):
         self.image = pygame.image.load("images/geladeira.png").convert_alpha()
         
         self.ingredientes.append(Tomate(gc, self.x_menu + 100, self.y_menu))
+        self.ingredientes.append(Cebola(gc, self.x_menu + 200, self.y_menu))
+        
         super().__init__(self.image, gc, x, y, self.ingredientes)
     
     def menu_show(self):

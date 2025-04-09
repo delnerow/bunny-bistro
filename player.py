@@ -33,7 +33,7 @@ class Player:
         self.frame = 0
 
         #inicia o prato do coelho como vazio
-        self.prato = Prato
+        self.prato = Prato()
 
     def update(self):
         #atualiza a posição do coelho na tela
@@ -70,5 +70,5 @@ class Player:
             self.screenposition = Vector2(200, 500)
             self.skin = self.skinVector[3]
     
-        def printOi():
-            print("oi")
+    def printOi(self):
+        print("oi")

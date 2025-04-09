@@ -44,7 +44,7 @@ class Ingrediente:
     def alertarEscolha(self):
         print("beep beep")
         #self.gc.level.player.prato.add_ingrediente(self.__clonar__())
-        self.gc.printOI()
+        self.gc.player.prato.add_ingrediente(self)
         
     #
     # um ingrediente clicado informa o GameController dessa escolha
