@@ -69,4 +69,6 @@ class Player:
         elif newPosition == 3:
             self.screenposition = Vector2(200, 500)
             self.skin = self.skinVector[3]
-         
+    
+        def printOi():
+            print("oi")

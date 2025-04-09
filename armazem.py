@@ -4,11 +4,11 @@ from ClickSprite import ClickableSprite
 from menu import Menu
 
 class Armazem:
-    def __init__(self, image, screen, x, y, ingredientes):
+    def __init__(self, image, gc, x, y, ingredientes):
         self.sprite = ClickableSprite(image, x, y, self.abrir_menu)
         self.menu_image = pygame.image.load("images/menu.png").convert_alpha()
         self.menu_aberto = False
-        self.menu = Menu(screen, ingredientes)
+        self.menu = Menu(gc, ingredientes)
 
     def print(self):
         #o print da geladeira é feito diretamente no level.py

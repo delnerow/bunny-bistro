@@ -5,12 +5,12 @@ import maquina
 from armazem import Geladeira, Despensa
 
 class Level:
-    def __init__(self, gc):
-        pygame.init()
-        self.screen = pygame.display.set_mode((1280, 720))
+    def __init__(self, gc, screen):
         pygame.display.set_caption("tituloo")
         self.clock = pygame.time.Clock()
         self.background = pygame.image.load("images\cozinha_demo.png").convert_alpha()
+        self.background = pygame.transform.scale2x(self.background)
+        self.screen = screen
 
         #controle de jogo
         self.gc = gc
@@ -30,8 +30,8 @@ class Level:
         self.maquinasGroup.add(self.forno.sprite)
 
         #despensa
-        self.geladeira = Geladeira(self.screen, 1, 1)
-        self.despensa = Despensa(self.screen, 10, 100)
+        self.geladeira = Geladeira(self.gc, 1, 1)
+        self.despensa = Despensa(self.gc, 10, 100)
 
         self.armazemGroup = pygame.sprite.Group()
         self.armazemGroup.add(self.geladeira.sprite)
