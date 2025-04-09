@@ -5,14 +5,14 @@ from ClickSprite import ClickableSprite
 
 
 class Ingrediente:
-    def __init__(self, nome, indiceReceita,gc, image,x,y):
+    def __init__(self, nome, indiceReceita,gc1, image,x,y):
         self.nome=nome
         self.indiceReceita = indiceReceita
         self.estadoReceita=[]
         self.__cortado=False
         self.__batido=False
         self.__assado=False
-        self.gc=gc
+        self.gc = gc1
         self.sprite = ClickableSprite(image,x,y,self.alertarEscolha)
     #
     # Um nome para identificar o ingrediente
@@ -43,8 +43,9 @@ class Ingrediente:
     
     def alertarEscolha(self):
         print("beep beep")
-        self.gc.holderPrato.add_ingrediente(self.__clonar__())
-        self.gc.printarPrato()
+        #self.gc.level.player.prato.add_ingrediente(self.__clonar__())
+        #self.gc.printarPrato()
+        self.gc.level.printOi()
         
     #
     # um ingrediente clicado informa o GameController dessa escolha
@@ -66,7 +67,7 @@ class Ingrediente:
     #
 class Tomate(Ingrediente):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images/tomate.png').convert_alpha();
+        self.image=pygame.image.load('images\\food\Vegetables\Tomato.png').convert_alpha();
         super().__init__("Tomate", 0,gc,self.image,x,y)  
     #
     # carrega imagem do sprite

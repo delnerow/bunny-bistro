@@ -57,6 +57,9 @@ class Level:
         self.maquinasGroup.update(events)
         self.armazemGroup.update(events)
 
+        self.geladeira.update(events)
+        self.despensa.update(events)
+
     def print(self):
         # Desenha o fundo
         self.screen.blit(self.background, (0, 0))
@@ -75,3 +78,4 @@ class Level:
         # Atualiza a tela
         pygame.display.flip()
         self.clock.tick(60)
+    

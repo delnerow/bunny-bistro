@@ -2,6 +2,7 @@
 #além das imagens
 import pygame
 from pygame.math import Vector2
+from prato import *
 
 def get_image(sheet, width, height, scale, colour, position):
 	#retira uma fração de uma imagem maior para utilizar
@@ -31,6 +32,9 @@ class Player:
         # direção pra ele ter movimento mesmo parado :D 
         self.frame = 0
 
+        #inicia o prato do coelho como vazio
+        self.prato = Prato
+
     def update(self):
         #atualiza a posição do coelho na tela
         #a cada 10 frames, muda a imagem do coelho
@@ -41,7 +45,7 @@ class Player:
         elif self.frame == 80:
             self.skin = self.skinVector[0]
             self.frame = 0
-    
+
     def move(self, newPosition):
         #muda a posição do coelho na tela com base na posição
         #da máquina em que ele está (depende da arte)
@@ -50,7 +54,7 @@ class Player:
         if newPosition == 0:
             self.screenposition = Vector2(200, 200)
             self.skin = self.skinVector[0]
-        
+
         #fogão
         elif newPosition == 1:
             self.screenposition = Vector2(200, 300)
