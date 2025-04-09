@@ -1,5 +1,6 @@
 import pygame, sys
 from player import Player
+from pratoDIsplay import PratoDisplay
 from ui import UI
 import maquina
 from armazem import Geladeira, Despensa
@@ -15,6 +16,8 @@ class Level:
         #controle de jogo
         self.gc = gc
         self.ui = UI() 
+        
+        self.pratoDisplay = PratoDisplay(self.screen)
 
         #o nosso player
         self.player = player
@@ -56,9 +59,12 @@ class Level:
         self.player.update()
         self.maquinasGroup.update(events)
         self.armazemGroup.update(events)
-
+        self.pratoDisplay.update_ingrediente(self.player.prato.ingredientes)
+        if(self.player.prato.ingredientes != []):
+            print(self.player.prato.ingredientes[0].nome)
         self.geladeira.update(events)
         self.despensa.update(events)
+        self.pratoDisplay.update(events)
 
     def print(self):
         # Desenha o fundo
@@ -74,6 +80,7 @@ class Level:
         #imprime a interface
         self.geladeira.print()
         self.despensa.print()
+        self.pratoDisplay.display(700,300)
 
         # Atualiza a tela
         pygame.display.flip()
