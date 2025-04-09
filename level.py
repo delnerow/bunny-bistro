@@ -60,8 +60,6 @@ class Level:
         self.maquinasGroup.update(events)
         self.armazemGroup.update(events)
         self.pratoDisplay.update_ingrediente(self.player.prato.ingredientes)
-        if(self.player.prato.ingredientes != []):
-            print(self.player.prato.ingredientes[0].nome)
         self.geladeira.update(events)
         self.despensa.update(events)
         self.pratoDisplay.update(events)
