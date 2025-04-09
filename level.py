@@ -59,7 +59,7 @@ class Level:
         self.player.update()
         self.maquinasGroup.update(events)
         self.armazemGroup.update(events)
-        self.pratoDisplay.update_ingrediente(self.player.prato.ingredientes)
+        self.pratoDisplay.update_ingrediente(self.player.prato)
         self.geladeira.update(events)
         self.despensa.update(events)
         #self.pratoDisplay.update(events)
