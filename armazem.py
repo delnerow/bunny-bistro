@@ -32,14 +32,14 @@ class Armazem:
 
 class Geladeira(Armazem):
     def __init__(self, gc, x, y):
-        self.x_menu = 10
-        self.y_menu = 50
+        self.x_menu = 20
+        self.y_menu = 0
         self.ingredientes = []
         self.image = pygame.image.load("images/geladeira.png").convert_alpha()
         
         self.ingredientes.append(Tomate(gc, self.x_menu + 100, self.y_menu))
         self.ingredientes.append(Cebola(gc, self.x_menu + 200, self.y_menu))
-        self.ingredientes.append(Leite(gc, self.x_menu + 200, self.y_menu))
+        self.ingredientes.append(Leite(gc, self.x_menu + 300, self.y_menu))
         
         
         super().__init__(self.image, gc, x, y, self.ingredientes)
