@@ -1,8 +1,8 @@
 import pygame
 
 class Menu:
-    def __init__(self, screen, items):
-        self.screen = screen
+    def __init__(self, gc, items):
+        self.screen = gc.screen
         self.items = items  #lista de itens do menu
         self.image = pygame.image.load("images/menu.png").convert_alpha()
         self.group = pygame.sprite.Group()
