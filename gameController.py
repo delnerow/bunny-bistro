@@ -10,7 +10,6 @@ class GameController:
     def __init__(self):
         pygame.init()
         self.screen = pygame.display.set_mode((16*64, 9*64))
-        self.holderPrato = Prato()
         self.time=0
         self.player = Player()
         self.level = Level(self, self.screen, self.player)
@@ -18,10 +17,10 @@ class GameController:
     #
     def printarPrato(self):
         print("=====Prato atual=====")
-        for c in self.holderPrato.ingredientes:
+        for c in self.player.prato.ingredientes:
             print(c.nome+"("+str(c.estadoNumerico())+")", end='')
             print("")
-        print(" = ", self.holderPrato.validar_receita())
+        print(" = ", self.player.prato.validar_receita())
     #
     # atualiza o prato nas mãos do Chef
     #

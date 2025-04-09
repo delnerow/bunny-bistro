@@ -67,6 +67,7 @@ class Ingrediente:
 class Tomate(Ingrediente):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images\\food\Vegetables\Tomato.png').convert_alpha();
+        self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__("Tomate", 0,gc,self.image,x,y)  
     #
     # carrega imagem do sprite
@@ -81,7 +82,8 @@ class Tomate(Ingrediente):
 
 class Cebola(Ingrediente):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images/cebola.png').convert_alpha();
+        self.image=pygame.image.load('images\\food\Vegetables\Onion.png').convert_alpha();
+        self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__("Cebola", 1,gc,self.image,x,y)  
     #
     # carrega imagem do sprite
