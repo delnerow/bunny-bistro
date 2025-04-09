@@ -33,7 +33,7 @@ class Player:
         self.frame = 0
 
         #inicia o prato do coelho como vazio
-        self.prato = Prato
+        self.prato = Prato()
 
     def update(self):
         #atualiza a posição do coelho na tela
