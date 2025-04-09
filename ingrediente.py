@@ -105,8 +105,10 @@ class Farinha(Ingrediente):
         super().__init__("Farinha", 3) 
         
 class Leite(Ingrediente):
-    def __init__(self):
-        super().__init__("Leite Vegetal", 4)    
+    def __init__(self,gc, x, y):
+        self.image=pygame.image.load('images\\food\EggsandDairy\Milk1.png').convert_alpha();
+        self.image = pygame.transform.scale_by(self.image, 3)
+        super().__init__("Leite Vegetal", 4,gc,self.image,x,y)  
         
 class Brocolis(Ingrediente):
     def __init__(self):
