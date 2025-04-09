@@ -62,7 +62,6 @@ class Level:
         self.pratoDisplay.update_ingrediente(self.player.prato)
         self.geladeira.update(events)
         self.despensa.update(events)
-        #self.pratoDisplay.update(events)
 
     def print(self):
         # Desenha o fundo
