@@ -4,6 +4,7 @@ from ClickSprite import ClickableSprite
 from gameController import GameController
 from ingrediente import Cebola, Tomate
 from maquina import Batedeira, Forno, Tabua
+from lixo import Lixo
 
 
 
@@ -16,6 +17,7 @@ coelinho = GameController()
 tabua = Tabua(coelinho,50,50)
 forno = Forno(coelinho,50,230)
 batedeira = Batedeira(coelinho,50,400)
+lixo = Lixo(coelinho, 700, 150)
 
 tomate = Tomate(coelinho, 400,100)
 cebola = Cebola(coelinho,400,300)
@@ -27,6 +29,7 @@ group.add(forno.sprite)
 group.add(batedeira.sprite)
 group.add(tomate.sprite)
 group.add(cebola.sprite)
+group.add(lixo.sprite)
 running = True
 while running:
     events = pygame.event.get()

@@ -23,22 +23,30 @@ class Ingrediente:
     #
     def cortar(self):
         self.__cortado= True
-        self.estadoReceita.append(1)
+        if self.estadoReceita.count(1) == 0:
+            self.estadoReceita.append(1)
     #
     # corta o ingrediente
     #
     
     def bater(self):
         self.__batido= True
-        self.estadoReceita.append(2)
+        if self.estadoReceita.count(2) == 0:
+            self.estadoReceita.append(2)
     #
     # bate o ingrediente
     #
     def assar(self):
         self.__assado= True
-        self.estadoReceita.append(3)
+        if self.estadoReceita.count(3) == 0:
+            self.estadoReceita.append(3)
     #
     # assa o ingrediente
+    #
+    def restaurar(self):
+        self.estadoReceita = []
+    #
+    # restaura o ingrediente
     #
     
     def alertarEscolha(self):

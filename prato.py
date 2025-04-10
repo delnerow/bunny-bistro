@@ -40,7 +40,11 @@ class Prato:
         self.receita = ""
     # 
     # esvazia o prato
-    #   
+    #
+
+    def restaurar_prato(self):
+        for ing in self.ingredientes:
+            ing.restaurar()
      
     def validar_receita(self):
         receitaNumerica=[0,0,0,0,0,0]

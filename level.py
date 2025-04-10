@@ -4,6 +4,7 @@ from pratoDIsplay import PratoDisplay
 from ui import UI
 import maquina
 from armazem import Geladeira, Despensa
+from lixo import Lixo
 
 class Level:
     def __init__(self, gc, screen, player):
@@ -40,6 +41,11 @@ class Level:
         self.armazemGroup.add(self.geladeira.sprite)
         self.armazemGroup.add(self.despensa.sprite)
 
+        #lixo
+        self.lixo = Lixo(gc, 10, 500)
+        self.lixoGroup = pygame.sprite.Group()
+        self.lixoGroup.add(self.lixo.sprite)
+
     def run(self):
         while True:
             events = pygame.event.get()
@@ -59,6 +65,7 @@ class Level:
         self.player.update()
         self.maquinasGroup.update(events)
         self.armazemGroup.update(events)
+        self.lixoGroup.update(events)
         self.pratoDisplay.update_ingrediente(self.player.prato)
         self.geladeira.update(events)
         self.despensa.update(events)
@@ -70,6 +77,7 @@ class Level:
         #imprime as máquinas na tela
         self.maquinasGroup.draw(self.screen)
         self.armazemGroup.draw(self.screen)
+        self.lixoGroup.draw(self.screen)
 
         #imprime o coelho na tela
         self.screen.blit(self.player.skin, self.player.screenposition)
