@@ -34,8 +34,12 @@ class PratoDisplay():
 
 
     def update_ingrediente(self, prato):
-        self.items=prato.ingredientes
-        self.receita = prato.validar_receita()
+        if(prato!= None):
+            self.items=prato.ingredientes
+            self.receita = prato.validar_receita()
+        else:
+            self.receita="sem prato"
+        
         
         #
         # atualiza os itens pelos ingredientes do prato

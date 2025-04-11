@@ -1,4 +1,5 @@
 import pygame, sys
+from bancada import Bancada
 from player import Player
 from pratoDIsplay import PratoDisplay
 from ui import UI
@@ -25,16 +26,20 @@ class Level:
 
         #as máquinas da cozinha
         self.tabua = maquina.Tabua(gc, 64*3.5,64*5)
-        self.batedeira = maquina.Batedeira(gc, 200, 80)
+        self.batedeira = maquina.Batedeira(gc, 620, 80)
         self.forno = maquina.Forno(gc, 476, 155)
+        
+        # bancada de pratos
+        self.bancada = Bancada(gc,64*5,64*5)
 
         self.maquinasGroup = pygame.sprite.Group()
         self.maquinasGroup.add(self.tabua.sprite)
         self.maquinasGroup.add(self.batedeira.sprite)
         self.maquinasGroup.add(self.forno.sprite)
+        self.maquinasGroup.add(self.bancada.sprite)
 
         #despensa
-        self.geladeira = Geladeira(self.gc, 1, 1)
+        self.geladeira = Geladeira(self.gc, 125, 70)
         self.despensa = Despensa(self.gc, 10, 100)
 
         self.armazemGroup = pygame.sprite.Group()

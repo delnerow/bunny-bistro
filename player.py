@@ -32,8 +32,8 @@ class Player:
         # direção pra ele ter movimento mesmo parado :D 
         self.frame = 0
 
-        #inicia o prato do coelho como vazio
-        self.prato = Prato()
+        #inicia o prato do coelho como NONE!!!
+        self.prato = None
 
     def update(self):
         #atualiza a posição do coelho na tela
@@ -46,29 +46,13 @@ class Player:
             self.skin = self.skinVector[0]
             self.frame = 0
 
-    def move(self, newPosition):
+    def move(self, x,y,s):
         #muda a posição do coelho na tela com base na posição
         #da máquina em que ele está (depende da arte)
+        # acho q da pra generalizar
+        self.screenposition = Vector2(x, y)
+        self.skin = self.skinVector[s]
 
-        #geladeira
-        if newPosition == 0:
-            self.screenposition = Vector2(200, 200)
-            self.skin = self.skinVector[0]
-
-        #fogão
-        elif newPosition == 1:
-            self.screenposition = Vector2(200, 300)
-            self.skin = self.skinVector[1]
-
-        #tábua
-        elif newPosition == 2:
-            self.screenposition = Vector2(200, 400)
-            self.skin = self.skinVector[2]
-
-        #bancada
-        elif newPosition == 3:
-            self.screenposition = Vector2(200, 500)
-            self.skin = self.skinVector[3]
     
     def printOi(self):
         print("oi")

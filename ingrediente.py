@@ -9,9 +9,6 @@ class Ingrediente:
         self.nome=nome
         self.indiceReceita = indiceReceita
         self.estadoReceita=[]
-        self.__cortado=False
-        self.__batido=False
-        self.__assado=False
         self.gc = gc1
         self.sprite = ClickableSprite(image,x,y,self.alertarEscolha)
     #
@@ -52,7 +49,8 @@ class Ingrediente:
     def alertarEscolha(self):
         print("beep beep")
         #self.gc.level.player.prato.add_ingrediente(self.__clonar__())
-        self.gc.player.prato.add_ingrediente(self)
+        if(self.gc.player.prato != None):
+            self.gc.player.prato.add_ingrediente(self)
         
     #
     # um ingrediente clicado informa o GameController dessa escolha

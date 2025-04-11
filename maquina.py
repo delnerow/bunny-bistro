@@ -6,6 +6,8 @@ class Maquina:
         self.prato_atual= Prato()
         self.__ocupada=False
         self.gc=gc
+        self.x=x
+        self.y=y
         self.sprite = ClickableSprite(image,x,y,self.ocupar)
         
     #
@@ -15,8 +17,9 @@ class Maquina:
     
     def ocupar(self):
         bandeja = self.gc.player.prato
+        self.gc.player.move(self.x,self.y+10,1)
         print("ocupar")
-        if(not self.__ocupada):
+        if(bandeja != None and not self.__ocupada):
             if not bandeja.esta_vazio():
                 self.prato_atual.ingredientes= bandeja.ingredientes
                 bandeja.limpar_comida()
@@ -56,7 +59,7 @@ class Maquina:
     
     def free(self):
         bandeja=self.gc.player.prato
-        if bandeja.ingredientes==[] and not self.prato_atual.esta_vazio():
+        if bandeja != None and bandeja.ingredientes==[] and not self.prato_atual.esta_vazio():
             bandeja.ingredientes=self.prato_atual.ingredientes
             self.prato_atual.limpar_comida()
             self.__ocupada=False
@@ -73,6 +76,7 @@ class Tabua(Maquina):
         self.image= pygame.transform.scale(self.image, (64, 32))
         super().__init__(gc,self.image,x,y)
     def cozinhar(self):
+        
         print("cozinhar")
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].cortar()
