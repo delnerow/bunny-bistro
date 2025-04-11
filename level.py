@@ -39,8 +39,8 @@ class Level:
         self.maquinasGroup.add(self.bancada.sprite)
 
         #despensa
-        self.geladeira = Geladeira(self.gc, 125, 70)
-        self.despensa = Despensa(self.gc, 10, 100)
+        self.geladeira = Geladeira(self.gc, 64*2, 64)
+        self.despensa = Despensa(self.gc, 64*4, 64)
 
         self.armazemGroup = pygame.sprite.Group()
         self.armazemGroup.add(self.geladeira.sprite)

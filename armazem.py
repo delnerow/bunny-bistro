@@ -1,5 +1,5 @@
 import pygame
-from ingrediente import Cebola, Tomate, Leite
+from ingrediente import Cebola, Tomate, Leite, Brocolis, Grao, Farinha
 from ClickSprite import ClickableSprite
 from menu import Menu
 
@@ -40,11 +40,11 @@ class Geladeira(Armazem):
         self.y_menu = y-50
         self.ingredientes = []
         self.image = pygame.image.load("images/geladeira.png").convert_alpha()
-        self.image= pygame.transform.scale(self.image, (64, 128))
-        self.ingredientes.append(Tomate(gc, self.x_menu + 10, self.y_menu))
-        self.ingredientes.append(Cebola(gc, self.x_menu + 60, self.y_menu))
-        self.ingredientes.append(Leite(gc, self.x_menu + 110, self.y_menu))
-        
+        self.image= pygame.transform.scale(self.image, (64, 64*2))
+        self.ingredientes.append(Tomate(gc, self.x_menu + 32, self.y_menu))
+        self.ingredientes.append(Cebola(gc, self.x_menu + 32*2, self.y_menu))
+        self.ingredientes.append(Leite(gc, self.x_menu + 32*3, self.y_menu))
+        self.ingredientes.append(Brocolis(gc, self.x_menu + 32*4, self.y_menu))
         
         super().__init__(self.image, gc, x, y, self.ingredientes)
     
@@ -54,13 +54,13 @@ class Geladeira(Armazem):
 
 class Despensa(Armazem):
     def __init__(self, gc, x, y):
-        self.x_menu = 10
-        self.y_menu = 100
+        self.x_menu = x+20
+        self.y_menu = y-50
         self.ingredientes = []
         self.image = pygame.image.load("images/despensa.png").convert_alpha()
         
-        self.ingredientes.append(Tomate(gc, self.x_menu + 100, self.y_menu))
-        self.ingredientes.append(Cebola(gc, self.x_menu + 200, self.y_menu))
+        self.ingredientes.append(Farinha(gc, self.x_menu + 32, self.y_menu))
+        self.ingredientes.append(Grao(gc, self.x_menu + 32*2, self.y_menu))
         
         super().__init__(self.image, gc, x, y, self.ingredientes)
     

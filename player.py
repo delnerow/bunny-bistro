@@ -20,7 +20,9 @@ class Player:
         self.screenposition = Vector2(200,200) #posição na tela, para print
 
         #posição do coelho na cozinha (em que máquina ele está)
-        self.position = 0 
+        #zero = virado pra baixo
+        #1 = virado pra cima
+        self.direcao = 0 
         
         self.sheet = pygame.image.load("images\coelinho.png").convert_alpha()
 
@@ -40,18 +42,27 @@ class Player:
         #a cada 10 frames, muda a imagem do coelho
         #para dar a impressão de movimento
         self.frame += 1
-        if self.frame == 40:
-            self.skin = self.skinVector[4]
-        elif self.frame == 80:
-            self.skin = self.skinVector[0]
-            self.frame = 0
+        if self.direcao == 0:                
+            if self.frame == 40:
+                self.skin = self.skinVector[4]
+            elif self.frame == 80:
+                self.skin = self.skinVector[0]
+                self.frame = 0
 
-    def move(self, x,y,s):
+        if self.direcao == 1:
+            if self.frame == 40:
+                self.skin = self.skinVector[1]
+            elif self.frame == 80:
+                self.skin = self.skinVector[5]
+                self.frame = 0
+
+    def move(self, x,y,direcao):
         #muda a posição do coelho na tela com base na posição
         #da máquina em que ele está (depende da arte)
         # acho q da pra generalizar
         self.screenposition = Vector2(x, y)
-        self.skin = self.skinVector[s]
+        #self.direcao = direcao
+        #self.skin = self.skinVector[s]
 
     
     def printOi(self):

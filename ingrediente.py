@@ -88,7 +88,7 @@ class Tomate(Ingrediente):
 
 class Cebola(Ingrediente):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images\\food\Vegetables\Onion.png').convert_alpha();
+        self.image=pygame.image.load('images\\food\Vegetables\Onion.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__("Cebola", 1,gc,self.image,x,y)  
     #
@@ -103,22 +103,28 @@ class Cebola(Ingrediente):
     #
 
 class Grao(Ingrediente):
-    def __init__(self):
-        super().__init__("Grão de Bico", 2) 
+    def __init__(self,gc, x, y):
+        self.image=pygame.image.load('images\\food\Vegetables\potato.png').convert_alpha()
+        self.image = pygame.transform.scale_by(self.image, 3)
+        super().__init__("Grão de Bico", 2, gc, self.image, x, y) 
         
 class Farinha(Ingrediente):
-    def __init__(self):
-        super().__init__("Farinha", 3) 
+    def __init__(self,gc, x, y):
+        self.image=pygame.image.load('images\\food\Sweets\Sugar.png').convert_alpha()
+        self.image = pygame.transform.scale_by(self.image, 3)
+        super().__init__("Farinha", 3, gc, self.image, x, y) 
         
 class Leite(Ingrediente):
     def __init__(self,gc, x, y):
-        self.image=pygame.image.load('images\\food\EggsandDairy\Milk1.png').convert_alpha();
+        self.image=pygame.image.load('images\\food\EggsandDairy\Milk1.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__("Leite Vegetal", 4,gc,self.image,x,y)  
         
 class Brocolis(Ingrediente):
-    def __init__(self):
-        super().__init__("Brócolis", 5) 
+    def __init__(self,gc, x, y):
+        self.image=pygame.image.load('images\\food\Vegetables\Broccoli.png').convert_alpha()
+        self.image = pygame.transform.scale_by(self.image, 3)
+        super().__init__("Brócolis", 5, gc, self.image, x, y) 
         
         
        
