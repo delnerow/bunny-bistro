@@ -8,9 +8,11 @@ class Ingrediente:
     def __init__(self, nome, indiceReceita,gc1, image,x,y):
         self.nome=nome
         self.indiceReceita = indiceReceita
-        self.estadoReceita=[]
         self.gc = gc1
-        self.sprite = ClickableSprite(image,x,y,self.alertarEscolha)
+        self.x=x
+        self.y=y
+        self.estadoReceita=[]
+        self.sprite = ClickableSprite(image,self.x,self.y,self.alertarEscolha)
     #
     # Um nome para identificar o ingrediente
     # o índice no código carteado de receita
@@ -103,12 +105,16 @@ class Cebola(Ingrediente):
     #
 
 class Grao(Ingrediente):
-    def __init__(self):
-        super().__init__("Grão de Bico", 2) 
+    def __init__(self,gc,x,y):
+        self.image=pygame.image.load('images\\grao_bico.png').convert_alpha();
+        self.image = pygame.transform.scale_by(self.image, 2)
+        super().__init__("Grão de Bico", 2,gc,self.image,x,y)
         
 class Farinha(Ingrediente):
-    def __init__(self):
-        super().__init__("Farinha", 3) 
+    def __init__(self,gc,x,y):
+        self.image=pygame.image.load('images\\farinha.png').convert_alpha();
+        self.image = pygame.transform.scale_by(self.image,2)
+        super().__init__("Farinha", 3,gc,self.image,x,y)
         
 class Leite(Ingrediente):
     def __init__(self,gc, x, y):
@@ -117,8 +123,10 @@ class Leite(Ingrediente):
         super().__init__("Leite Vegetal", 4,gc,self.image,x,y)  
         
 class Brocolis(Ingrediente):
-    def __init__(self):
-        super().__init__("Brócolis", 5) 
+    def __init__(self,gc,x,y):
+        self.image=pygame.image.load('images\\food\Vegetables\Brocolli.png').convert_alpha();
+        self.image = pygame.transform.scale_by(self.image, 3)
+        super().__init__("Brócolis", 5,gc,self.image,x,y) 
         
         
        

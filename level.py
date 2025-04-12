@@ -43,8 +43,8 @@ class Level:
         self.despensa = Despensa(self.gc, 10, 100)
 
         self.armazemGroup = pygame.sprite.Group()
-        self.armazemGroup.add(self.geladeira.sprite)
-        self.armazemGroup.add(self.despensa.sprite)
+        self.armazemGroup.add(self.geladeira)
+        self.armazemGroup.add(self.despensa)
 
         #lixo
         self.lixo = Lixo(gc, 10, 500)
@@ -69,7 +69,7 @@ class Level:
         # Atualiza a lógica do jogo aqui
         self.player.update()
         self.maquinasGroup.update(events)
-        self.armazemGroup.update(events)
+        #self.armazemGroup.update(events)
         self.lixoGroup.update(events)
         self.pratoDisplay.update_ingrediente(self.player.prato)
         self.geladeira.update(events)
