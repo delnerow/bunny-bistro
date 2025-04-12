@@ -11,6 +11,8 @@ class Lixo:
     
     def descartar(self):
         bandeja = self.gc.player.prato
+        if (bandeja == None):
+            return
         print("descartar")
         if not bandeja.esta_vazio():
             bandeja.restaurar_prato()
