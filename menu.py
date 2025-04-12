@@ -8,11 +8,11 @@ class Menu:
         self.items = items  #lista de itens do menu
         self.image = pygame.image.load("images/menu.png").convert_alpha()
         self.group = pygame.sprite.Group()
-        padding =50
+        padding = 32+16
         i =0
         for item in self.items:
-            item.sprite.rect.x= self.x +i*padding+10
-            item.sprite.rect.y= self.y
+            item.sprite.rect.x= self.x +(i%3)*padding+32+16-4
+            item.sprite.rect.y= self.y +(i//3)*padding
             self.group.add(item.sprite)
             i=i+1
     def get_rect(self):
