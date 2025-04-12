@@ -62,10 +62,10 @@ class Geladeira(Armazem):
 class Despensa(Armazem):
     def __init__(self, gc, x, y):
         self.x_menu = x+20
-        self.y_menu = y-50
+        self.y_menu = y-50-32
         self.ingredientes = []
         self.image = pygame.image.load("images/despensa.png").convert_alpha()
-        
+        self.image= pygame.transform.scale(self.image, (64, 64))
         self.ingredientes.append(Farinha(gc, self.x_menu + 32, self.y_menu))
         self.ingredientes.append(Grao(gc, self.x_menu + 32*2, self.y_menu))
         

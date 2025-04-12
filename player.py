@@ -15,10 +15,9 @@ def get_image(sheet, width, height, scale, colour, position):
 	return image
 
 
-
 class Player:
     def __init__(self):
-        self.screenposition = Vector2(200,200) #posição na tela, para print
+        self.screenposition = Vector2(64*3,64*3) #posição na tela, para print
 
         #posição do coelho na cozinha (em que máquina ele está)
         #zero = virado pra baixo
@@ -41,11 +40,11 @@ class Player:
         self.movVec = []
         #declara as posições do player na cozinha
         pos_geladeira = Vector2(64*1.5, 64*1.5)
-        pos_armario = Vector2(64*5, 64*3)
-        pos_fogao = Vector2(64*7, 64*3)
-        pos_batedeira = Vector2(64*3, 64*5)
-        pos_tabua = Vector2(64*5, 64*5)
-        pos_prato = Vector2(64*7, 64*5)
+        pos_armario = Vector2(64*3.5, 64*1.5)
+        pos_fogao = Vector2(64*7, 64*1.5)
+        pos_batedeira = Vector2(64*9, 64*1.5)
+        pos_tabua = Vector2(64*3, 64*3)
+        pos_prato = Vector2(64*4, 64*3)
         self.movVec.extend([pos_geladeira, pos_armario, pos_fogao, pos_batedeira, pos_tabua, pos_prato])
 
     def update(self):
