@@ -1,4 +1,5 @@
 import pygame, sys
+from Fila import Fila
 from bancada import Bancada
 from cliente import Cliente
 from player import Player
@@ -30,7 +31,9 @@ class Level:
 
         #o nosso player
         self.player = player
-        self.cliente = Cliente(gc,64*7,64*4.5, 100, "Caponata","cao")
+        self.fila = Fila(gc,64*7,64*4.5 )
+        self.cliente = Cliente(gc,64*7,64*4.5, 100, "Caponata","cao",self.fila)
+        self.fila.entra_cliente(self.cliente)
 
         #as máquinas da cozinha
         self.tabua = maquina.Tabua(gc, 64*3.5,64*4.5)
@@ -76,7 +79,7 @@ class Level:
     def update(self, events):
         # Atualiza a lógica do jogo aqui
         self.player.update()
-        self.cliente.update(events)
+        self.fila.update(events)
         self.maquinasGroup.update(events)
         #self.armazemGroup.update(events)
         self.lixoGroup.update(events)
@@ -115,8 +118,7 @@ class Level:
 
         #imprime o coelho na tela
         self.screen.blit(self.player.skin, self.player.screenposition)
-        self.screen.blit(self.cliente.skin, pygame.Vector2(self.cliente.x,self.cliente.y))
-
+        self.fila.draw()
         #imprime a interface
         self.geladeira.print()
         self.despensa.print()

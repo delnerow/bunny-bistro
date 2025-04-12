@@ -15,13 +15,16 @@ def get_image(sheet, width, height, scale, colour, position):
 	return image
 
 class Cliente(ClickableSprite):
-    def __init__(self,gc,x,y,paciencia, pedido, especie):
+    def __init__(self,gc,x,y,paciencia, pedido, especie,fila):
+        self.fila=fila
         self.paciencia = paciencia
         self.pedido = pedido
         self.especie = especie
         self.x=x
         self.y=y
         self.gc=gc
+        self.fila=fila
+        self.servido=False
         self.image = pygame.image.load("images\cliente.png").convert_alpha()
         self.skinVector = [get_image(self.image, 14, 32, 3, (0,0,0), (i, 0)) for i in range(2)]
         self.skin = self.skinVector[0]
@@ -37,11 +40,11 @@ class Cliente(ClickableSprite):
     # pedido desejado, especie do cliente
     # score do pedido
     # e sabendo qual o gameController
-    
     def comer(self):
         print("nham nham")
         prato = self.gc.player.prato
         if(prato):
+            self.servido=True
             if(self.pedido == prato.validar_receita()):
                 self.__score=100
                 print("que gostoso")
@@ -51,6 +54,8 @@ class Cliente(ClickableSprite):
             prato.ingredientes = []
             self.gc.player.prato = None
             self.gc.level.score= self.gc.level.score+self.satisfacao()
+            self.fila.sai_cliente(self)
+
     #
     # interacao do cliente com oq tem no prato
     # se for oq pediu, brasil
@@ -67,11 +72,12 @@ class Cliente(ClickableSprite):
         #atualiza a posição do coelho na tela
         #a cada 10 frames, muda a imagem do coelho
         #para dar a impressão de movimento
-        super().update(events)
-        self.frame += 1             
-        if self.frame == 40:
-            self.skin = self.skinVector[1]
-        elif self.frame == 80:
-            self.skin = self.skinVector[0]
-            self.frame = 0
+        if(not self.servido):
+            super().update(events)
+            self.frame += 1             
+            if self.frame == 40:
+                self.skin = self.skinVector[1]
+            elif self.frame == 80:
+                self.skin = self.skinVector[0]
+                self.frame = 0
         #self.image = self.skin 

@@ -11,24 +11,29 @@ class Fila():
         self.padding =50
     def entra_cliente(self, cliente):
         self.clientes.append(cliente)
-        self.group.add(cliente.sprite)
-        i=0
-        for item in self.clientes:
-            item.sprite.rect.x= self.x +i*self.padding+10
-            item.sprite.rect.y= self.y
-            i=i+1
+        self.group.add(cliente)
+        self.update_client_positions()
         
     def sai_cliente(self, cliente):
+        print("bye bye")
         if cliente in self.clientes:
+            print("see ya")
             self.clientes.remove(cliente)
-        i=0
-        for item in self.clientes:
-            item.sprite.rect.x= self.x +i*self.padding+10
-            item.sprite.rect.y= self.y
-            i=i+1
+            del cliente
             
-    def display(self):
-        self.group.draw(self.screen)
+        self.update_client_positions()
+    def update_client_positions(self):
+        # Reposition remaining clientes
+        i = 0
+        for item in self.clientes:
+            item.rect.x = self.x + i * self.padding + 10
+            item.rect.y = self.y
+            i += 1
+            
+    def draw(self):
+        for cliente in self.clientes:
+            self.screen.blit(cliente.skin, pygame.Vector2(cliente.x,cliente.y))
+
     
     def update(self, events):
         self.group.update(events)
