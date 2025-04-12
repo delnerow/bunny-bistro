@@ -10,6 +10,7 @@ class Lixo:
         self.sprite = ClickableSprite(self.image, x, y, self.descartar)
     
     def descartar(self):
+        self.gc.player.move(6)
         bandeja = self.gc.player.prato
         if (bandeja == None):
             return
