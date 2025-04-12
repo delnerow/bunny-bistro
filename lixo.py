@@ -8,6 +8,7 @@ class Lixo:
         self.image=pygame.image.load('images/lixo.png').convert_alpha()
         self.image= pygame.transform.scale(self.image, (150, 150))
         self.sprite = ClickableSprite(self.image, x, y, self.descartar)
+        self.sound = pygame.mixer.Sound('sounds/lixo.mp3')
     
     def descartar(self):
         self.gc.player.move(6)
@@ -19,6 +20,7 @@ class Lixo:
             bandeja.restaurar_prato()
             bandeja.limpar_comida()
             self.gc.printarPrato()
+            self.sound.play()
         else:
             print("Erro: nada na bandeja")
     #
