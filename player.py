@@ -40,9 +40,9 @@ class Player:
         self.movVec = []
         #declara as posições do player na cozinha
         pos_geladeira = Vector2(64*1.5, 64*1.5)     #0
-        pos_armario = Vector2(64*3.5, 64*1.5)       #1
-        pos_fogao = Vector2(64*7, 64*1.5)           #2
-        pos_batedeira = Vector2(64*9, 64*1.5)       #3
+        pos_armario = Vector2(64*8.5, 64*1.5)       #1
+        pos_fogao = Vector2(64*7.5, 64*1.5)           #2
+        pos_batedeira = Vector2(64*4, 64*1.5)       #3
         pos_tabua = Vector2(64*3, 64*3)             #4
         pos_prato = Vector2(64*4, 64*3)             #5
         pos_lixo = Vector2(64*0.5, 64*6)              #6
