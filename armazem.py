@@ -10,6 +10,7 @@ class Armazem(HoverSprite):
         self.x = x
         self.y = y
         self.position = position
+        self.sound = pygame.mixer.Sound("sounds/menu.mp3")
         #coordenadas do Armazem
         
         
@@ -41,6 +42,7 @@ class Armazem(HoverSprite):
     
     def abre_ou_fecha(self):
         print("abre ou fecha")
+        self.sound.play()
         self.gc.player.move(self.position)
         if(self.menu_aberto):
             self.menu_aberto = False

@@ -9,6 +9,7 @@ import pygame
 class GameController:
     def __init__(self):
         pygame.init()
+        pygame.mixer.init()
         self.screen = pygame.display.set_mode((16*64, 9*64))
         self.time=0
         self.player = Player()

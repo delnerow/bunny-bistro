@@ -57,7 +57,13 @@ class Level:
         self.lixoGroup = pygame.sprite.Group()
         self.lixoGroup.add(self.lixo.sprite)
 
+        #musica
+        self.music = pygame.mixer.Sound('sounds/music.mp3')
+        pygame.mixer.music.load('sounds/music.mp3')
+        pygame.mixer.music.set_volume(0.5)  # Ajuste o volume conforme necessário
     def run(self):
+        # Inicia a música de fundo
+        pygame.mixer.music.play(-1)  # -1 para tocar em loop
         while True:
             events = pygame.event.get()
             for event in events:
