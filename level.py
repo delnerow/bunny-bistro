@@ -32,7 +32,7 @@ class Level:
 
         #as máquinas da cozinha
         self.tabua = maquina.Tabua(gc, 64*3.5,64*4.5)
-        self.batedeira = maquina.Batedeira(gc, 300, 80)
+        self.batedeira = maquina.Batedeira(gc, 348, 80)
         self.forno = maquina.Forno(gc, 64*8, 64*1.5)
         
         # bancada de pratos
