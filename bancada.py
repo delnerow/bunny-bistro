@@ -12,7 +12,8 @@ class Bancada():
         self.image = self.image=pygame.image.load('images/despensa.png').convert_alpha();
         #self.image= pygame.transform.scale(self.image, (64, 64))
         self.sprite = ClickableSprite(self.image,x,y,self.dar_novo_prato)
+        self.position = 5
     def dar_novo_prato(self):
-        self.gc.player.move(self.x,self.y+10,1)
+        self.gc.player.move(self.position)
         if(self.gc.player.prato is None):
             self.gc.player.prato = Prato()

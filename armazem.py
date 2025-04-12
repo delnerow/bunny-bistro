@@ -12,6 +12,7 @@ class Armazem:
         self.x=x
         self.y=y
         self.menu = Menu(gc, ingredientes)
+        self.position = 0
 
     def print(self):
         #o print da geladeira é feito diretamente no level.py
@@ -22,15 +23,13 @@ class Armazem:
             self.menu.display(0,0)
 
     def abrir_menu(self):
-        self.gc.player.move(self.x,self.y+10,1)
+        self.gc.player.move(self.position)
         if(self.menu_aberto):
             self.menu_aberto = False
             return
         self.menu_aberto = True
     
-    def update(self, events):
-        if self.menu_aberto:
-            self.menu.update(events)
+
             
 
 
@@ -47,10 +46,18 @@ class Geladeira(Armazem):
         self.ingredientes.append(Brocolis(gc, self.x_menu + 32*4, self.y_menu))
         
         super().__init__(self.image, gc, x, y, self.ingredientes)
+        self.position = 0
     
     def menu_show(self):
         if self.menu_aberto:
             self.menu.display(self.x_menu, self.y_menu)
+   
+    def update(self, events):
+        if self.menu_aberto:
+            self.menu.update(events)
+        if self.gc.player.position != 0:
+            self.menu_aberto = False 
+
 
 class Despensa(Armazem):
     def __init__(self, gc, x, y):
@@ -63,7 +70,14 @@ class Despensa(Armazem):
         self.ingredientes.append(Grao(gc, self.x_menu + 32*2, self.y_menu))
         
         super().__init__(self.image, gc, x, y, self.ingredientes)
+        self.position = 1
     
     def menu_show(self):
         if self.menu_aberto:
             self.menu.display(self.x_menu, self.y_menu)
+
+    def update(self, events):
+        if self.menu_aberto:
+            self.menu.update(events)
+        if self.gc.player.position != 1:
+            self.menu_aberto = False
