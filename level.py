@@ -18,6 +18,11 @@ class Level:
         #controle de jogo
         self.gc = gc
         self.ui = UI() 
+
+        # Timer do jogo (em segundos)
+        self.time_remaining = 300  # Exemplo: 5 minutos
+        self.last_time = pygame.time.get_ticks()
+        self.timer_font = pygame.font.Font("images\DigitalDismay.otf", 36) 
         
         self.pratoDisplay = PratoDisplay(self.screen)
 
@@ -25,12 +30,12 @@ class Level:
         self.player = player
 
         #as máquinas da cozinha
-        self.tabua = maquina.Tabua(gc, 64*3.5,64*5)
+        self.tabua = maquina.Tabua(gc, 64*3.5,64*4.5)
         self.batedeira = maquina.Batedeira(gc, 620, 80)
-        self.forno = maquina.Forno(gc, 476, 155)
+        self.forno = maquina.Forno(gc, 64*8, 64*1.5)
         
         # bancada de pratos
-        self.bancada = Bancada(gc,64*5,64*5)
+        self.bancada = Bancada(gc,64*5,64*4.5)
 
         self.maquinasGroup = pygame.sprite.Group()
         self.maquinasGroup.add(self.tabua.sprite)
@@ -39,8 +44,8 @@ class Level:
         self.maquinasGroup.add(self.bancada.sprite)
 
         #despensa
-        self.geladeira = Geladeira(self.gc, 125, 70)
-        self.despensa = Despensa(self.gc, 10, 100)
+        self.geladeira = Geladeira(self.gc, 64*2, 64)
+        self.despensa = Despensa(self.gc, 64*4, 64*1.5)
 
         self.armazemGroup = pygame.sprite.Group()
         self.armazemGroup.add(self.geladeira)
@@ -75,6 +80,18 @@ class Level:
         self.geladeira.update(events)
         self.despensa.update(events)
 
+        #atualiza o timer
+        current_time = pygame.time.get_ticks()
+        if current_time - self.last_time >= 1000:  # 1000 ms = 1 segundo
+            self.time_remaining -= 1
+            self.last_time = current_time
+
+        # Verifica se o tempo acabou
+        if self.time_remaining <= 0:
+            print("Fim do jogo! O tempo acabou!")
+            pygame.quit()
+            sys.exit()
+
     def print(self):
         # Desenha o fundo
         self.screen.blit(self.background, (0, 0))
@@ -91,6 +108,10 @@ class Level:
         self.geladeira.print()
         self.despensa.print()
         self.pratoDisplay.display(700,430)
+
+        # Exibe o timer na tela
+        timer_text = self.timer_font.render(f"Tempo: {self.time_remaining}", True, (255, 255, 255))  # Texto branco
+        self.screen.blit(timer_text, (10, 10))  # Posição no canto superior esquerdo
 
         # Atualiza a tela
         pygame.display.flip()

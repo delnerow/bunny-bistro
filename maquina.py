@@ -9,6 +9,7 @@ class Maquina:
         self.x=x
         self.y=y
         self.sprite = ClickableSprite(image,x,y,self.ocupar)
+        self.position = 0
         
     #
     # inicializa uma máqina (superclasse)
@@ -17,7 +18,7 @@ class Maquina:
     
     def ocupar(self):
         bandeja = self.gc.player.prato
-        self.gc.player.move(self.x,self.y+10,1)
+        self.gc.player.move(self.position)
         print("ocupar")
         if(bandeja != None and not self.__ocupada):
             if not bandeja.esta_vazio():
@@ -75,6 +76,7 @@ class Tabua(Maquina):
         self.image=pygame.image.load('images/tabua.png').convert_alpha();
         self.image= pygame.transform.scale(self.image, (64, 32))
         super().__init__(gc,self.image,x,y)
+        self.position = 4
     def cozinhar(self):
         
         print("cozinhar")
@@ -91,6 +93,7 @@ class Batedeira(Maquina):
         self.image=pygame.image.load('images/batedeira.png').convert_alpha();
         self.image= pygame.transform.scale(self.image, (64, 64))
         super().__init__(gc,self.image,x,y)
+        self.position = 3
     def cozinhar(self):
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].bater()
@@ -104,6 +107,7 @@ class Forno(Maquina):
         self.image=pygame.image.load('images/forno.png').convert_alpha()
         self.image= pygame.transform.scale(self.image, (64, 64))
         super().__init__(gc,self.image,x,y)
+        self.position = 2
     def cozinhar(self):
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].assar()

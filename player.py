@@ -17,9 +17,11 @@ def get_image(sheet, width, height, scale, colour, position):
 
 class Player:
     def __init__(self):
-        self.screenposition = Vector2(200,200) #posição na tela, para print
+        self.screenposition = Vector2(64*3,64*3) #posição na tela, para print
 
         #posição do coelho na cozinha (em que máquina ele está)
+        #zero = virado pra baixo
+        #1 = virado pra cima
         self.position = 0 
         
         self.sheet = pygame.image.load("images\coelinho.png").convert_alpha()
@@ -35,23 +37,41 @@ class Player:
         #inicia o prato do coelho como NONE!!!
         self.prato = None
 
+        self.movVec = []
+        #declara as posições do player na cozinha
+        pos_geladeira = Vector2(64*1.5, 64*1.5)     #0
+        pos_armario = Vector2(64*3.5, 64*1.5)       #1
+        pos_fogao = Vector2(64*7, 64*1.5)           #2
+        pos_batedeira = Vector2(64*9, 64*1.5)       #3
+        pos_tabua = Vector2(64*3, 64*3)             #4
+        pos_prato = Vector2(64*4, 64*3)             #5
+        pos_lixo = Vector2(64*0.5, 64*6)              #6
+        self.movVec.extend([pos_geladeira, pos_armario, pos_fogao, pos_batedeira, pos_tabua, pos_prato, pos_lixo])
+
     def update(self):
         #atualiza a posição do coelho na tela
         #a cada 10 frames, muda a imagem do coelho
         #para dar a impressão de movimento
-        self.frame += 1
+        self.frame += 1             
         if self.frame == 40:
             self.skin = self.skinVector[4]
         elif self.frame == 80:
             self.skin = self.skinVector[0]
             self.frame = 0
 
-    def move(self, x,y,s):
+        # if self.position == 1:
+        #     if self.frame == 40:
+        #         self.skin = self.skinVector[1]
+        #     elif self.frame == 80:
+        #         self.skin = self.skinVector[5]
+        #         self.frame = 0
+
+    def move(self, position):
         #muda a posição do coelho na tela com base na posição
         #da máquina em que ele está (depende da arte)
         # acho q da pra generalizar
-        self.screenposition = Vector2(x, y)
-        self.skin = self.skinVector[s]
+        self.screenposition = self.movVec[position]
+        self.position = position
 
     
     def printOi(self):
