@@ -13,6 +13,7 @@ class Ingrediente:
         self.y=y
         self.estadoReceita=[]
         self.sprite = ClickableSprite(image,self.x,self.y,self.alertarEscolha)
+        self.sound = pygame.mixer.Sound("sounds\\vup.mp3")
     #
     # Um nome para identificar o ingrediente
     # o índice no código carteado de receita
@@ -52,6 +53,7 @@ class Ingrediente:
         print("beep beep")
         #self.gc.level.player.prato.add_ingrediente(self.__clonar__())
         if(self.gc.player.prato != None):
+            self.sound.play()
             self.gc.player.prato.add_ingrediente(self)
         
     #

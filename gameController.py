@@ -2,9 +2,6 @@ from prato import Prato
 from level import Level
 from player import Player
 import pygame
-#falta bastante coisa, já criei pra não dar catapora na maquina.py
-#
-#
 
 class GameController:
     def __init__(self):
@@ -15,7 +12,7 @@ class GameController:
         pygame.display.set_icon(icon)
         pygame.display.set_caption("Bunny-Bistro")
         self.screen = pygame.display.set_mode((16*64, 9*64))
-        
+
         self.time=0
         self.player = Player()
         self.level = Level(self, self.screen, self.player)
