@@ -1,21 +1,20 @@
 import pygame
 from HoverSprite import HoverSprite
-from ingrediente import Cebola, Farinha, Grao, Tomate, Leite
-from ClickSprite import ClickableSprite
+from ingrediente import Brocolis, Cebola, Farinha, Grao, Tomate, Leite
 from menu import Menu
 
 class Armazem(HoverSprite):
     def __init__(self, image, gc, x, y, x_menu,y_menu,items,position):
         super().__init__(image, x, y,self.abre_ou_fecha,self.abre_ou_fecha)
-        self.gc=gc
-        self.x=x
-        self.y=y
-        self.position =position
+        self.gc = gc
+        self.x = x
+        self.y = y
+        self.position = position
         #coordenadas do Armazem
         
         
-        self.x_menu=x_menu
-        self.y_menu=y_menu
+        self.x_menu = x_menu
+        self.y_menu = y_menu
         # coordenadas do menu gerado
         
         
@@ -62,7 +61,7 @@ class Geladeira(Armazem):
         self.y_menu = y-50
         self.image = pygame.image.load("images/geladeira.png").convert_alpha()
         self.image= pygame.transform.scale(self.image, (64, 128))
-        self.items=[Tomate(gc, 0, 0),Cebola(gc,0, 0),Leite(gc, 0 , 0)]
+        self.items=[Tomate(gc, 0, 0),Cebola(gc,0, 0),Leite(gc, 0 , 0), Brocolis(gc, 0, 0)]
         self.position=0
         super().__init__(self.image, gc, x, y,self.x_menu,self.y_menu,self.items, self.position)
     
