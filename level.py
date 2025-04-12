@@ -34,7 +34,7 @@ class Level:
 
         #as máquinas da cozinha
         self.tabua = maquina.Tabua(gc, 64*3.5,64*4.5)
-        self.batedeira = maquina.Batedeira(gc, 620, 80)
+        self.batedeira = maquina.Batedeira(gc, 348, 80)
         self.forno = maquina.Forno(gc, 64*8, 64*1.5)
         
         # bancada de pratos
@@ -48,7 +48,7 @@ class Level:
 
         #despensa
         self.geladeira = Geladeira(self.gc, 64*2, 64)
-        self.despensa = Despensa(self.gc, 64*4, 64*1.5)
+        self.despensa = Despensa(self.gc, 64*9, 64*1.5)
 
         self.armazemGroup = pygame.sprite.Group()
         self.armazemGroup.add(self.geladeira)
@@ -100,6 +100,14 @@ class Level:
         # Desenha o fundo
         self.screen.blit(self.background, (0, 0))
 
+        # Exibe o timer na tela
+        timer_text = self.font.render(f"Tempo: {self.time_remaining}", True, (255, 255, 255))  # Texto branco
+        self.screen.blit(timer_text, (10, 10))  # Posição no canto superior esquerdo
+
+        # Exibe a pontuação na tela
+        score_text = self.font.render(f"Pontuacao: {self.score}", True, (255, 255, 255))  # Texto branco
+        self.screen.blit(score_text, (10, 50))  # Posição no canto superior esquerdo, abaixo do timer
+        
         #imprime as máquinas na tela
         self.maquinasGroup.draw(self.screen)
         self.armazemGroup.draw(self.screen)
@@ -114,13 +122,6 @@ class Level:
         self.despensa.print()
         self.pratoDisplay.display(700,430)
 
-        # Exibe o timer na tela
-        timer_text = self.font.render(f"Tempo: {self.time_remaining}", True, (255, 255, 255))  # Texto branco
-        self.screen.blit(timer_text, (10, 10))  # Posição no canto superior esquerdo
-
-        # Exibe a pontuação na tela
-        score_text = self.font.render(f"Pontuacao: {self.score}", True, (255, 255, 255))  # Texto branco
-        self.screen.blit(score_text, (10, 50))  # Posição no canto superior esquerdo, abaixo do timer
         
         # Atualiza a tela
         pygame.display.flip()
