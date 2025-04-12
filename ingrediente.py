@@ -8,9 +8,11 @@ class Ingrediente:
     def __init__(self, nome, indiceReceita,gc1, image,x,y):
         self.nome=nome
         self.indiceReceita = indiceReceita
-        self.estadoReceita=[]
         self.gc = gc1
-        self.sprite = ClickableSprite(image,x,y,self.alertarEscolha)
+        self.x=x
+        self.y=y
+        self.estadoReceita=[]
+        self.sprite = ClickableSprite(image,self.x,self.y,self.alertarEscolha)
     #
     # Um nome para identificar o ingrediente
     # o índice no código carteado de receita
