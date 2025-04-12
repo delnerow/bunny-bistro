@@ -5,11 +5,12 @@ from ClickSprite import ClickableSprite
 from menu import Menu
 
 class Armazem(HoverSprite):
-    def __init__(self, image, gc, x, y, x_menu,y_menu,items):
+    def __init__(self, image, gc, x, y, x_menu,y_menu,items,position):
         super().__init__(image, x, y,self.abre_ou_fecha,self.abre_ou_fecha)
         self.gc=gc
         self.x=x
         self.y=y
+        self.position =position
         #coordenadas do Armazem
         
         
@@ -41,7 +42,7 @@ class Armazem(HoverSprite):
     
     def abre_ou_fecha(self):
         print("abre ou fecha")
-        self.gc.player.move(self.x,self.y+10,1)
+        self.gc.player.move(self.position)
         if(self.menu_aberto):
             self.menu_aberto = False
             return
@@ -62,16 +63,17 @@ class Geladeira(Armazem):
         self.image = pygame.image.load("images/geladeira.png").convert_alpha()
         self.image= pygame.transform.scale(self.image, (64, 128))
         self.items=[Tomate(gc, 0, 0),Cebola(gc,0, 0),Leite(gc, 0 , 0)]
-        
-        super().__init__(self.image, gc, x, y,self.x_menu,self.y_menu,self.items)
+        self.position=0
+        super().__init__(self.image, gc, x, y,self.x_menu,self.y_menu,self.items, self.position)
     
 
 class Despensa(Armazem):
     def __init__(self, gc, x, y):
         self.x_menu = x+20
         self.y_menu = y-50
+        self.position =1
         image = pygame.image.load("images/despensa.png").convert_alpha()
         self.items=[Grao(gc, 0, 0),Farinha(gc, 0, 0)]
 
-        super().__init__(image, gc, x, y,self.x_menu,self.y_menu,self.items)
+        super().__init__(image, gc, x, y,self.x_menu,self.y_menu,self.items,self.position)
     
