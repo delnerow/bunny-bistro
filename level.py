@@ -18,11 +18,12 @@ class Level:
         #controle de jogo
         self.gc = gc
         self.ui = UI() 
+        self.score = 0
 
         # Timer do jogo (em segundos)
         self.time_remaining = 300  # Exemplo: 5 minutos
         self.last_time = pygame.time.get_ticks()
-        self.timer_font = pygame.font.Font("images\DigitalDismay.otf", 36) 
+        self.font = pygame.font.Font("images\DigitalDismay.otf", 36) 
         
         self.pratoDisplay = PratoDisplay(self.screen)
 
@@ -110,9 +111,13 @@ class Level:
         self.pratoDisplay.display(700,430)
 
         # Exibe o timer na tela
-        timer_text = self.timer_font.render(f"Tempo: {self.time_remaining}", True, (255, 255, 255))  # Texto branco
+        timer_text = self.font.render(f"Tempo: {self.time_remaining}", True, (255, 255, 255))  # Texto branco
         self.screen.blit(timer_text, (10, 10))  # Posição no canto superior esquerdo
 
+        # Exibe a pontuação na tela
+        score_text = self.font.render(f"Pontuacao: {self.score}", True, (255, 255, 255))  # Texto branco
+        self.screen.blit(score_text, (10, 50))  # Posição no canto superior esquerdo, abaixo do timer
+        
         # Atualiza a tela
         pygame.display.flip()
         self.clock.tick(60)
