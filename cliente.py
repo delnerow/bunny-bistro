@@ -49,6 +49,7 @@ class Cliente(ClickableSprite):
                 self.__score=0
                 print("que bosta")
             prato.ingredientes = []
+            self.gc.player.prato = None
             self.gc.level.score= self.gc.level.score+self.satisfacao()
     #
     # interacao do cliente com oq tem no prato

@@ -38,6 +38,7 @@ class PratoDisplay():
             self.items=prato.ingredientes
             self.receita = prato.validar_receita()
         else:
+            self.items=[]
             self.receita="sem prato"
         
         
