@@ -34,7 +34,7 @@ class Cliente(ClickableSprite):
         self.frame = 0
         
         self.__score=0
-        super().__init__(self.image, x, y,self.comer)
+        super().__init__(self.skin, x, y,self.comer)
     #
     # inicializa um cliente com tempo de paciencia
     # pedido desejado, especie do cliente
@@ -77,7 +77,9 @@ class Cliente(ClickableSprite):
             self.frame += 1             
             if self.frame == 40:
                 self.skin = self.skinVector[1]
+                self.image = self.skin
             elif self.frame == 80:
                 self.skin = self.skinVector[0]
+                self.image = self.skin
                 self.frame = 0
         #self.image = self.skin 

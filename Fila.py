@@ -30,6 +30,8 @@ class Fila():
         for item in self.clientes:
             item.rect.x = self.x + i * self.padding + 10
             item.rect.y = self.y
+            item.x = item.rect.x  # sincroniza para desenhar certinho
+            item.y = item.rect.y
             i += 1
             
     def draw(self):

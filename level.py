@@ -33,7 +33,12 @@ class Level:
         self.player = player
         self.fila = Fila(gc,64*7,64*4.5 )
         self.cliente = Cliente(gc,64*7,64*4.5, 100, "Caponata","cao",self.fila)
+        self.cliente2 = Cliente(gc,64*10,64*4.5, 100, "Hamburguer","cao",self.fila)
+        self.cliente3 = Cliente(gc,64*10,64*4.5, 100, "Quiche","cao",self.fila)
+
         self.fila.entra_cliente(self.cliente)
+        self.fila.entra_cliente(self.cliente2)
+        self.fila.entra_cliente(self.cliente3)
 
         #as máquinas da cozinha
         self.tabua = maquina.Tabua(gc, 64*3.5,64*4.5)

@@ -1,7 +1,7 @@
 
 #Código numérico para relacionar receitas
-pratos={(1,1,0,0,0,0):"Caponata", (0,0,12,2,2,0):"hamburguer",(0,0,0,23,23,123):"quiche"}
-
+pratos={(1,1,0,0,0,0):"Caponata", (0,0,12,2,2,0):"Hamburguer",(0,0,0,23,23,123):"Quiche"}
+#tomate cebola grao farinha leite brocolis
 interface={1:"cortado",2:"batido",3:"assado",12:"cortado e batido",13:"cortado e assado",23:"batido e assado",123:"cortado, assado e batido"}
 # Código das receitas (T de tomate, C de cebola... / C de corte, B de bater e A de assar...)
 # TCGFLB       C B A  CB CA  ...
