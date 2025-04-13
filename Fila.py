@@ -8,7 +8,7 @@ class Fila():
         self.x=x
         self.y=y
         self.group = pygame.sprite.Group()
-        self.padding =50
+        self.padding =55
         
         
     def entra_cliente(self, cliente):
@@ -37,7 +37,8 @@ class Fila():
     def draw(self):
         for cliente in self.clientes:
             self.screen.blit(cliente.skin, pygame.Vector2(cliente.x,cliente.y))
-
+            self.screen.blit(cliente.balao_image, pygame.Vector2(cliente.rect.topleft) + cliente.balao_offset)
+            self.screen.blit(cliente.pedido_image, pygame.Vector2(cliente.rect.topleft) + cliente.pedido_offset)
     
     def update(self, events):
         self.group.update(events)

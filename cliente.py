@@ -1,4 +1,6 @@
 especies=("humano","cao","gato")
+pedidos={"Caponata":"images\pratos\caponata.png", "Hamburguer":"images\pratos\hamburguer.png","Quiche":"images\pratos\quiche.png"}
+
 import pygame
 from ClickSprite import ClickableSprite
 from prato import Prato
@@ -28,7 +30,13 @@ class Cliente(ClickableSprite):
         self.image = pygame.image.load("images\cliente.png").convert_alpha()
         self.skinVector = [get_image(self.image, 14, 32, 3, (0,0,0), (i, 0)) for i in range(2)]
         self.skin = self.skinVector[0]
-
+        self.balao_image = pygame.image.load("images/balao.png").convert_alpha()  # carrega a imagem do balão
+        self.balao_image = pygame.transform.scale_by(self.balao_image, 2)
+        self.balao_offset = pygame.Vector2(-30, -70)
+        
+        self.pedido_image = pygame.image.load(pedidos[pedido]).convert_alpha()  # carrega a imagem do balão
+        self.pedido_image = pygame.transform.scale_by(self.pedido_image, 1.5)
+        self.pedido_offset = pygame.Vector2(-28, -70)
         #frame do coelho: alterna entre imagens na mesma 
         # direção pra ele ter movimento mesmo parado :D 
         self.frame = 0
