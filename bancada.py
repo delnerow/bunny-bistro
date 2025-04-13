@@ -9,7 +9,8 @@ class Bancada():
         self.gc=gc
         self.x=x
         self.y=y
-        self.image = self.image=pygame.image.load('images/despensa.png').convert_alpha();
+        self.image = self.image=pygame.image.load('images/pratos.png').convert_alpha();
+        self.image = pygame.transform.scale_by(self.image, 1.5)
         #self.image= pygame.transform.scale(self.image, (64, 64))
         self.sprite = ClickableSprite(self.image,x,y,self.dar_novo_prato)
         self.position = 5

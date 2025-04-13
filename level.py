@@ -48,13 +48,15 @@ class Level:
         self.forno = maquina.Forno(gc, 64*8, 64*1.5)
         
         # bancada de pratos
-        self.bancada = Bancada(gc,64*5,64*4.5)
+        self.bancada = Bancada(gc,64*5,64*4.2)
 
         self.maquinasGroup = pygame.sprite.Group()
+        self.bancadaGroup= pygame.sprite.Group()
         self.maquinasGroup.add(self.tabua.sprite)
         self.maquinasGroup.add(self.batedeira.sprite)
         self.maquinasGroup.add(self.forno.sprite)
-        self.maquinasGroup.add(self.bancada.sprite)
+        self.bancadaGroup.add(self.bancada.sprite)
+
 
         #despensa
         self.geladeira = Geladeira(self.gc, 64*2, 64)
@@ -99,6 +101,7 @@ class Level:
         self.player.update()
         self.fila.update(events)
         self.maquinasGroup.update(events)
+        self.bancadaGroup.update(events)
         #self.armazemGroup.update(events)
         self.lixoGroup.update(events)
         self.pratoDisplay.update_ingrediente(self.player.prato)
@@ -131,7 +134,7 @@ class Level:
         self.geladeira.print()
         self.despensa.print()
         self.pratoDisplay.display(700,430)
-
+        self.bancadaGroup.draw(self.screen)
         # Atualiza a tela
         pygame.display.flip()
         self.clock.tick(60)
