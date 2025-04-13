@@ -11,7 +11,6 @@ from lixo import Lixo
 
 class Level:
     def __init__(self, gc, screen, player):
-        pygame.display.set_caption("tituloo")
         self.clock = pygame.time.Clock()
         self.background = pygame.image.load("images\cozinha_demo.png").convert_alpha()
         self.background = pygame.transform.scale2x(self.background)
@@ -23,7 +22,8 @@ class Level:
         self.score = 0
 
         # Timer do jogo (em segundos)
-        self.time_remaining = 300  # Exemplo: 5 minutos
+        self.time_init = 100
+        self.time_remaining = self.time_init
         self.last_time = pygame.time.get_ticks()
         self.font = pygame.font.Font("images\DigitalDismay.otf", 36) 
         
@@ -62,7 +62,18 @@ class Level:
         self.lixoGroup = pygame.sprite.Group()
         self.lixoGroup.add(self.lixo.sprite)
 
+        #musica
+        self.volume = 0.2
+        self.music = pygame.mixer.Sound('sounds/music.mp3')
+
+        pygame.mixer.music.set_volume(self.volume)   
+        pygame.mixer.music.load('sounds/music.mp3')
+
+        self.musicNow = 0
+
     def run(self):
+        # Inicia a música de fundo
+        pygame.mixer.music.play(-1)  # -1 para tocar em loop
         while True:
             events = pygame.event.get()
             for event in events:
@@ -86,18 +97,8 @@ class Level:
         self.pratoDisplay.update_ingrediente(self.player.prato)
         self.geladeira.update(events)
         self.despensa.update(events)
-
-        #atualiza o timer
-        current_time = pygame.time.get_ticks()
-        if current_time - self.last_time >= 1000:  # 1000 ms = 1 segundo
-            self.time_remaining -= 1
-            self.last_time = current_time
-
-        # Verifica se o tempo acabou
-        if self.time_remaining <= 0:
-            print("Fim do jogo! O tempo acabou!")
-            pygame.quit()
-            sys.exit()
+        self.update_music()
+        self.update_timer()
 
     def print(self):
         # Desenha o fundo
@@ -124,8 +125,31 @@ class Level:
         self.despensa.print()
         self.pratoDisplay.display(700,430)
 
-        
         # Atualiza a tela
         pygame.display.flip()
         self.clock.tick(60)
     
+    def update_music(self):
+        if self.time_remaining <= self.time_init/2 and self.musicNow == 0:
+            self.musicNow = 1
+            pygame.mixer.music.fadeout(100)  # Fadeout da música atual (1 segundo)
+            pygame.mixer.music.load('sounds/music_fast.mp3')  # Carrega a nova música
+            pygame.mixer.music.play(-1, fade_ms=100)  # Toca a nova música com fadein (1 segundo)
+
+
+        if self.time_remaining <= self.time_init/4 and self.musicNow == 1:
+            self.musicNow = 2
+            pygame.mixer.music.fadeout(100)  # Fadeout da música atual (1 segundo)
+            pygame.mixer.music.load('sounds/music_muitofast.mp3')  # Carrega a nova música
+            pygame.mixer.music.play(-1, fade_ms=100)  # Toca a nova música com fadein (1 segundo)
+    
+    def update_timer(self):
+        current_time = pygame.time.get_ticks()
+        if current_time - self.last_time >= 1000:  # 1000 ms = 1 segundo
+            self.time_remaining -= 1
+            self.last_time = current_time
+
+        # Verifica se o tempo acabou
+        if self.time_remaining <= 0:
+            #faz algo quando o tempo acaba!!
+            pass

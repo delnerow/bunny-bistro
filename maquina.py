@@ -77,8 +77,10 @@ class Tabua(Maquina):
         self.image= pygame.transform.scale(self.image, (64, 32))
         super().__init__(gc,self.image,x,y)
         self.position = 4
+        self.sound = pygame.mixer.Sound('sounds/cortar.mp3')
+    
     def cozinhar(self):
-        
+        self.sound.play()
         print("cozinhar")
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].cortar()
@@ -94,7 +96,9 @@ class Batedeira(Maquina):
         self.image= pygame.transform.scale(self.image, (64, 64))
         super().__init__(gc,self.image,x,y)
         self.position = 3
+        self.sound = pygame.mixer.Sound('sounds/bater.mp3')
     def cozinhar(self):
+        self.sound.play()
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].bater()
         self.free()
@@ -108,7 +112,9 @@ class Forno(Maquina):
         self.image= pygame.transform.scale(self.image, (64, 64))
         super().__init__(gc,self.image,x,y)
         self.position = 2
+        self.sound = pygame.mixer.Sound('sounds/forno.mp3')
     def cozinhar(self):
+        self.sound.play()
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].assar()
         self.free()
