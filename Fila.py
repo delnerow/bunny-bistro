@@ -9,6 +9,8 @@ class Fila():
         self.y=y
         self.group = pygame.sprite.Group()
         self.padding =50
+        
+        
     def entra_cliente(self, cliente):
         self.clientes.append(cliente)
         self.group.add(cliente)
