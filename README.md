@@ -18,6 +18,7 @@ This repository constain a pygame game, made to CSI-22 computer science course.
     * fazer sumir quando tiver acabado a paciencia
     * controlar tempo de entrada pra criar cliente (tipo uma distribuicao de poisson)
     * controlar qual a paciencia, skin e prato do q vai entrar
+    * fazer coelinho se mover ate cliente quando entregar prato, mas ele fica do lado de dentro do balcão
 
 # Cola das receitas (arte)
     * tipo post-its que ficam no canto superior direito com a arte do prato de cada receita e os ingredientes (sinalizar faca, etc talvez para indicar que precisa ser cortado)
