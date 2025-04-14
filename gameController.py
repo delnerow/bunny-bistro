@@ -21,7 +21,7 @@ class GameController:
     def printarPrato(self):
         print("=====Prato atual=====")
         for c in self.player.prato.ingredientes:
-            print(c.nome+"("+str(c.estadoNumerico())+")", end='')
+            print(c.nome+""+str(c.estadoNumerico())+"", end='')
             print("")
         print(" = ", self.player.prato.validar_receita())
     #

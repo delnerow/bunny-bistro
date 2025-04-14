@@ -66,10 +66,8 @@ class Ingrediente:
 
     
     def estadoNumerico(self):
-        estado=0
-        for i in range(len(self.estadoReceita)):
-            estado = estado +pow(10,len(self.estadoReceita)-i-1)*self.estadoReceita[i]
-        return estado
+        
+        return tuple(self.estadoReceita)
     #
     # definindo qual o estado culinário do ingrediente
     # transformando lista de algarismos num número
