@@ -1,7 +1,9 @@
 # bunny-bistro
 This repository constain a pygame game, made to CSI-22 computer science course.
 
-
+* bugs *
+    * quando entrega prato pra cliente, tem q zerar as operações de cortado dos ingredientes, ou ent da pra fazer infinitas caponata sem cortar (pq n voltamos ao clone dos ingredientes?)
+    * display de prato parece nn atualizar com add de ingrediente, e sim com maquina. ent se tivermos um prato feito e add um ingrediente, a imagem do prato bonintho continua, mas ta invalido!
 
 * Artes a fazer *
 # lixo
