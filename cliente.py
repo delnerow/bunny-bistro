@@ -19,7 +19,6 @@ def get_image(sheet, width, height, scale, colour, position):
 class Cliente(ClickableSprite):
     def __init__(self,time,gc,x,y,paciencia, pedido, especie,fila):
         self.fila=fila
-        
         self.pedido = pedido
         self.especie = especie
         self.x=x

@@ -1,4 +1,5 @@
 import pygame
+pedidos={"invalido":"images\prato.png", "Caponata":"images\pratos\caponata.png", "Hamburguer":"images\pratos\hamburguer.png","Quiche":"images\pratos\quiche.png"}
 
 
 class PratoDisplay():
@@ -23,8 +24,7 @@ class PratoDisplay():
         #
         
         self.receita = ""
-        self.font = pygame.font.SysFont(None, 24)
-        self.TEXT_COLOR = (255, 255, 255)
+        self.receita_image = None
         
         #
         # receita a ser displayada 
@@ -37,9 +37,12 @@ class PratoDisplay():
         if(prato!= None):
             self.items=prato.ingredientes
             self.receita = prato.validar_receita()
+            self.receita_image = pygame.image.load(pedidos[self.receita]).convert_alpha()
+            self.receita_image = pygame.transform.scale_by(self.receita_image, 2.5)
         else:
             self.items=[]
             self.receita="sem prato"
+            self.receita_image = None
         
         
         #
@@ -56,10 +59,11 @@ class PratoDisplay():
         for item in self.items:
             self.screen.blit(item.sprite.image, (x0, y0))
             x0 += self.tamanho_item + self.padding
-        text = self.font.render(f"{self.receita}", True, self.TEXT_COLOR)
-        text_x = x + 40 + self.padding
-        text_y = y + self.height // 2 - text.get_height() // 2
-        self.screen.blit(text, (text_x, text_y))
+        
+        if self.receita_image:
+            receita_x = x + 170 
+            receita_y = y 
+            self.screen.blit(self.receita_image, (receita_x,receita_y))
         #
         # menu eh um retangulo marrom 
         # texto

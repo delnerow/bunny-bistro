@@ -12,10 +12,6 @@ This repository constain a pygame game, made to CSI-22 computer science course.
 * Mecânicas a implementar *
 
 # Clientes
-    * fazer balaozinho com prato q quer (nn ingredientes, arte do prato msm)
-    * receber tempo da fase
-    * indicativo de tempo acabando (balaozinho ficar vermehlo, sla)
-    * fazer sumir quando tiver acabado a paciencia
     * controlar tempo de entrada pra criar cliente (tipo uma distribuicao de poisson)
     * controlar qual a paciencia, skin e prato do q vai entrar
     * fazer coelinho se mover ate cliente quando entregar prato, mas ele fica do lado de dentro do balcão

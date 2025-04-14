@@ -10,6 +10,7 @@ class Fila():
         self.gc=gc
         self.group = pygame.sprite.Group()
         self.padding =55
+        self.capacidade=10
         
         
     def entra_cliente(self, cliente):
@@ -26,30 +27,46 @@ class Fila():
             
         self.update_client_positions()
     def update_client_positions(self):
-        # Reposition remaining clientes
         i = 0
         for item in self.clientes:
             item.rect.x = self.x + i * self.padding + 10
             item.rect.y = self.y
-            item.x = item.rect.x  # sincroniza para desenhar certinho
+            item.x = item.rect.x  
             item.y = item.rect.y
             i += 1
             
     def draw(self):
         for cliente in self.clientes:
-            balao_surface = cliente.balao_image.copy()
+            # desenha o cliente
             self.screen.blit(cliente.skin, pygame.Vector2(cliente.x,cliente.y))
+            
+            #clone do mal do balao que fica vermelho
+            balao_surface = cliente.balao_image.copy()
+            
+            #tempo em ms pro fade ficar suave
             tempo_percorrido= pygame.time.get_ticks()/1000-(self.gc.level.time_init-cliente.tempo_entrada)
+            
+            #balao começa a ficar vermelho nos segundos finais defindio por tempo_alerta
             if cliente.paciencia-tempo_percorrido< cliente.tempo_alerta:
+                # interpolação do balão
                 intensidade = int(255 * ((tempo_percorrido+cliente.tempo_alerta-cliente.paciencia) / cliente.tempo_alerta))
                 intensidade = max(0, min(255, intensidade))
+                
+                #overlay que ficara vermelho
                 overlay = pygame.Surface(balao_surface.get_size(), pygame.SRCALPHA)
-                overlay.fill((255, 0, 0, intensidade),)
+                overlay.fill((255, 0, 0, intensidade))
+                
+                #mascara aparecendo
                 balao_surface.blit(overlay, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
+            #balao do bem
             self.screen.blit(cliente.balao_image, pygame.Vector2(cliente.rect.topleft) + cliente.balao_offset)
+            
+            #balao do mal
             self.screen.blit(balao_surface, pygame.Vector2(cliente.rect.topleft) + cliente.balao_offset)
+            
             # desenha o pedido por cima do balão (sempre por ultimo)
             self.screen.blit(cliente.pedido_image, pygame.Vector2(cliente.rect.topleft) + cliente.pedido_offset)
+            
     def update(self, events):
         self.group.update(events)
     
