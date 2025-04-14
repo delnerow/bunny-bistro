@@ -34,10 +34,9 @@ class Level:
         self.fila = Fila(gc,64*7,64*4.5 )
         
         # clientes
-        self.cliente = Cliente(gc,64*7,64*4.5, 100, "Caponata","cao",self.fila)
-        self.cliente2 = Cliente(gc,64*10,64*4.5, 100, "Hamburguer","cao",self.fila)
-        self.cliente3 = Cliente(gc,64*10,64*4.5, 100, "Quiche","cao",self.fila)
-
+        self.cliente = Cliente(self.time_remaining,gc,64*7,64*4.5, 6, "Caponata","cao",self.fila)
+        self.cliente2 = Cliente(self.time_remaining,gc,64*10,64*4.5, 6, "Hamburguer","cao",self.fila)
+        self.cliente3 = Cliente(self.time_remaining,gc,64*10,64*4.5, 6, "Quiche","cao",self.fila)
         self.fila.entra_cliente(self.cliente)
         self.fila.entra_cliente(self.cliente2)
         self.fila.entra_cliente(self.cliente3)
@@ -47,17 +46,16 @@ class Level:
         self.batedeira = maquina.Batedeira(gc, 348, 80)
         self.forno = maquina.Forno(gc, 64*8, 64*1.5)
         
-        # bancada de pratos
-        self.bancada = Bancada(gc,64*5,64*4.2)
-
         self.maquinasGroup = pygame.sprite.Group()
         self.bancadaGroup= pygame.sprite.Group()
         self.maquinasGroup.add(self.tabua.sprite)
         self.maquinasGroup.add(self.batedeira.sprite)
         self.maquinasGroup.add(self.forno.sprite)
+        
+        # bancada de pratos
+        self.bancada = Bancada(gc,64*5,64*4.2)
         self.bancadaGroup.add(self.bancada.sprite)
-
-
+        
         #despensa
         self.geladeira = Geladeira(self.gc, 64*2, 64)
         self.despensa = Despensa(self.gc, 64*9, 64*1.5)

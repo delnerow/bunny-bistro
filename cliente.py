@@ -17,9 +17,9 @@ def get_image(sheet, width, height, scale, colour, position):
 	return image
 
 class Cliente(ClickableSprite):
-    def __init__(self,gc,x,y,paciencia, pedido, especie,fila):
+    def __init__(self,time,gc,x,y,paciencia, pedido, especie,fila):
         self.fila=fila
-        self.paciencia = paciencia
+        
         self.pedido = pedido
         self.especie = especie
         self.x=x
@@ -40,8 +40,12 @@ class Cliente(ClickableSprite):
         #frame do coelho: alterna entre imagens na mesma 
         # direção pra ele ter movimento mesmo parado :D 
         self.frame = 0
-        
         self.__score=0
+        self.paciencia = paciencia
+        self.tempo_entrada = time
+        print("ola sou cliente e vou ficar bravo em"+ str(self.tempo_entrada-paciencia))
+        #nesses ultimos segundos ele fica puto
+        self.tempo_alerta=5
         super().__init__(self.skin, x, y,self.comer)
     #
     # inicializa um cliente com tempo de paciencia
@@ -80,6 +84,12 @@ class Cliente(ClickableSprite):
         #atualiza a posição do coelho na tela
         #a cada 10 frames, muda a imagem do coelho
         #para dar a impressão de movimento
+        tempo_percorrido= self.tempo_entrada-self.gc.level.time_remaining
+
+        if not self.servido and tempo_percorrido == self.paciencia:
+            print("restaurante de bosta!")
+            self.servido=True
+            self.fila.sai_cliente(self)
         if(not self.servido):
             super().update(events)
             self.frame += 1             

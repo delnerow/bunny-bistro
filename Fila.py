@@ -7,6 +7,7 @@ class Fila():
         self.screen = gc.screen
         self.x=x
         self.y=y
+        self.gc=gc
         self.group = pygame.sprite.Group()
         self.padding =55
         
@@ -36,10 +37,19 @@ class Fila():
             
     def draw(self):
         for cliente in self.clientes:
+            balao_surface = cliente.balao_image.copy()
             self.screen.blit(cliente.skin, pygame.Vector2(cliente.x,cliente.y))
+            tempo_percorrido= pygame.time.get_ticks()/1000-(self.gc.level.time_init-cliente.tempo_entrada)
+            if cliente.paciencia-tempo_percorrido< cliente.tempo_alerta:
+                intensidade = int(255 * ((tempo_percorrido+cliente.tempo_alerta-cliente.paciencia) / cliente.tempo_alerta))
+                intensidade = max(0, min(255, intensidade))
+                overlay = pygame.Surface(balao_surface.get_size(), pygame.SRCALPHA)
+                overlay.fill((255, 0, 0, intensidade),)
+                balao_surface.blit(overlay, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
             self.screen.blit(cliente.balao_image, pygame.Vector2(cliente.rect.topleft) + cliente.balao_offset)
+            self.screen.blit(balao_surface, pygame.Vector2(cliente.rect.topleft) + cliente.balao_offset)
+            # desenha o pedido por cima do balão (sempre por ultimo)
             self.screen.blit(cliente.pedido_image, pygame.Vector2(cliente.rect.topleft) + cliente.pedido_offset)
-    
     def update(self, events):
         self.group.update(events)
     
