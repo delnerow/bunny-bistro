@@ -46,6 +46,7 @@ class Level:
 
         self.cola = ColaUI(760,280)
         self.janela = Window(730,5)
+
         # Timer do jogo (em segundos)
         self.time_init = 100
         self.time_remaining = self.time_init
@@ -77,8 +78,6 @@ class Level:
         self.tabua = maquina.Tabua(gc, 64*3.5,64*4.4)
         self.batedeira = maquina.Batedeira(gc, 348, 80)
         self.forno = maquina.Forno(gc, 64*8, 64*1.5)
-        
-        
         
         
         self.mesasGroup = pygame.sprite.Group()
@@ -148,8 +147,6 @@ class Level:
         self.clienteControl.update()
         self.update_music()
         self.update_timer()
-
-        #ainda n sei como implementar
         self.barata.update(events)
 
     def print(self):
@@ -171,28 +168,25 @@ class Level:
         
         #imprime as máquinas na tela
         self.maquinasGroup.draw(self.screen)
-        
         self.armazemGroup.draw(self.screen)
         self.lixoGroup.draw(self.screen)
         
         
-        
+        #imprime a barata na tela
+        if self.barata.live:
+            self.screen.blit(self.barata.image, (self.barata.x,self.barata.y))
 
         #imprime o coelho na tela
         self.screen.blit(self.player.skin, self.player.screenposition)
         self.fila.draw()
 
         #imprime a interface
-        self.janela.print(self.screen)
         self.geladeira.print()
         self.despensa.print()
         self.pratoDisplay.display(700,450)
         self.bancadaGroup.draw(self.screen)
         self.cola.display(self.screen)
 
-        #imprime a barata na tela
-        self.screen.blit(self.barata.image, (self.barata.x,self.barata.y))
-        
         
         # Atualiza a tela
         pygame.display.flip()
@@ -255,8 +249,11 @@ class Level:
                 if section_x < self.score_bar_x + current_width:
                     pygame.draw.rect(self.screen, color, 
                                     (section_x, self.score_bar_y, 1, self.score_bar_height))
-
-
         # Desenha o contorno da barra
         pygame.draw.rect(self.screen, (233, 216, 166), 
                 (self.score_bar_x, self.score_bar_y, self.score_bar_width, self.score_bar_height), 4)
+        
+    def change_score(self, score):
+        self.score += score
+        if self.score < 0:
+            self.score = 0

@@ -49,6 +49,9 @@ class Player:
         pos_lixo = Vector2(32*0.5, 64*3)        #6
         self.movVec.extend([pos_geladeira, pos_armario, pos_fogao, pos_batedeira, pos_tabua, pos_prato, pos_lixo])
 
+        self.prepGunSound = pygame.mixer.Sound("sounds\gunPrepare.mp3")
+        self.shootSound = pygame.mixer.Sound("sounds\gunShoot.mp3")
+
     def update(self):
         #atualiza a posição do coelho na tela
         #a cada 10 frames, muda a imagem do coelho
@@ -96,5 +99,13 @@ class Player:
     
     def mirar(self):
         self.mira = not self.mira
+
+    def engatilhar(self):
+        #prepara a arma para atirar
+        self.prepGunSound.play()
+
+    def shoot(self):
+        self.shootSound.play()
+
     def printOi(self):
         print("oi")
