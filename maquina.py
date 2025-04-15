@@ -19,6 +19,7 @@ class Maquina:
     def ocupar(self):
         bandeja = self.gc.player.prato
         self.gc.player.move(self.position)
+        self.gc.player.machine_using()
         print("ocupar")
         if(bandeja != None and not self.__ocupada):
             if not bandeja.esta_vazio():
