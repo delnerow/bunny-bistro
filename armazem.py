@@ -42,6 +42,7 @@ class Armazem(HoverSprite):
     
     def abre_ou_fecha(self):
         print("abre ou fecha")
+        self.gc.player.is_on_armazem = not self.gc.player.is_on_armazem
         self.sound.play()
         self.gc.player.move(self.position)
         if(self.menu_aberto):

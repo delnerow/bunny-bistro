@@ -43,6 +43,7 @@ class Level:
         self.time_remaining = self.time_init
         self.last_time = pygame.time.get_ticks()
         self.font = pygame.font.Font("images\DigitalDismay.otf", 36) 
+        self.font_point = pygame.font.Font("images\DigitalDismay.otf", 20) 
         
         self.pratoDisplay = PratoDisplay(self.screen)
 
@@ -135,8 +136,8 @@ class Level:
 
         # Exibe a pontuação na tela
         self.print_pointbar()
-        # score_text = self.font.render(f"Pontuacao: {self.score}", True, (255, 255, 255))  # Texto branco
-        # self.screen.blit(score_text, (10, 50))  # Posição no canto superior esquerdo, abaixo do timer
+        score_text = self.font_point.render(f"EcoPoints: {self.score}", True, (255, 255, 255))  # Texto branco
+        self.screen.blit(score_text, (16, 22))  # Posição no canto superior esquerdo, abaixo do timer
         
         #imprime as máquinas na tela
         self.maquinasGroup.draw(self.screen)

@@ -20,9 +20,9 @@ class Player:
         self.screenposition = Vector2(64*3,64*3) #posição na tela, para print
 
         #posição do coelho na cozinha (em que máquina ele está)
-        #zero = virado pra baixo
-        #1 = virado pra cima
         self.position = 0 
+        self.is_on_armazem = False
+        self.using_machine_timer = 0
         
         self.sheet = pygame.image.load("images\coelinho.png").convert_alpha()
 
@@ -52,19 +52,35 @@ class Player:
         #atualiza a posição do coelho na tela
         #a cada 10 frames, muda a imagem do coelho
         #para dar a impressão de movimento
-        self.frame += 1             
-        if self.frame == 40:
-            self.skin = self.skinVector[4]
-        elif self.frame == 80:
-            self.skin = self.skinVector[0]
-            self.frame = 0
+        self.frame += 1
 
-        # if self.position == 1:
-        #     if self.frame == 40:
-        #         self.skin = self.skinVector[1]
-        #     elif self.frame == 80:
-        #         self.skin = self.skinVector[5]
-        #         self.frame = 0
+        #verifica se olha pra cima
+        if self.is_on_armazem:
+            self.skin = self.skinVector[1+4*(self.frame//40)]
+            if self.frame > 79:
+                self.frame = 0
+
+        #verifica se está usando máquina
+        elif self.using_machine_timer > 0:
+            k=1
+            if self.position==4:
+                k=0
+            
+            self.skin = self.skinVector[k+4*(self.frame//40)]
+            self.using_machine_timer -= 1
+            if self.frame == 80:
+                self.frame = 0
+
+        #verifica se está no lixo
+        elif self.position == 6:
+            self.skin = self.skinVector[2+4*(self.frame//40)]
+            if self.frame > 79:
+                self.frame = 0
+
+        else:
+            self.skin = self.skinVector[4*(self.frame//40)]
+            if self.frame > 79:
+                self.frame = 0
 
     def move(self, position):
         #muda a posição do coelho na tela com base na posição
@@ -73,6 +89,8 @@ class Player:
         self.screenposition = self.movVec[position]
         self.position = position
 
+    def machine_using(self):
+        self.using_machine_timer = 30
     
     def printOi(self):
         print("oi")
