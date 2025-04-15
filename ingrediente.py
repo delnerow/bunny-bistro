@@ -54,7 +54,7 @@ class Ingrediente:
         print("beep beep")
         #self.gc.level.player.prato.add_ingrediente(self.__clonar__())
         if(self.gc.player.prato != None):
-            self.gc.player.prato.add_ingrediente(self)
+            self.gc.player.prato.add_ingrediente(self.__clonar__())
             if(len(self.gc.player.prato.ingredientes)<5):
                 self.sound.play()
             else:
@@ -70,10 +70,8 @@ class Ingrediente:
 
     
     def estadoNumerico(self):
-        estado=0
-        for i in range(len(self.estadoReceita)):
-            estado = estado +pow(10,len(self.estadoReceita)-i-1)*self.estadoReceita[i]
-        return estado
+        
+        return tuple(self.estadoReceita)
     #
     # definindo qual o estado culinário do ingrediente
     # transformando lista de algarismos num número
