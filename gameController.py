@@ -15,7 +15,7 @@ class GameController:
 
         self.time=0
         self.player = Player()
-        self.level = Level(self, self.screen, self.player)
+        self.level = Level(self)
 
     #
     def printarPrato(self):

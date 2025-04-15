@@ -3,7 +3,6 @@ from ClienteSpawner import ClienteSpawner
 from Fila import Fila
 from bancada import Bancada
 from cliente import Cliente
-from player import Player
 from pratoDIsplay import PratoDisplay
 from ui import UI
 import maquina
@@ -11,11 +10,10 @@ from armazem import Geladeira, Despensa
 from lixo import Lixo
 
 class Level:
-    def __init__(self, gc, screen, player):
+    def __init__(self, gc):
         self.clock = pygame.time.Clock()
         self.background = pygame.image.load("images\cozinha1.png").convert_alpha()
         self.background = pygame.transform.scale2x(self.background)
-        self.screen = screen
 
         #controle de jogo
         self.gc = gc
@@ -46,10 +44,7 @@ class Level:
         self.font = pygame.font.Font("images\DigitalDismay.otf", 36) 
         self.font_point = pygame.font.Font(None, 22) 
         
-        self.pratoDisplay = PratoDisplay(self.screen)
-
-        #o nosso player
-        self.player = player
+        self.pratoDisplay = PratoDisplay(self.gc.screen)
         self.fila = Fila(gc,64*7,64*4.5 )
         
         # clientes
@@ -112,13 +107,13 @@ class Level:
 
     def update(self, events):
         # Atualiza a lógica do jogo aqui
-        self.player.update()
+        self.gc.player.update()
         self.fila.update(events)
         self.maquinasGroup.update(events)
         self.bancadaGroup.update(events)
         #self.armazemGroup.update(events)
         self.lixoGroup.update(events)
-        self.pratoDisplay.update_ingrediente(self.player.prato)
+        self.pratoDisplay.update_ingrediente(self.gc.player.prato)
         self.geladeira.update(events)
         self.despensa.update(events)
         self.clienteControl.update()
@@ -127,31 +122,31 @@ class Level:
 
     def print(self):
         # Desenha o fundo
-        self.screen.blit(self.background, (0, 0))
+        self.gc.screen.blit(self.background, (0, 0))
 
         # Exibe o timer na tela
         timer_text = self.font.render(f"{self.time_remaining}", True, (255, 255, 255))  # Texto branco
-        self.screen.blit(timer_text, (64*7.5+16, 14))  # Posição no mostrador
+        self.gc.screen.blit(timer_text, (64*7.5+16, 14))  # Posição no mostrador
 
         # Exibe a pontuação na tela
         self.print_pointbar()
         score_text = self.font_point.render(f"EcoPoints: {self.score}", True, (255, 255, 255))  # Texto branco
-        self.screen.blit(score_text, (18, 22))  # Posição no canto superior esquerdo, abaixo do timer
+        self.gc.screen.blit(score_text, (18, 22))  # Posição no canto superior esquerdo, abaixo do timer
         
         #imprime as máquinas na tela
-        self.maquinasGroup.draw(self.screen)
-        self.armazemGroup.draw(self.screen)
-        self.lixoGroup.draw(self.screen)
+        self.maquinasGroup.draw(self.gc.screen)
+        self.armazemGroup.draw(self.gc.screen)
+        self.lixoGroup.draw(self.gc.screen)
 
         #imprime o coelho na tela
-        self.screen.blit(self.player.skin, self.player.screenposition)
+        self.gc.screen.blit(self.gc.player.skin, self.gc.player.screenposition)
         self.fila.draw()
 
         #imprime a interface
         self.geladeira.print()
         self.despensa.print()
         self.pratoDisplay.display(700,430)
-        self.bancadaGroup.draw(self.screen)
+        self.bancadaGroup.draw(self.gc.screen)
         
         # Atualiza a tela
         pygame.display.flip()
@@ -184,7 +179,7 @@ class Level:
 
     def print_pointbar(self):
         # Preenche o retângulo com a cor de fundo
-        pygame.draw.rect(self.screen, (200, 200, 200), 
+        pygame.draw.rect(self.gc.screen, (200, 200, 200), 
                 (self.score_bar_x, self.score_bar_y, self.score_bar_width, self.score_bar_height))
         
         score_percentage = min(self.score / self.max_score, 1)  # Calcula a porcentagem (máximo de 100%)
@@ -212,10 +207,10 @@ class Level:
                 # Calcula a posição da sub-seção
                 section_x = self.score_bar_x + i * section_width + j
                 if section_x < self.score_bar_x + current_width:
-                    pygame.draw.rect(self.screen, color, 
+                    pygame.draw.rect(self.gc.screen, color, 
                                     (section_x, self.score_bar_y, 1, self.score_bar_height))
 
 
         # Desenha o contorno da barra
-        pygame.draw.rect(self.screen, (233, 216, 166), 
+        pygame.draw.rect(self.gc.screen, (233, 216, 166), 
                 (self.score_bar_x, self.score_bar_y, self.score_bar_width, self.score_bar_height), 4)
