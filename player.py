@@ -57,7 +57,7 @@ class Player:
         #verifica se olha pra cima
         if self.is_on_armazem:
             self.skin = self.skinVector[1+4*(self.frame//40)]
-            if self.frame > 79:
+            if self.frame > 78:
                 self.frame = 0
 
         #verifica se está usando máquina
@@ -68,18 +68,19 @@ class Player:
             
             self.skin = self.skinVector[k+4*(self.frame//40)]
             self.using_machine_timer -= 1
-            if self.frame == 80:
+            if self.frame > 78:
                 self.frame = 0
 
         #verifica se está no lixo
         elif self.position == 6:
             self.skin = self.skinVector[2+4*(self.frame//40)]
-            if self.frame > 79:
+            if self.frame > 78:
                 self.frame = 0
 
+        #posição padrão do coelho
         else:
-            self.skin = self.skinVector[4*(self.frame//40)]
-            if self.frame > 79:
+            self.skin = self.skinVector[8+4*(self.frame//40)]
+            if self.frame > 78:
                 self.frame = 0
 
     def move(self, position):

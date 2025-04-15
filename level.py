@@ -173,6 +173,7 @@ class Level:
         self.fila.draw()
 
         #imprime a interface
+        self.janela.print(self.screen)
         self.geladeira.print()
         self.despensa.print()
         self.pratoDisplay.display(700,450)
