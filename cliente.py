@@ -44,7 +44,7 @@ class Cliente(ClickableSprite):
         self.tempo_entrada = time
         print("ola sou cliente e vou ficar bravo em"+ str(self.tempo_entrada-paciencia))
         #nesses ultimos segundos ele fica puto
-        self.tempo_alerta=5
+        self.tempo_alerta=10
         super().__init__(self.skin, x, y,self.comer)
     #
     # inicializa um cliente com tempo de paciencia

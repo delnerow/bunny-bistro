@@ -34,9 +34,9 @@ class Level:
         self.fila = Fila(gc,64*7,64*4.5 )
         
         # clientes
-        self.cliente = Cliente(self.time_remaining,gc,64*7,64*4.5, 10, "Caponata","cao",self.fila)
-        self.cliente2 = Cliente(self.time_remaining,gc,64*10,64*4.5, 10, "Hamburguer","cao",self.fila)
-        self.cliente3 = Cliente(self.time_remaining,gc,64*10,64*4.5, 10, "Quiche","cao",self.fila)
+        self.cliente = Cliente(self.time_remaining,gc,64*7,64*4.5, 20, "Caponata","cao",self.fila)
+        self.cliente2 = Cliente(self.time_remaining,gc,64*10,64*4.5, 20, "Hamburguer","cao",self.fila)
+        self.cliente3 = Cliente(self.time_remaining,gc,64*10,64*4.5, 20, "Quiche","cao",self.fila)
         self.fila.entra_cliente(self.cliente)
         self.fila.entra_cliente(self.cliente2)
         self.fila.entra_cliente(self.cliente3)

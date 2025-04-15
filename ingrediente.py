@@ -54,7 +54,7 @@ class Ingrediente:
         #self.gc.level.player.prato.add_ingrediente(self.__clonar__())
         if(self.gc.player.prato != None):
             self.sound.play()
-            self.gc.player.prato.add_ingrediente(self)
+            self.gc.player.prato.add_ingrediente(self.__clonar__())
         
     #
     # um ingrediente clicado informa o GameController dessa escolha
