@@ -45,7 +45,7 @@ class Player:
         pos_batedeira = Vector2(64*4.75,64*1.5) #3
         pos_tabua = Vector2(64*3, 64*3)         #4
         pos_prato = Vector2(64*4, 64*3)         #5
-        pos_lixo = Vector2(64*0.5, 64*6)        #6
+        pos_lixo = Vector2(32*0.5, 64*3)        #6
         self.movVec.extend([pos_geladeira, pos_armario, pos_fogao, pos_batedeira, pos_tabua, pos_prato, pos_lixo])
 
     def update(self):

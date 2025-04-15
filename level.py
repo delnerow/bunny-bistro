@@ -43,7 +43,7 @@ class Level:
         self.time_remaining = self.time_init
         self.last_time = pygame.time.get_ticks()
         self.font = pygame.font.Font("images\DigitalDismay.otf", 36) 
-        self.font_point = pygame.font.Font("images\DigitalDismay.otf", 20) 
+        self.font_point = pygame.font.Font(None, 22) 
         
         self.pratoDisplay = PratoDisplay(self.screen)
 
@@ -83,7 +83,7 @@ class Level:
         self.armazemGroup.add(self.despensa)
 
         #lixo
-        self.lixo = Lixo(gc, 10, 500)
+        self.lixo = Lixo(gc, 10, 36*7)
         self.lixoGroup = pygame.sprite.Group()
         self.lixoGroup.add(self.lixo.sprite)
 
@@ -137,7 +137,7 @@ class Level:
         # Exibe a pontuação na tela
         self.print_pointbar()
         score_text = self.font_point.render(f"EcoPoints: {self.score}", True, (255, 255, 255))  # Texto branco
-        self.screen.blit(score_text, (16, 22))  # Posição no canto superior esquerdo, abaixo do timer
+        self.screen.blit(score_text, (18, 22))  # Posição no canto superior esquerdo, abaixo do timer
         
         #imprime as máquinas na tela
         self.maquinasGroup.draw(self.screen)
@@ -147,11 +147,13 @@ class Level:
         #imprime o coelho na tela
         self.screen.blit(self.player.skin, self.player.screenposition)
         self.fila.draw()
+
         #imprime a interface
         self.geladeira.print()
         self.despensa.print()
         self.pratoDisplay.display(700,430)
         self.bancadaGroup.draw(self.screen)
+        
         # Atualiza a tela
         pygame.display.flip()
         self.clock.tick(60)

@@ -54,10 +54,10 @@ class PratoDisplay():
         
         
     def display(self, x, y):
-        background_rect = pygame.Rect(x - 5, y - 5, self.width + 10, self.height + 10)
-        pygame.draw.rect(self.screen, (139, 69, 19), background_rect, border_radius=8)  # Brown with rounded corners
-        x0=x
-        y0=y
+        #background_rect = pygame.Rect(x - 5, y - 5, self.width + 10, self.height + 10)
+        #pygame.draw.rect(self.screen, (139, 69, 19), background_rect, border_radius=8)  # Brown with rounded corners
+        x0=x+100
+        y0=y-40
         for item in self.items:
             
             for estado in item.estadoNumerico():
@@ -83,8 +83,8 @@ class PratoDisplay():
             
         
         if self.receita_image:
-            receita_x = x + 170 
-            receita_y = y 
+            receita_x = x + 160
+            receita_y = y +40
             self.screen.blit(self.receita_image, (receita_x,receita_y))
         #
         # menu eh um retangulo marrom 
