@@ -22,7 +22,7 @@ class GameController:
         # Inicialização do tempo, jogador e Level
         self.time=0
         self.player = Player()
-        self.level = Level(self, self.screen, self.player)
+        self.level = Level(self)
 
     # Roda o nível atual
     def run(self):

@@ -33,6 +33,7 @@ class Player:
         #frame do coelho: alterna entre imagens na mesma 
         # direção pra ele ter movimento mesmo parado :D 
         self.frame = 0
+        self.mira = False #coelho está com a arma
 
         #inicia o prato do coelho como NONE!!!
         self.prato = None
@@ -47,6 +48,9 @@ class Player:
         pos_prato = Vector2(64*4, 64*3)         #5
         pos_lixo = Vector2(32*0.5, 64*3)        #6
         self.movVec.extend([pos_geladeira, pos_armario, pos_fogao, pos_batedeira, pos_tabua, pos_prato, pos_lixo])
+
+        self.prepGunSound = pygame.mixer.Sound("sounds\gunPrepare.mp3")
+        self.shootSound = pygame.mixer.Sound("sounds\gunShoot.mp3")
 
     def update(self):
         #atualiza a posição do coelho na tela
@@ -79,7 +83,7 @@ class Player:
 
         #posição padrão do coelho
         else:
-            self.skin = self.skinVector[8+4*(self.frame//40)]
+            self.skin = self.skinVector[8*self.mira+4*(self.frame//40)]
             if self.frame > 78:
                 self.frame = 0
 
@@ -93,5 +97,15 @@ class Player:
     def machine_using(self):
         self.using_machine_timer = 30
     
+    def mirar(self):
+        self.mira = not self.mira
+
+    def engatilhar(self):
+        #prepara a arma para atirar
+        self.prepGunSound.play()
+
+    def shoot(self):
+        self.shootSound.play()
+
     def printOi(self):
         print("oi")
