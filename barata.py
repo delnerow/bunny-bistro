@@ -55,7 +55,6 @@ class Barata(HoverSprite):
             if np.random.random() < 0.01:  # 0.01% chance
                 self.live = True
                 self.changePlace()
-                
 
     def is_mouse_over(self, mouse_pos):
         # Override to include both sprite and its menu in hover area
