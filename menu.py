@@ -11,9 +11,9 @@ class Menu:
         padding = 32+16
         i =0
         for item in self.items:
-            item.sprite.rect.x= self.x +(i%3)*padding+32+16-4
-            item.sprite.rect.y= self.y +(i//3)*padding
-            self.group.add(item.sprite)
+            item.rect.x= self.x +(i%3)*padding+32+16-4
+            item.rect.y= self.y +(i//3)*padding
+            self.group.add(item)
             i=i+1
     def get_rect(self):
         return self.image.get_rect(topleft=(self.x, self.y))

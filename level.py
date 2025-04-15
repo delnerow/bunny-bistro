@@ -1,6 +1,6 @@
 import pygame, sys
 from ClienteSpawner import ClienteSpawner
-from Fila import Fila
+from fila import Fila
 from filaMesa import FilaMesa
 from mesa import Mesa
 from bancada import Bancada
@@ -43,7 +43,7 @@ class Level:
         (158, 240, 26)   # Roxo
         ]    
 
-        self.cola = ColaUI(760,280)
+        self.cola = ColaUI(750,280)
         self.janela = Window(730,5)
         # Timer do jogo (em segundos)
         self.time_init = 100

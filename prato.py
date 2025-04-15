@@ -45,16 +45,13 @@ class Prato:
     # esvazia o prato
     #
 
-    def restaurar_prato(self):
-        for ing in self.ingredientes:
-            ing.restaurar()
      
     def validar_receita(self):
-        receitaNumerica=[(0),(0),(0),(0),(0),(0)]
+        receita_Numerica=[(0),(0),(0),(0),(0),(0)]
         for ingrediente in self.ingredientes:
-            receitaNumerica[ingrediente.indiceReceita]=ingrediente.estadoNumerico()
-        if tuple(receitaNumerica) in pratos:
-            self.receita=pratos[tuple(receitaNumerica)]
+            receita_Numerica[ingrediente.indice_Receita]=ingrediente.estado_Numerico()
+        if tuple(receita_Numerica) in pratos:
+            self.receita=pratos[tuple(receita_Numerica)]
         else:
             self.receita="invalido"
         return self.receita 

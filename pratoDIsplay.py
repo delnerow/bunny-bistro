@@ -59,7 +59,7 @@ class PratoDisplay():
         y0=y-40
         for item in self.items:
             
-            for estado in item.estadoNumerico():
+            for estado in item.estado_Numerico():
                 ye=y0
                 xe=x0
                 preparo_image = pygame.image.load(preparos[estado]).convert_alpha()
@@ -76,7 +76,7 @@ class PratoDisplay():
                     factor =2.5
                 preparo_image = pygame.transform.scale_by(preparo_image,factor)
                 self.screen.blit(preparo_image, (xe, ye))
-            self.screen.blit(item.sprite.image, (x0, y0))
+            self.screen.blit(item.image, (x0, y0))
             x0 += self.tamanho_item + self.x_padding
             
             

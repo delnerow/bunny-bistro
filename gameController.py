@@ -3,33 +3,28 @@ from level import Level
 from player import Player
 import pygame
 
+
+# Estrutura intermediária de varios eventos e objetos globais, além das fases
 class GameController:
     def __init__(self):
+        # Inicio do jogo e mixer de som
         pygame.init()
         pygame.mixer.init()
-
+        
+        # Setup do icone/thumbnail do jogo
         icon = pygame.image.load("images\icon.bmp")
         pygame.display.set_icon(icon)
         pygame.display.set_caption("Bunny-Bistro")
+        
+        # Tamanho/resolucao da tela
         self.screen = pygame.display.set_mode((16*64, 9*64))
 
+        # Inicialização do tempo, jogador e Level
         self.time=0
         self.player = Player()
         self.level = Level(self, self.screen, self.player)
 
-    #
-    def printarPrato(self):
-        print("=====Prato atual=====")
-        for c in self.player.prato.ingredientes:
-            print(c.nome+""+str(c.estadoNumerico())+"", end='')
-            print("")
-        print(" = ", self.player.prato.validar_receita())
-    #
-    # atualiza o prato nas mãos do Chef
-    #
-
+    # Roda o nível atual
     def run(self):
         self.level.run()
 
-    def printOI(self):
-        print("oi\n")

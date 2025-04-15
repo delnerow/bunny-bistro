@@ -64,40 +64,43 @@ class Fila():
             
     def draw(self):
         for cliente in self.clientes:
-            # desenha o cliente
+            # Desenha o cliente
             self.screen.blit(cliente.skin, pygame.Vector2(cliente.x,cliente.y))
             
-            #clone do mal do balao que fica vermelho
+            # Clone de urgencia do balao que fica vermelho
             balao_surface = cliente.balao_image.copy()
             
-            #tempo em ms pro fade ficar suave
+            # Tempo em ms para o fade do balao ficar suave
             tempo_percorrido= (pygame.time.get_ticks()-cliente.tempo_entrada)/1000
             
-            #balao começa a ficar vermelho nos segundos finais defindio por tempo_alerta
+            # Balao começa a ficar vermelho nos segundos finais definidos por tempo_alerta
             if cliente.paciencia-tempo_percorrido< cliente.tempo_alerta:
-                # interpolação do balão
+                # Interpolação do balão
                 intensidade = int(255 * ((tempo_percorrido+cliente.tempo_alerta-cliente.paciencia) / cliente.tempo_alerta))
                 intensidade = max(0, min(255, intensidade))
                 
-                #overlay que ficara vermelho
+                # Overlay que ficara vermelho
                 overlay = pygame.Surface(balao_surface.get_size(), pygame.SRCALPHA)
                 overlay.fill((255, 0, 0, intensidade))
                 
-                #mascara aparecendo
+                # Mascara aparecendo
                 balao_surface.blit(overlay, (0, 0), special_flags=pygame.BLEND_RGBA_MULT)
-            #balao do bem
+            # Balao base
             self.screen.blit(cliente.balao_image, pygame.Vector2(cliente.rect.topleft) + cliente.balao_offset)
             
-            #balao do mal
+            # Balao de urgencia
             self.screen.blit(balao_surface, pygame.Vector2(cliente.rect.topleft) + cliente.balao_offset)
             
-            # desenha o pedido por cima do balão (sempre por ultimo)
+            # Desenha o pedido por cima do balão 
             self.screen.blit(cliente.pedido_image, pygame.Vector2(cliente.rect.topleft) + cliente.pedido_offset)
             
     def update(self, events):
         self.group.update(events)
+    # Atualiza o grupo de sprite por eventos (como click) e frames
+    
     def cheia(self):
         if(len(self.clientes)==self.capacidade):
             return True
+    # Retorna se a fila está cheia
     
     

@@ -31,7 +31,6 @@ class Cliente(ClickableSprite):
         self.gc=gc
         self.x=x
         self.y=y
-        
         # :fila:            Fila que armazena o cliente 
         # :tempo_entrada:   Timestamp em que ele entrou
         # :pedido:          Pedido que precisa ser preparado 
