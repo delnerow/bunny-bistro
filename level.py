@@ -3,6 +3,7 @@ from ClienteSpawner import ClienteSpawner
 from Fila import Fila
 from bancada import Bancada
 from cliente import Cliente
+from colaReceitas import ColaUI
 from player import Player
 from pratoDIsplay import PratoDisplay
 from ui import UI
@@ -39,6 +40,7 @@ class Level:
         (158, 240, 26)   # Roxo
         ]    
 
+        self.cola = ColaUI(760,280)
         # Timer do jogo (em segundos)
         self.time_init = 100
         self.time_remaining = self.time_init
@@ -150,8 +152,9 @@ class Level:
         #imprime a interface
         self.geladeira.print()
         self.despensa.print()
-        self.pratoDisplay.display(700,430)
+        self.pratoDisplay.display(700,450)
         self.bancadaGroup.draw(self.screen)
+        self.cola.display(self.screen)
         
         # Atualiza a tela
         pygame.display.flip()
