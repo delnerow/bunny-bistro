@@ -1,4 +1,5 @@
 import pygame, sys
+from ClienteSpawner import ClienteSpawner
 from Fila import Fila
 from bancada import Bancada
 from cliente import Cliente
@@ -53,11 +54,8 @@ class Level:
         
         # clientes
         self.cliente = Cliente(gc,64*7,64*4.5, 20, "Caponata","bode",self.fila)
-        self.cliente2 = Cliente(gc,64*10,64*4.5, 20, "Hamburguer","touro",self.fila)
-        self.cliente3 = Cliente(gc,64*10,64*4.5, 20, "Quiche","vaca",self.fila)
+        self.clienteControl = ClienteSpawner(self.gc,self.fila,0.2)
         self.fila.entra_cliente(self.cliente)
-        self.fila.entra_cliente(self.cliente2)
-        self.fila.entra_cliente(self.cliente3)
 
         #as máquinas da cozinha
         self.tabua = maquina.Tabua(gc, 64*3.5,64*4.5)
@@ -123,6 +121,7 @@ class Level:
         self.pratoDisplay.update_ingrediente(self.player.prato)
         self.geladeira.update(events)
         self.despensa.update(events)
+        self.clienteControl.update()
         self.update_music()
         self.update_timer()
 

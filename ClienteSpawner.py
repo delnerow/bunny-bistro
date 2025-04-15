@@ -22,11 +22,12 @@ class ClienteSpawner:
             self.tempo_proximo_cliente = tempo_atual + self._gerar_intervalo()
 
     def spawn_cliente(self):
-        print("Novo cliente chegou!")
-        # Aqui você criaria um cliente real e colocaria na fila
-        paciencias =(20,30,40)
-        pedidos=("Caponata", "Hamburguer","Quiche")
-        especies=("lady","bode","galinha","gato","macaco","morcego","porco","touro","vaca")
-        cliente = Cliente(self.cg,0,0,random.choice(paciencias),random.choice(pedidos),random.choice(especies),self.fila)
-        self.fila.entra_cliente(cliente)
+        if(not self.fila.cheia()):
+            print("Novo cliente chegou!")
+            # Aqui você criaria um cliente real e colocaria na fila
+            paciencias =(20,30,40)
+            pedidos=("Caponata", "Hamburguer","Quiche")
+            especies=("lady","bode","galinha","gato","macaco","morcego","porco","touro","vaca")
+            cliente = Cliente(self.gc,0,0,random.choice(paciencias),random.choice(pedidos),random.choice(especies),self.fila)
+            self.fila.entra_cliente(cliente)
 
