@@ -23,7 +23,6 @@ class ClienteSpawner:
 
     def spawn_cliente(self):
         if(not self.fila.cheia()):
-            print("Novo cliente chegou!")
             # Aqui você criaria um cliente real e colocaria na fila
             paciencias =(20,30,40)
             pedidos=("Caponata", "Hamburguer","Quiche")

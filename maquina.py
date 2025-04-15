@@ -20,7 +20,6 @@ class Maquina:
         bandeja = self.gc.player.prato
         self.gc.player.move(self.position)
         self.gc.player.machine_using()
-        print("ocupar")
         if(bandeja != None and not self.__ocupada):
             if not bandeja.esta_vazio():
                 self.prato_atual.ingredientes= bandeja.ingredientes
@@ -65,7 +64,7 @@ class Maquina:
             bandeja.ingredientes=self.prato_atual.ingredientes
             self.prato_atual.limpar_comida()
             self.__ocupada=False
-            self.gc.printarPrato()
+            #self.gc.printarPrato()
         else:
             print("Erro: bandeja cheia/maquina já vazia")
     #
@@ -82,7 +81,6 @@ class Tabua(Maquina):
     
     def cozinhar(self):
         self.sound.play()
-        print("cozinhar")
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].cortar()
         self.free()
