@@ -24,8 +24,7 @@ class ClienteSpawner:
     def spawn_cliente(self):
         if(not self.fila.cheia()):
             # Aqui você criaria um cliente real e colocaria na fila
-            #paciencias =(20,30,40)
-            paciencias=(1000,100)
+            paciencias =(20,30,40)
             pedidos=("Caponata", "Hamburguer","Quiche")
             especies=("lady","bode","galinha","gato","macaco","morcego","porco","touro","vaca")
             cliente = Cliente(self.gc,0,0,random.choice(paciencias),random.choice(pedidos),random.choice(especies),self.fila)

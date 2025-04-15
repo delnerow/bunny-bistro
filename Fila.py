@@ -20,13 +20,9 @@ class Fila():
         self.update_client_positions()
         
     def sai_cliente(self, cliente):
-        print("bye bye")
-        #print(str(cliente)+"esta em "+str(self.clientes)+"?")
         
         if cliente in self.clientes:
-            print("byeeeee")
             if not cliente.servido_certo:
-                print("see ya")
                 cliente.comido=True
                 self.clientes.remove(cliente)
                 del cliente

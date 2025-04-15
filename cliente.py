@@ -60,8 +60,6 @@ class Cliente(ClickableSprite):
         if(not self.servido):
             prato = self.gc.player.prato
             if(prato):
-                print("nham nham")
-                print(self.especie+" queria "+self.pedido +" e vc entregou "+prato.validar_receita()+"??" )
 
                 self.servido=True
                 if(self.pedido == prato.validar_receita()):
@@ -75,7 +73,6 @@ class Cliente(ClickableSprite):
                 self.gc.player.prato = None
                 self.gc.level.score= self.gc.level.score+self.satisfacao()
                 self.fila.sai_cliente(self)
-                print(self.especie+ "saiu da fila")
 
     #
     # interacao do cliente com oq tem no prato
@@ -94,9 +91,7 @@ class Cliente(ClickableSprite):
         #a cada 10 frames, muda a imagem do coelho
         #para dar a impressão de movimento
         tempo_percorrido= (pygame.time.get_ticks()-self.tempo_entrada)/1000
-        if self.especie== "bode":
-            pass
-            #print("AINDA ESTOU AQUI"+str(self.comido))
+        
         if not self.servido and tempo_percorrido >= self.paciencia:
             print("restaurante de bosta!")
             self.servido=True

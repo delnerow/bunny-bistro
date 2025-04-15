@@ -1,5 +1,6 @@
 
 
+pedidos={"Caponata":"images\pratos\caponata.png", "Hamburguer":"images\pratos\hamburguer.png","Quiche":"images\pratos\quiche.png"}
 
 import pygame
 
@@ -40,7 +41,9 @@ class Cadeira():
         self.esquerda=esquerda
         self.pos = pos
         self.ocupante=[]
-        self.tempo_comer=100
+        self.refeicao = None
+        self.refeicao_offset = pygame.Vector2(50, -30)
+        self.tempo_comer=10
         self.filaMesa=filaMesa
     def senta(self,cliente):
         if(self.esquerda):
@@ -49,11 +52,13 @@ class Cadeira():
         cliente.y=self.pos[1]
         cliente.inicio_comer=pygame.time.get_ticks()
         self.ocupante.append(cliente)
+        self.refeicao=cliente.pedido
     def levanta(self):
         print(self.ocupante[0].especie+" levantouuu")
         self.ocupante[0].comido=True
         self.ocupante.pop()
         self.filaMesa.disponiveis.append(self)
+        self.refeicao=None
     def vazia(self):
         return len(self.ocupante)==0
     def update(self,events):
@@ -67,6 +72,12 @@ class Cadeira():
     def print(self,screen):
         if(not self.vazia()):
             cliente = self.ocupante[0]
+            pedido_image = pygame.image.load(pedidos[self.refeicao]).convert_alpha()  # carrega a imagem do balão
+            pedido_image = pygame.transform.scale_by(pedido_image, 1.5)
+            dx= -25
+            if(self.esquerda):
+                dx= 60
+            screen.blit(pedido_image, pygame.Vector2(cliente.x,cliente.y)+pygame.Vector2(dx,+20))
+            
             screen.blit(cliente.skin, pygame.Vector2(cliente.x,cliente.y))
 
-        
