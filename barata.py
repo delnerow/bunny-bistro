@@ -48,11 +48,9 @@ class Barata(HoverSprite):
                         # Se a mira estiver na barata, chama o método de atirar
                         self.gc.player.shoot()
                         self.live = False
-                        self.changePlace()
-        elif self.gc.player.mira:
-            # Se a barata não está viva e o coelho está mirando, muda a mira
-            self.gc.player.mira = False
-        
+                        self.changePlace()        
+                        self.gc.player.mira = False
+                        self.hovering = False  # Reseta o estado de hover após clicar
         else:
             if np.random.random() < 0.01:  # 0.01% chance
                 self.live = True
