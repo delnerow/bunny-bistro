@@ -75,7 +75,7 @@ class Maquina:
 class Tabua(Maquina):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images/tabua.png').convert_alpha();
-        self.image= pygame.transform.scale(self.image, (64, 32))
+        self.image= pygame.transform.scale(self.image, (50, 50))
         super().__init__(gc,self.image,x,y)
         self.position = 4
         self.sound = pygame.mixer.Sound('sounds/cortar.mp3')
