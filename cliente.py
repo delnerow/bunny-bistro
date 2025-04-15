@@ -21,12 +21,14 @@ class Cliente(ClickableSprite):
         self.fila=fila
         self.pedido = pedido
         self.especie = especie
+        self.virar=False
         self.x=x
         self.y=y
         self.gc=gc
         self.fila=fila
         self.servido=False
         self.comido=False
+        self.servido_certo=False
         diretorio = especie+".png"
         self.image = pygame.image.load("images\clientes\\"+diretorio).convert_alpha()
         self.skinVector = [get_image(self.image, 27, 30, 3, None, (i, 0)) for i in range(2)]
@@ -44,7 +46,6 @@ class Cliente(ClickableSprite):
         self.__score=0
         self.paciencia = paciencia
         self.tempo_entrada = pygame.time.get_ticks()
-        print("ola sou cliente e vou ficar bravo em"+ str(self.tempo_entrada+paciencia))
         #nesses ultimos segundos ele fica puto
         self.tempo_alerta=10
         self.cadeira=None
@@ -56,20 +57,25 @@ class Cliente(ClickableSprite):
     # score do pedido
     # e sabendo qual o gameController
     def comer(self):
-        print("nham nham")
-        prato = self.gc.player.prato
-        if(prato):
-            self.servido=True
-            if(self.pedido == prato.validar_receita()):
-                self.__score=100
-                print("que gostoso")
-            else:
-                self.__score=0
-                print("que bosta")
-            prato.ingredientes = []
-            self.gc.player.prato = None
-            self.gc.level.score= self.gc.level.score+self.satisfacao()
-            self.fila.sai_cliente(self)
+        if(not self.servido):
+            prato = self.gc.player.prato
+            if(prato):
+                print("nham nham")
+                print(self.especie+" queria "+self.pedido +" e vc entregou "+prato.validar_receita()+"??" )
+
+                self.servido=True
+                if(self.pedido == prato.validar_receita()):
+                    self.servido_certo=True
+                    self.__score=100
+                    print("que gostoso")
+                else:
+                    self.__score=0
+                    print("que bosta")
+                prato.ingredientes = []
+                self.gc.player.prato = None
+                self.gc.level.score= self.gc.level.score+self.satisfacao()
+                self.fila.sai_cliente(self)
+                print(self.especie+ "saiu da fila")
 
     #
     # interacao do cliente com oq tem no prato
@@ -96,14 +102,19 @@ class Cliente(ClickableSprite):
             self.servido=True
             self.comido=True
             self.fila.sai_cliente(self)
-        if(not self.servido or not self.comido):
-            super().update(events)
-            self.frame += 1             
-            if self.frame == 40:
-                self.skin = self.skinVector[1]
-                self.image = self.skin
-            elif self.frame == 80:
-                self.skin = self.skinVector[0]
-                self.image = self.skin
-                self.frame = 0
+       
+        super().update(events)
+        if(self.virar):
+            self.skinVector = [pygame.transform.flip(frame, True, False) for frame in self.skinVector]
+            self.skin=self.skinVector[1]
+            self.virar=False  
+        self.frame += 1             
+        if self.frame == 40:
+            self.skin = self.skinVector[1]
+            self.image = self.skin
+        elif self.frame == 80:
+            self.skin = self.skinVector[0]
+            self.image = self.skin
+            self.frame = 0
+
         #self.image = self.skin 

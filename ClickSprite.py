@@ -19,6 +19,5 @@ class ClickableSprite(pygame.sprite.Sprite):
         for event in events:
             if event.type == pygame.MOUSEBUTTONUP:
                 if self.rect.collidepoint(event.pos):
-                    print("chamandO")
                     self.callback()
  

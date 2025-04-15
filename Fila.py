@@ -21,19 +21,24 @@ class Fila():
         
     def sai_cliente(self, cliente):
         print("bye bye")
+        #print(str(cliente)+"esta em "+str(self.clientes)+"?")
+        
         if cliente in self.clientes:
-            if not cliente.servido:
+            print("byeeeee")
+            if not cliente.servido_certo:
                 print("see ya")
+                cliente.comido=True
                 self.clientes.remove(cliente)
                 del cliente
             else:
+                self.group.remove(cliente)
                 self.filaMesa.alocar_cliente(cliente)
-                self.clientes.remove(cliente)
-                print("cliente morreu")
-            
+                self.clientes.remove(cliente)   
+                 
         self.update_client_positions()
     def update_client_positions(self):
         i = 0
+       
         for item in self.clientes:
             item.rect.x = self.x + i * self.padding + 10
             item.rect.y = self.y

@@ -61,6 +61,7 @@ class Level:
         self.player = player
         self.filaMesa=FilaMesa()
         self.mesa1= Mesa(360,490, self.filaMesa)
+        self.mesa2= Mesa(100,490, self.filaMesa)
         self.fila = Fila(gc,64*7,64*4.5, self.filaMesa )
         
         # clientes
@@ -83,6 +84,7 @@ class Level:
         self.maquinasGroup.add(self.batedeira.sprite)
         self.maquinasGroup.add(self.forno.sprite)
         self.mesasGroup.add(self.mesa1)
+        self.mesasGroup.add(self.mesa2)
         
         # bancada de pratos
         self.bancada = Bancada(gc,64*6,64*4.2)
@@ -128,6 +130,7 @@ class Level:
 
     def update(self, events):
         # Atualiza a lógica do jogo aqui
+        self.mesasGroup.update(events)
         self.janela.update()
         self.player.update()
         self.fila.update(events)
@@ -141,13 +144,17 @@ class Level:
         self.clienteControl.update()
         self.update_music()
         self.update_timer()
-        self.mesasGroup.update()
+        
         
 
     def print(self):
         # Desenha o fundo
         self.screen.blit(self.background, (0, 0))
         self.janela.print(self.screen)
+        
+        self.mesasGroup.draw(self.screen)
+        for mesa in self.mesasGroup:
+            mesa.print(self.screen)
         # Exibe o timer na tela
         timer_text = self.font.render(f"{self.time_remaining}", True, (255, 255, 255))  # Texto branco
         self.screen.blit(timer_text, (64*7.5+16, 14))  # Posição no mostrador
@@ -159,9 +166,7 @@ class Level:
         
         #imprime as máquinas na tela
         self.maquinasGroup.draw(self.screen)
-        self.mesasGroup.draw(self.screen)
-        for mesa in self.mesasGroup:
-            mesa.print(self.screen)
+        
         self.armazemGroup.draw(self.screen)
         self.lixoGroup.draw(self.screen)
         

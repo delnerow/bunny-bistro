@@ -15,7 +15,6 @@ class HoverSprite(pygame.sprite.Sprite):
         self.hovering = False  # Tracks hover state from previous frame
 
     def is_mouse_over(self, mouse_pos):
-        print("ooon")
         return self.rect.collidepoint(mouse_pos)
     
     def update(self,events):
@@ -25,7 +24,6 @@ class HoverSprite(pygame.sprite.Sprite):
         # Detect new hover
         if is_hovering_now and not self.hovering:
             self.hovering = True
-            print("hoover")
             self.callback()
         elif not is_hovering_now and self.hovering:
             self.hovering = False  # mouse exited
