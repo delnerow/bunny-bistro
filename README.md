@@ -13,21 +13,33 @@ This repository constain a pygame game, made to CSI-22 computer science course.
 
 * Mecânicas a implementar *
 
-# Display
-    * mostrar estado de preparo do ingrediente
+
 
 # Clientes
-    * controlar tempo de entrada pra criar cliente (tipo uma distribuicao de poisson)
-    * controlar qual a paciencia, skin e prato do q vai entrar
-    * fazer coelinho se mover ate cliente quando entregar prato, mas ele fica do lado de dentro do balcão
+    * Fazer eles se sentarem numa mesa com o prato após atendidos
+    * se coelinho errar pedio a camera treme levemente e fica meio vermelha
+    * se esgota a paciencia, o cliente treme um pouco e some
+
+
 
 # Cola das receitas (arte)
     * tipo post-its que ficam no canto superior direito com a arte do prato de cada receita e os ingredientes (sinalizar faca, etc talvez para indicar que precisa ser cortado)
 
+
+# Tela Inicio
+    * jogar
+    * volume
+    * sair
+
 # Tela Menu
+    * sair
+    * volume
+    *continuar
 
 # Tela Fim
-
+    * mensagem
+    * voltar ao start
+    * sair
 
 
 

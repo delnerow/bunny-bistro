@@ -3,12 +3,14 @@ from ClienteSpawner import ClienteSpawner
 from Fila import Fila
 from bancada import Bancada
 from cliente import Cliente
+from colaReceitas import ColaUI
 from player import Player
 from pratoDIsplay import PratoDisplay
 from ui import UI
 import maquina
 from armazem import Geladeira, Despensa
 from lixo import Lixo
+from window import Window
 
 class Level:
     def __init__(self, gc, screen, player):
@@ -39,6 +41,8 @@ class Level:
         (158, 240, 26)   # Roxo
         ]    
 
+        self.cola = ColaUI(760,280)
+        self.janela = Window(730,5)
         # Timer do jogo (em segundos)
         self.time_init = 100
         self.time_remaining = self.time_init
@@ -58,7 +62,7 @@ class Level:
         self.fila.entra_cliente(self.cliente)
 
         #as máquinas da cozinha
-        self.tabua = maquina.Tabua(gc, 64*3.5,64*4.5)
+        self.tabua = maquina.Tabua(gc, 64*3.5,64*4.4)
         self.batedeira = maquina.Batedeira(gc, 348, 80)
         self.forno = maquina.Forno(gc, 64*8, 64*1.5)
         
@@ -124,6 +128,7 @@ class Level:
         self.clienteControl.update()
         self.update_music()
         self.update_timer()
+        self.janela.update()
 
     def print(self):
         # Desenha o fundo
@@ -150,8 +155,10 @@ class Level:
         #imprime a interface
         self.geladeira.print()
         self.despensa.print()
-        self.pratoDisplay.display(700,430)
+        self.pratoDisplay.display(700,450)
         self.bancadaGroup.draw(self.screen)
+        self.cola.display(self.screen)
+        self.janela.print(self.screen)
         
         # Atualiza a tela
         pygame.display.flip()
