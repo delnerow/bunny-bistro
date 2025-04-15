@@ -64,7 +64,7 @@ class Ingrediente:
     # um ingrediente clicado informa o GameController dessa escolha
     # altera um parâmetro do gameController (ou será melhor uma função só para isso?)
     
-    def __clonar__(self, memo):
+    def __clonar__(self):
         # just create a new instance 
         raise NotImplementedError("Subclasses must implement this method")
 
@@ -113,24 +113,32 @@ class Grao(Ingrediente):
         self.image=pygame.image.load('images\\food\Vegetables\potato.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__("Grão de Bico", 2, gc, self.image, x, y) 
+    def __clonar__(self):
+        return Grao(self.gc,0,0) 
         
 class Farinha(Ingrediente):
     def __init__(self,gc, x, y):
         self.image=pygame.image.load('images\\food\Sweets\Sugar.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__("Farinha", 3, gc, self.image, x, y) 
+    def __clonar__(self):
+        return Farinha(self.gc,0,0) 
         
 class Leite(Ingrediente):
     def __init__(self,gc, x, y):
         self.image=pygame.image.load('images\\food\EggsandDairy\Milk1.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__("Leite Vegetal", 4,gc,self.image,x,y)  
+    def __clonar__(self):
+        return Leite(self.gc,0,0) 
         
 class Brocolis(Ingrediente):
     def __init__(self,gc, x, y):
         self.image=pygame.image.load('images\\food\Vegetables\Broccoli.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__("Brócolis", 5, gc, self.image, x, y) 
+    def __clonar__(self):
+        return Brocolis(self.gc,0,0) 
         
         
        

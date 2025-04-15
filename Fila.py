@@ -44,7 +44,7 @@ class Fila():
             balao_surface = cliente.balao_image.copy()
             
             #tempo em ms pro fade ficar suave
-            tempo_percorrido= pygame.time.get_ticks()/1000-(self.gc.level.time_init-cliente.tempo_entrada)
+            tempo_percorrido= (pygame.time.get_ticks()-cliente.tempo_entrada)/1000
             
             #balao começa a ficar vermelho nos segundos finais defindio por tempo_alerta
             if cliente.paciencia-tempo_percorrido< cliente.tempo_alerta:

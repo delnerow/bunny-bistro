@@ -1,8 +1,11 @@
 import pygame
 import random
 
+from cliente import Cliente
+
 class ClienteSpawner:
-    def __init__(self, fila, taxa_chegada):
+    def __init__(self,gc, fila, taxa_chegada):
+        self.gc=gc
         self.fila = fila
         self.taxa = taxa_chegada  # λ = clientes por segundo
         self.tempo_proximo_cliente = pygame.time.get_ticks() + self._gerar_intervalo()
@@ -23,6 +26,7 @@ class ClienteSpawner:
         # Aqui você criaria um cliente real e colocaria na fila
         paciencias =(20,30,40)
         pedidos=("Caponata", "Hamburguer","Quiche")
-        cliente = Cliente(...)
+        especies=("humano","cao","gato")
+        cliente = Cliente(self.cg,0,0,random.choice(paciencias),random.choice(pedidos),random.choice(especies),self.fila)
         self.fila.entra_cliente(cliente)
 

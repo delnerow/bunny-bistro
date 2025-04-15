@@ -17,7 +17,7 @@ def get_image(sheet, width, height, scale, colour, position):
 	return image
 
 class Cliente(ClickableSprite):
-    def __init__(self,time,gc,x,y,paciencia, pedido, especie,fila):
+    def __init__(self,gc,x,y,paciencia, pedido, especie,fila):
         self.fila=fila
         self.pedido = pedido
         self.especie = especie
@@ -41,8 +41,8 @@ class Cliente(ClickableSprite):
         self.frame = 0
         self.__score=0
         self.paciencia = paciencia
-        self.tempo_entrada = time
-        print("ola sou cliente e vou ficar bravo em"+ str(self.tempo_entrada-paciencia))
+        self.tempo_entrada = pygame.time.get_ticks()
+        print("ola sou cliente e vou ficar bravo em"+ str(self.tempo_entrada+paciencia))
         #nesses ultimos segundos ele fica puto
         self.tempo_alerta=10
         super().__init__(self.skin, x, y,self.comer)
@@ -83,9 +83,9 @@ class Cliente(ClickableSprite):
         #atualiza a posição do coelho na tela
         #a cada 10 frames, muda a imagem do coelho
         #para dar a impressão de movimento
-        tempo_percorrido= self.tempo_entrada-self.gc.level.time_remaining
+        tempo_percorrido= (pygame.time.get_ticks()-self.tempo_entrada)/1000
 
-        if not self.servido and tempo_percorrido == self.paciencia:
+        if not self.servido and tempo_percorrido >= self.paciencia:
             print("restaurante de bosta!")
             self.servido=True
             self.fila.sai_cliente(self)
