@@ -10,6 +10,7 @@ from ui import UI
 import maquina
 from armazem import Geladeira, Despensa
 from lixo import Lixo
+from window import Window
 
 class Level:
     def __init__(self, gc, screen, player):
@@ -41,6 +42,7 @@ class Level:
         ]    
 
         self.cola = ColaUI(760,280)
+        self.janela = Window(730,5)
         # Timer do jogo (em segundos)
         self.time_init = 100
         self.time_remaining = self.time_init
@@ -126,6 +128,7 @@ class Level:
         self.clienteControl.update()
         self.update_music()
         self.update_timer()
+        self.janela.update()
 
     def print(self):
         # Desenha o fundo
@@ -155,6 +158,7 @@ class Level:
         self.pratoDisplay.display(700,450)
         self.bancadaGroup.draw(self.screen)
         self.cola.display(self.screen)
+        self.janela.print(self.screen)
         
         # Atualiza a tela
         pygame.display.flip()
