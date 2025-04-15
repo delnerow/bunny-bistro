@@ -25,6 +25,7 @@ class Window():
         self.frame_speed = 8
         self.frame_duration = 0.05  # time between frames, adjust for speed
         self.skin = self.frames[self.current_frame]
+        self.skin = pygame.transform.scale_by(self.skin, 0.15)
         
         self.x=x
         self.y=y
@@ -35,9 +36,8 @@ class Window():
             self.frame_counter = 0
             self.current_frame = (self.current_frame + 1) % len(self.frames)
             self.skin = self.frames[self.current_frame]
-            self.image = self.skin
-            self.image = pygame.transform.scale_by(self.image, 0.15)
+            self.skin = pygame.transform.scale_by(self.skin, 0.15)
 
 
     def print(self,screen):
-        screen.blit(self.image, (self.x, self.y))
+        screen.blit(self.skin, (self.x, self.y))
