@@ -1,4 +1,3 @@
-especies=("humano","cao","gato")
 pedidos={"Caponata":"images\pratos\caponata.png", "Hamburguer":"images\pratos\hamburguer.png","Quiche":"images\pratos\quiche.png"}
 
 import pygame
@@ -7,14 +6,15 @@ from prato import Prato
 
 
 def get_image(sheet, width, height, scale, colour, position):
-	#retira uma fração de uma imagem maior para utilizar
-	#como sprite, usado para elementos pequenos na tela
-	
-	image = pygame.Surface((width, height)).convert_alpha()
-	image.blit(sheet, (0, 0), (width*position[0], height*position[1],width*(position[0]+1), height*(position[1]+1)))
-	image = pygame.transform.scale(image, (width*scale, height*scale))
-	image.set_colorkey(colour)
-	return image
+    # retira uma fração de uma imagem maior para utilizar
+    # como sprite, usado para elementos pequenos na tela
+
+    image = pygame.Surface((width, height), pygame.SRCALPHA).convert_alpha()
+    image.blit(sheet, (0, 0), (width * position[0], height * position[1], width, height))
+    image = pygame.transform.scale(image, (width * scale, height * scale))
+    if colour is not None:
+        image.set_colorkey(colour)
+    return image
 
 class Cliente(ClickableSprite):
     def __init__(self,gc,x,y,paciencia, pedido, especie,fila):
@@ -26,8 +26,9 @@ class Cliente(ClickableSprite):
         self.gc=gc
         self.fila=fila
         self.servido=False
-        self.image = pygame.image.load("images\cliente.png").convert_alpha()
-        self.skinVector = [get_image(self.image, 14, 32, 3, (0,0,0), (i, 0)) for i in range(2)]
+        diretorio = especie+".png"
+        self.image = pygame.image.load("images\clientes\\"+diretorio).convert_alpha()
+        self.skinVector = [get_image(self.image, 27, 30, 3, None, (i, 0)) for i in range(2)]
         self.skin = self.skinVector[0]
         self.balao_image = pygame.image.load("images/balao.png").convert_alpha()  # carrega a imagem do balão
         self.balao_image = pygame.transform.scale_by(self.balao_image, 2)

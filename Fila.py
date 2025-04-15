@@ -10,7 +10,7 @@ class Fila():
         self.gc=gc
         self.group = pygame.sprite.Group()
         self.padding =55
-        self.capacidade=10
+        self.capacidade=6
         
         
     def entra_cliente(self, cliente):
@@ -69,6 +69,8 @@ class Fila():
             
     def update(self, events):
         self.group.update(events)
-    
+    def cheia(self):
+        if(len(self.clientes)==self.capacidade):
+            return True
     
     
