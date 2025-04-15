@@ -11,6 +11,7 @@ import maquina
 from armazem import Geladeira, Despensa
 from lixo import Lixo
 from window import Window
+from barata import Barata
 
 class Level:
     def __init__(self, gc, screen, player):
@@ -55,6 +56,9 @@ class Level:
         #o nosso player
         self.player = player
         self.fila = Fila(gc,64*7,64*4.5 )
+
+        #as baratas
+        self.barata = Barata(gc)
         
         # clientes
         self.cliente = Cliente(gc,64*7,64*4.5, 20, "Caponata","bode",self.fila)
@@ -130,6 +134,9 @@ class Level:
         self.update_timer()
         self.janela.update()
 
+        #ainda n sei como implementar
+        self.barata.update(events)
+
     def print(self):
         # Desenha o fundo
         self.screen.blit(self.background, (0, 0))
@@ -159,6 +166,9 @@ class Level:
         self.pratoDisplay.display(700,450)
         self.bancadaGroup.draw(self.screen)
         self.cola.display(self.screen)
+
+        #imprime a barata na tela
+        self.screen.blit(self.barata.image, (self.barata.x,self.barata.y))
         
         # Atualiza a tela
         pygame.display.flip()
