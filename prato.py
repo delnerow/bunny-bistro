@@ -31,7 +31,7 @@ class Prato:
     def add_ingrediente(self, ingrediente):
         if(len(self.ingredientes)<5):
             self.ingredientes.append(ingrediente)
-            print("works")
+
         else:
             print("Prato cheio! joga no lixo")
     # 

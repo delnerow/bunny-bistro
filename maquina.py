@@ -20,7 +20,6 @@ class Maquina:
         bandeja = self.gc.player.prato
         self.gc.player.move(self.position)
         self.gc.player.machine_using()
-        print("ocupar")
         if(bandeja != None and not self.__ocupada):
             if not bandeja.esta_vazio():
                 self.prato_atual.ingredientes= bandeja.ingredientes
@@ -65,7 +64,7 @@ class Maquina:
             bandeja.ingredientes=self.prato_atual.ingredientes
             self.prato_atual.limpar_comida()
             self.__ocupada=False
-            self.gc.printarPrato()
+            #self.gc.printarPrato()
         else:
             print("Erro: bandeja cheia/maquina já vazia")
     #
@@ -75,14 +74,13 @@ class Maquina:
 class Tabua(Maquina):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images/tabua.png').convert_alpha();
-        self.image= pygame.transform.scale(self.image, (64, 32))
+        self.image= pygame.transform.scale(self.image, (50, 50))
         super().__init__(gc,self.image,x,y)
         self.position = 4
         self.sound = pygame.mixer.Sound('sounds/cortar.mp3')
     
     def cozinhar(self):
         self.sound.play()
-        print("cozinhar")
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].cortar()
         self.free()

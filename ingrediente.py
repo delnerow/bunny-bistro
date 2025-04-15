@@ -51,7 +51,6 @@ class Ingrediente:
     #
     
     def alertarEscolha(self):
-        print("beep beep")
         #self.gc.level.player.prato.add_ingrediente(self.__clonar__())
         if(self.gc.player.prato != None):
             self.gc.player.prato.add_ingrediente(self.__clonar__())

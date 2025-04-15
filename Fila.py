@@ -1,8 +1,10 @@
 import pygame
 
 
+
+# Estrutura que controla o fluxo de clientes sendo atendidos
 class Fila():
-    def __init__(self,gc,x,y):
+    def __init__(self,gc,x,y, filaMesa):
         self.clientes =[]
         self.screen = gc.screen
         self.x=x
@@ -11,21 +13,44 @@ class Fila():
         self.group = pygame.sprite.Group()
         self.padding =55
         self.capacidade=6
-        
+        self.filaMesa=filaMesa
+        # :clientes:        Lista de clientes na fila
+        # :screen:          Tela para renderizar imagem dos clientes
+        # :x:               Posição x do início da fila 
+        # :y:               Posição y do início da fila
+        # :gc:              GameController para acessar prato e score
+        # :group:           Grupo de sprites de clientes 
+        # :padding:         Distância entre clientes 
+        # :capacidade:      Tamanho máximo da fila
+        # :filaMesa:        Estrutura que controla a ida as mesas
+
+              
         
     def entra_cliente(self, cliente):
         self.clientes.append(cliente)
         self.group.add(cliente)
         self.update_client_positions()
+    # Adiciona cliente a fila
+    # Adiciona como sprite no grupo renderizador
+    # Atualiza as posições x e y dos clientes da lista
         
     def sai_cliente(self, cliente):
-        print("bye bye")
         if cliente in self.clientes:
-            print("see ya")
-            self.clientes.remove(cliente)
-            del cliente
-            
+            self.group.remove(cliente)
+            if not cliente.servido_certo:
+                cliente.comido=True
+                self.clientes.remove(cliente)
+                del cliente
+            else:
+                self.filaMesa.alocar_cliente(cliente)
+                self.clientes.remove(cliente)   
+                 
         self.update_client_positions()
+    # Remove cliente da lista e do grupo renderizador
+    # Se não foi servido certo, comeu comida errada, 
+    # é removido da lista e apagado. Se foi servido certo, 
+    # manda para a fila de mesas e é removido da fila
+    
     def update_client_positions(self):
         i = 0
         for item in self.clientes:
@@ -34,6 +59,8 @@ class Fila():
             item.x = item.rect.x  
             item.y = item.rect.y
             i += 1
+    # Atualiza as posições x e y dos clientes da lista
+    
             
     def draw(self):
         for cliente in self.clientes:

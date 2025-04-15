@@ -3,6 +3,8 @@ from HoverSprite import HoverSprite
 from ingrediente import Brocolis, Cebola, Farinha, Grao, Tomate, Leite
 from menu import Menu
 
+
+# Objeto que armazena ingredientes dentro de si
 class Armazem(HoverSprite):
     def __init__(self, image, gc, x, y, x_menu,y_menu,items,position):
         super().__init__(image, x, y,self.abre_ou_fecha,self.abre_ou_fecha)
@@ -41,7 +43,6 @@ class Armazem(HoverSprite):
             self.menu.update(events)
     
     def abre_ou_fecha(self):
-        print("abre ou fecha")
         self.gc.player.is_on_armazem = not self.gc.player.is_on_armazem
         self.sound.play()
         self.gc.player.move(self.position)
