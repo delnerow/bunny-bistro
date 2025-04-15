@@ -2,13 +2,11 @@
 This repository constain a pygame game, made to CSI-22 computer science course.
 
 * bugs *
-    * quando entrega prato pra cliente, tem q zerar as operações de cortado dos ingredientes, ou ent da pra fazer infinitas caponata sem cortar (pq n voltamos ao clone dos ingredientes?)
+    
 
 
 * Artes a fazer *
 # lixo
-# pratos na bancada
-# tabua de corte
 # batedeira
 
 * Mecânicas a implementar *
@@ -16,14 +14,14 @@ This repository constain a pygame game, made to CSI-22 computer science course.
 
 
 # Clientes
-    * Fazer eles se sentarem numa mesa com o prato após atendidos
-    * se coelinho errar pedio a camera treme levemente e fica meio vermelha
-    * se esgota a paciencia, o cliente treme um pouco e some
+    * se coelinho errar pedido a barra de score treme
+    * se esgota a paciencia/erra pedido, o cliente treme um pouco e some
+    * fades de saida e entrada e barulhinho de sino (quando entra)
 
 
-
-# Cola das receitas (arte)
-    * tipo post-its que ficam no canto superior direito com a arte do prato de cada receita e os ingredientes (sinalizar faca, etc talvez para indicar que precisa ser cortado)
+# Fim do jogo
+    * quando tempo acabar, ir pra tela de fim
+    
 
 
 # Tela Inicio
@@ -44,16 +42,6 @@ This repository constain a pygame game, made to CSI-22 computer science course.
 
 
 # Barata
-
-
-
-
-
-
-
-
-
-
 
 
 
