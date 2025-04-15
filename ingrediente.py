@@ -14,7 +14,8 @@ class Ingrediente:
         self.estadoReceita=[]
         self.sprite = ClickableSprite(image,self.x,self.y,self.alertarEscolha)
         self.sound = pygame.mixer.Sound("sounds\\vup.mp3")
-    #
+        self.sound2 = pygame.mixer.Sound("sounds\\menu.mp3")
+        self.sound2.set_volume(0.3)  # Define o volume de sound2 para 50% #
     # Um nome para identificar o ingrediente
     # o índice no código carteado de receita
     # bools indicando o estado culinário do ingrediente
@@ -53,8 +54,11 @@ class Ingrediente:
         print("beep beep")
         #self.gc.level.player.prato.add_ingrediente(self.__clonar__())
         if(self.gc.player.prato != None):
-            self.sound.play()
             self.gc.player.prato.add_ingrediente(self.__clonar__())
+            if(len(self.gc.player.prato.ingredientes)<5):
+                self.sound.play()
+            else:
+                self.sound2.play()
         
     #
     # um ingrediente clicado informa o GameController dessa escolha

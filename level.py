@@ -12,14 +12,31 @@ from lixo import Lixo
 class Level:
     def __init__(self, gc, screen, player):
         self.clock = pygame.time.Clock()
-        self.background = pygame.image.load("images\cozinha_demo.png").convert_alpha()
+        self.background = pygame.image.load("images\cozinha1.png").convert_alpha()
         self.background = pygame.transform.scale2x(self.background)
         self.screen = screen
 
         #controle de jogo
         self.gc = gc
         self.ui = UI() 
-        self.score = 0
+        self.score = 400
+        self.max_score = 1000
+
+        # Configuração da barra de pontuação
+        self.score_bar_width = 300  # Largura máxima da barra
+        self.score_bar_height = 30  # Altura da barra
+        self.score_bar_x = 10       # Posição X da barra
+        self.score_bar_y = 16       # Posição Y da barra
+        self.score_bar_color = (0, 75, 35)  # Cor da barra (verde)
+        self.max_score = 1000  # Pontuação máxima para encher a barra
+        self.gradient_colors = [
+        (0, 75, 35),    # Vermelho
+        (0, 100, 0),  # Laranja
+        (0, 114, 0),  # Amarelo
+        (56, 176, 0),    # Verde
+        (112, 224, 0),    # Azul
+        (158, 240, 26)   # Roxo
+        ]    
 
         # Timer do jogo (em segundos)
         self.time_init = 100
@@ -53,11 +70,11 @@ class Level:
         self.maquinasGroup.add(self.forno.sprite)
         
         # bancada de pratos
-        self.bancada = Bancada(gc,64*5,64*4.2)
+        self.bancada = Bancada(gc,64*6,64*4.2)
         self.bancadaGroup.add(self.bancada.sprite)
         
         #despensa
-        self.geladeira = Geladeira(self.gc, 64*2, 64)
+        self.geladeira = Geladeira(self.gc, 64*3, 64)
         self.despensa = Despensa(self.gc, 64*9, 64*1.5)
 
         self.armazemGroup = pygame.sprite.Group()
@@ -113,12 +130,13 @@ class Level:
         self.screen.blit(self.background, (0, 0))
 
         # Exibe o timer na tela
-        timer_text = self.font.render(f"Tempo: {self.time_remaining}", True, (255, 255, 255))  # Texto branco
-        self.screen.blit(timer_text, (10, 10))  # Posição no canto superior esquerdo
+        timer_text = self.font.render(f"{self.time_remaining}", True, (255, 255, 255))  # Texto branco
+        self.screen.blit(timer_text, (64*7.5+16, 14))  # Posição no mostrador
 
         # Exibe a pontuação na tela
-        score_text = self.font.render(f"Pontuacao: {self.score}", True, (255, 255, 255))  # Texto branco
-        self.screen.blit(score_text, (10, 50))  # Posição no canto superior esquerdo, abaixo do timer
+        self.print_pointbar()
+        # score_text = self.font.render(f"Pontuacao: {self.score}", True, (255, 255, 255))  # Texto branco
+        # self.screen.blit(score_text, (10, 50))  # Posição no canto superior esquerdo, abaixo do timer
         
         #imprime as máquinas na tela
         self.maquinasGroup.draw(self.screen)
@@ -161,3 +179,41 @@ class Level:
         if self.time_remaining <= 0:
             #faz algo quando o tempo acaba!!
             pass
+
+    def print_pointbar(self):
+        # Preenche o retângulo com a cor de fundo
+        pygame.draw.rect(self.screen, (200, 200, 200), 
+                (self.score_bar_x, self.score_bar_y, self.score_bar_width, self.score_bar_height))
+        
+        score_percentage = min(self.score / self.max_score, 1)  # Calcula a porcentagem (máximo de 100%)
+        current_width = int(self.score_bar_width * score_percentage)  # Largura atual da barra
+
+        # Número de seções para o gradiente
+        num_sections = len(self.gradient_colors) - 1
+        section_width = self.score_bar_width // num_sections
+
+        for i in range(num_sections):
+            # Cor inicial e final para a seção
+            start_color = self.gradient_colors[i]
+            end_color = self.gradient_colors[i + 1]
+
+            # Número de sub-seções dentro de cada seção
+            sub_sections = section_width
+            for j in range(sub_sections):
+                # Interpola a cor entre start_color e end_color
+                t = j / sub_sections
+                red = int(start_color[0] + t * (end_color[0] - start_color[0]))
+                green = int(start_color[1] + t * (end_color[1] - start_color[1]))
+                blue = int(start_color[2] + t * (end_color[2] - start_color[2]))
+                color = (red, green, blue)
+
+                # Calcula a posição da sub-seção
+                section_x = self.score_bar_x + i * section_width + j
+                if section_x < self.score_bar_x + current_width:
+                    pygame.draw.rect(self.screen, color, 
+                                    (section_x, self.score_bar_y, 1, self.score_bar_height))
+
+
+        # Desenha o contorno da barra
+        pygame.draw.rect(self.screen, (233, 216, 166), 
+                (self.score_bar_x, self.score_bar_y, self.score_bar_width, self.score_bar_height), 4)
