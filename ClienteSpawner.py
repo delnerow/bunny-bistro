@@ -26,7 +26,7 @@ class ClienteSpawner:
         # Aqui você criaria um cliente real e colocaria na fila
         paciencias =(20,30,40)
         pedidos=("Caponata", "Hamburguer","Quiche")
-        especies=("humano","cao","gato")
+        especies=("lady","bode","galinha","gato","macaco","morcego","porco","touro","vaca")
         cliente = Cliente(self.cg,0,0,random.choice(paciencias),random.choice(pedidos),random.choice(especies),self.fila)
         self.fila.entra_cliente(cliente)
 
