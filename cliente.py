@@ -32,18 +32,18 @@ class Cliente(ClickableSprite):
         self.x=x
         self.y=y
         
-        # Fila que armazena o cliente 
-        # Timestamp em que ele entrou
-        # Pedido que precisa ser preparado 
-        # Especie da arte do sprite 
-        # Paciencia, quantos segundos até desistir do pedido  
-        # Ultimos segundos da paciencia, onde o balão de pedido fica vermelho
-        # Cadeira que ele estiver sentado
-        # Timestamp em que ele se sentou numa mesa
-        # O score do prato, 0 ou 100
-        # GameController para acessar prato e score 
-        # Posição x do cliente 
-        # Posição y do cliente
+        # :fila:            Fila que armazena o cliente 
+        # :tempo_entrada:   Timestamp em que ele entrou
+        # :pedido:          Pedido que precisa ser preparado 
+        # :especie:         Especie da arte do sprite 
+        # :paciencia:       Paciencia, quantos segundos até desistir do pedido  
+        # :tempo_alerta:    Ultimos segundos da paciencia, onde o balão de pedido fica vermelho
+        # :cadeira:         Cadeira que ele estiver sentado
+        # :inicio_comer:    Timestamp em que ele se sentou numa mesa
+        # :score:           O score do prato, 0 ou 100
+        # :gc:              GameController para acessar prato e score 
+        # :x:               Posição x do cliente 
+        # :y:               Posição y do cliente
     
         self.servido=False
         self.servido_certo=False
@@ -87,10 +87,8 @@ class Cliente(ClickableSprite):
                 if(self.pedido == prato.validar_receita()):
                     self.servido_certo=True
                     self.__score=100
-                    print("que gostoso")
                 else:
                     self.__score=0
-                    print("que bosta")
                 prato.ingredientes = []
                 self.gc.player.prato = None
                 self.gc.level.score= self.gc.level.score+self.satisfacao()
