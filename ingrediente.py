@@ -118,8 +118,8 @@ class Grao(Ingrediente):
         
 class Farinha(Ingrediente):
     def __init__(self,gc, x, y):
-        self.image=pygame.image.load('images\\farinha.png').convert_alpha()
-        self.image = pygame.transform.scale_by(self.image, 1.5)
+        self.image=pygame.image.load('images\\food\Sweets\Sugar.png').convert_alpha()
+        self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__("Farinha", 3, gc, self.image, x, y) 
     def __clonar__(self):
         return Farinha(self.gc,0,0) 

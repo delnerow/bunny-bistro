@@ -153,12 +153,12 @@ class Level:
         self.fila.draw()
 
         #imprime a interface
+        self.janela.print(self.screen)
         self.geladeira.print()
         self.despensa.print()
         self.pratoDisplay.display(700,450)
         self.bancadaGroup.draw(self.screen)
         self.cola.display(self.screen)
-        self.janela.print(self.screen)
         
         # Atualiza a tela
         pygame.display.flip()
