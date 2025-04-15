@@ -26,6 +26,7 @@ class Cliente(ClickableSprite):
         self.gc=gc
         self.fila=fila
         self.servido=False
+        self.comido=False
         diretorio = especie+".png"
         self.image = pygame.image.load("images\clientes\\"+diretorio).convert_alpha()
         self.skinVector = [get_image(self.image, 27, 30, 3, None, (i, 0)) for i in range(2)]
@@ -46,6 +47,8 @@ class Cliente(ClickableSprite):
         print("ola sou cliente e vou ficar bravo em"+ str(self.tempo_entrada+paciencia))
         #nesses ultimos segundos ele fica puto
         self.tempo_alerta=10
+        self.cadeira=None
+        self.inicio_comer=0
         super().__init__(self.skin, x, y,self.comer)
     #
     # inicializa um cliente com tempo de paciencia
@@ -85,12 +88,15 @@ class Cliente(ClickableSprite):
         #a cada 10 frames, muda a imagem do coelho
         #para dar a impressão de movimento
         tempo_percorrido= (pygame.time.get_ticks()-self.tempo_entrada)/1000
-
+        if self.especie== "bode":
+            pass
+            #print("AINDA ESTOU AQUI"+str(self.comido))
         if not self.servido and tempo_percorrido >= self.paciencia:
             print("restaurante de bosta!")
             self.servido=True
+            self.comido=True
             self.fila.sai_cliente(self)
-        if(not self.servido):
+        if(not self.servido or not self.comido):
             super().update(events)
             self.frame += 1             
             if self.frame == 40:

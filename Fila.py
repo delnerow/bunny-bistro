@@ -2,7 +2,7 @@ import pygame
 
 
 class Fila():
-    def __init__(self,gc,x,y):
+    def __init__(self,gc,x,y, filaMesa):
         self.clientes =[]
         self.screen = gc.screen
         self.x=x
@@ -11,6 +11,7 @@ class Fila():
         self.group = pygame.sprite.Group()
         self.padding =55
         self.capacidade=6
+        self.filaMesa=filaMesa
         
         
     def entra_cliente(self, cliente):
@@ -21,9 +22,14 @@ class Fila():
     def sai_cliente(self, cliente):
         print("bye bye")
         if cliente in self.clientes:
-            print("see ya")
-            self.clientes.remove(cliente)
-            del cliente
+            if not cliente.servido:
+                print("see ya")
+                self.clientes.remove(cliente)
+                del cliente
+            else:
+                self.filaMesa.alocar_cliente(cliente)
+                self.clientes.remove(cliente)
+                print("cliente morreu")
             
         self.update_client_positions()
     def update_client_positions(self):

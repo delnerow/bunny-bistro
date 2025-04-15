@@ -1,6 +1,8 @@
 import pygame, sys
 from ClienteSpawner import ClienteSpawner
 from Fila import Fila
+from filaMesa import FilaMesa
+from mesa import Mesa
 from bancada import Bancada
 from cliente import Cliente
 from colaReceitas import ColaUI
@@ -52,9 +54,14 @@ class Level:
         
         self.pratoDisplay = PratoDisplay(self.screen)
 
+        # mesas
+        
+
         #o nosso player
         self.player = player
-        self.fila = Fila(gc,64*7,64*4.5 )
+        self.filaMesa=FilaMesa()
+        self.mesa1= Mesa(360,490, self.filaMesa)
+        self.fila = Fila(gc,64*7,64*4.5, self.filaMesa )
         
         # clientes
         self.cliente = Cliente(gc,64*7,64*4.5, 20, "Caponata","bode",self.fila)
@@ -66,11 +73,16 @@ class Level:
         self.batedeira = maquina.Batedeira(gc, 348, 80)
         self.forno = maquina.Forno(gc, 64*8, 64*1.5)
         
+        
+        
+        
+        self.mesasGroup = pygame.sprite.Group()
         self.maquinasGroup = pygame.sprite.Group()
         self.bancadaGroup= pygame.sprite.Group()
         self.maquinasGroup.add(self.tabua.sprite)
         self.maquinasGroup.add(self.batedeira.sprite)
         self.maquinasGroup.add(self.forno.sprite)
+        self.mesasGroup.add(self.mesa1)
         
         # bancada de pratos
         self.bancada = Bancada(gc,64*6,64*4.2)
@@ -116,6 +128,7 @@ class Level:
 
     def update(self, events):
         # Atualiza a lógica do jogo aqui
+        self.janela.update()
         self.player.update()
         self.fila.update(events)
         self.maquinasGroup.update(events)
@@ -128,12 +141,13 @@ class Level:
         self.clienteControl.update()
         self.update_music()
         self.update_timer()
-        self.janela.update()
+        self.mesasGroup.update()
+        
 
     def print(self):
         # Desenha o fundo
         self.screen.blit(self.background, (0, 0))
-
+        self.janela.print(self.screen)
         # Exibe o timer na tela
         timer_text = self.font.render(f"{self.time_remaining}", True, (255, 255, 255))  # Texto branco
         self.screen.blit(timer_text, (64*7.5+16, 14))  # Posição no mostrador
@@ -145,8 +159,14 @@ class Level:
         
         #imprime as máquinas na tela
         self.maquinasGroup.draw(self.screen)
+        self.mesasGroup.draw(self.screen)
+        for mesa in self.mesasGroup:
+            mesa.print(self.screen)
         self.armazemGroup.draw(self.screen)
         self.lixoGroup.draw(self.screen)
+        
+        
+        
 
         #imprime o coelho na tela
         self.screen.blit(self.player.skin, self.player.screenposition)
@@ -158,7 +178,7 @@ class Level:
         self.pratoDisplay.display(700,450)
         self.bancadaGroup.draw(self.screen)
         self.cola.display(self.screen)
-        self.janela.print(self.screen)
+        
         
         # Atualiza a tela
         pygame.display.flip()
