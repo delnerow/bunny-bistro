@@ -83,7 +83,7 @@ class Tabua(Maquina):
 class Batedeira(Maquina):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images/batedeira.png').convert_alpha();
-        self.image= pygame.transform.scale(self.image, (64, 64))
+        self.image= pygame.transform.scale(self.image, (40, 40))
         super().__init__(gc,self.image,x,y)
         self.position = 3
         self.sound = pygame.mixer.Sound('sounds/bater.mp3')

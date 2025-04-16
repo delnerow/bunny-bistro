@@ -60,6 +60,7 @@ class Level:
         self.filaMesa=FilaMesa()
         self.mesa1= Mesa(360,490, self.filaMesa)
         self.mesa2= Mesa(100,490, self.filaMesa)
+        self.mesa3= Mesa(220,420, self.filaMesa)
         self.fila = Fila(gc,64*7,64*4.5, self.filaMesa )
 
         #as baratas
@@ -82,8 +83,10 @@ class Level:
         self.maquinasGroup.add(self.tabua)
         self.maquinasGroup.add(self.batedeira)
         self.maquinasGroup.add(self.forno)
+        self.mesasGroup.add(self.mesa3)
         self.mesasGroup.add(self.mesa1)
         self.mesasGroup.add(self.mesa2)
+        
         
         # bancada de pratos
         self.bancada = Bancada(gc,64*6,64*4.2)
@@ -98,7 +101,7 @@ class Level:
         self.armazemGroup.add(self.despensa)
 
         #lixo
-        self.lixo = Lixo(gc, 10, 36*7)
+        self.lixo = Lixo(gc, -14, 36*6.1)
         self.lixoGroup = pygame.sprite.Group()
         self.lixoGroup.add(self.lixo)
 
