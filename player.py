@@ -24,7 +24,7 @@ class Player:
         self.is_on_armazem = False
         self.using_machine_timer = 0
         
-        self.sheet = pygame.image.load("images\coelinho.png").convert_alpha()
+        self.sheet = pygame.image.load("images/coelinho.png").convert_alpha()
 
         #cria o vetor de sprites do coelho (a gente não deve usar todas...)
         self.skinVector = [get_image(self.sheet, 48,48, 3, (0,0,0), (int(x / 4), x % 4)) for x in range(16)]

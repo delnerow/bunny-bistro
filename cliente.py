@@ -30,7 +30,7 @@ class Cliente(ClickableSprite):
         self.comido=False
         self.servido_certo=False
         diretorio = especie+".png"
-        self.image = pygame.image.load("images\clientes\\"+diretorio).convert_alpha()
+        self.image = pygame.image.load("images/clientes\\"+diretorio).convert_alpha()
         self.skinVector = [get_image(self.image, 27, 30, 3, None, (i, 0)) for i in range(2)]
         self.skin = self.skinVector[0]
         self.balao_image = pygame.image.load("images/balao.png").convert_alpha()  # carrega a imagem do balão
