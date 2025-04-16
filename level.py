@@ -25,6 +25,11 @@ class Level:
         self.ui = UI() 
         self.score = 400
         self.max_score = 1000
+        
+        # pra transição de final de jogo
+        self.fim_de_jogo = False
+        self.transicao_alpha = 0  # transparência do fade
+        self.transicao_ativa = False
 
         # Configuração da barra de pontuação
         self.shake_duration = 0  # Duração do shake em loops
@@ -125,10 +130,37 @@ class Level:
                     sys.exit()
             
             #atualização
-            self.update(events)
+            if self.time_remaining>0 and not self.fim_de_jogo:
+                self.update(events)
 
             #impressão na tela
             self.print()
+            
+            # Quando o tempo acabar e a transição ainda não tiver sido ativada
+            if self.time_remaining <= 0 and not self.transicao_ativa:
+                self.transicao_ativa = True  # Inicia a transição de escurecimento
+
+            if self.transicao_ativa:
+                # Cria a superfície preta semi-transparente
+                fade_surface = pygame.Surface(self.gc.screen.get_size()).convert_alpha()
+                fade_surface.fill((0, 0, 0, self.transicao_alpha))  # RGBA, com controle de opacidade
+
+                if self.transicao_alpha < 255:
+                    self.transicao_alpha += 5  # Aumenta a opacidade lentamente
+                else:
+                    self.fim_de_jogo = True  # Marca o fim definitivo do jogo
+
+                # Aplica a camada preta em cima da tela
+                self.gc.screen.blit(fade_surface, (0, 0))
+
+                
+
+                # Redesenha o player por cima da máscara, para que o player fique iluminado
+                self.gc.screen.blit(self.gc.player.skin, self.gc.player.screenposition)
+
+            # Atualiza a tela e o FPS
+            pygame.display.flip()
+            self.clock.tick(60)
 
     def update(self, events):
         # Atualiza a lógica do jogo aqui
@@ -188,8 +220,8 @@ class Level:
 
         
         # Atualiza a tela
-        pygame.display.flip()
-        self.clock.tick(60)
+        #pygame.display.flip()
+        #self.clock.tick(60)
     
     def update_music(self):
         if self.time_remaining <= self.time_init/2 and self.musicNow == 0:
