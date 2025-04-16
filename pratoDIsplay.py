@@ -1,5 +1,5 @@
 import pygame
-pedidos={"invalido":"images\\prato.png", "Caponata":"images\\pratos\\caponata.png", "Hamburguer":"images\\pratos\\hamburguer.png","Quiche":"images\\pratos\\quiche.png"}
+pedidos={"invalido":"images\\cozinha\\prato.png", "Caponata":"images\\pratos\\caponata.png", "Hamburguer":"images\\pratos\\hamburguer.png","Quiche":"images\\pratos\\quiche.png"}
 preparos={1:"images\\knife.png", 2:"images\\whisk42x42.png",3:"images\\fire16x16.png"}
 
 

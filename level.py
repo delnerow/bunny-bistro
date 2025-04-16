@@ -81,7 +81,7 @@ class Level:
         self.fila.entra_cliente(self.cliente)
 
         # as máquinas da cozinha
-        self.tabua = maquina.Tabua(self.gc, 64 * 3.5, 64 * 4.4)
+        self.tabua = maquina.Tabua(self.gc, 64 * 14.05, 64 * 1.4)
         self.batedeira = maquina.Batedeira(self.gc, 348, 80)
         self.forno = maquina.Forno(self.gc, 64 * 8, 64 * 1.5)
 

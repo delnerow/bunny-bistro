@@ -47,7 +47,7 @@ class Player:
         pos_armario = Vector2(64*8.5, 64*1.5)   #1
         pos_fogao = Vector2(64*7.5, 64*1.5)     #2
         pos_batedeira = Vector2(64*4.75,64*1.5) #3
-        pos_tabua = Vector2(64*3, 64*3)         #4
+        pos_tabua = Vector2(64*13.55, 64*1.5)         #4
         pos_prato = Vector2(64*4, 64*3)         #5
         pos_lixo = Vector2(32*0.3, 64*2.7)        #6
         

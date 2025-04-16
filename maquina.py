@@ -67,7 +67,7 @@ class Maquina(ClickableSprite):
  
 class Tabua(Maquina):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images\\tabua.png').convert_alpha();
+        self.image=pygame.image.load('images\\cozinha\\tabua.png').convert_alpha();
         self.image= pygame.transform.scale(self.image, (50, 50))
         super().__init__(gc,self.image,x,y)
         self.position = 4
