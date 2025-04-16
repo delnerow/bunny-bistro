@@ -17,111 +17,113 @@ from barata import Barata
 
 class Level:
     def __init__(self, gc):
-        self.clock = pygame.time.Clock()
-        self.background = pygame.image.load("images\\cozinha1.png").convert_alpha()
-        self.background = pygame.transform.scale2x(self.background)
         #controle de jogo
         self.gc = gc
-        self.ui = UI() 
+
+
+    def reset(self):
+        self.clock = pygame.time.Clock()
+        self.background = pygame.image.load("images\\cozinha\\cozinha_nivel1.png").convert_alpha()
+        self.background = pygame.transform.scale2x(self.background)
+        # controle de jogo
+        self.ui = UI()
         self.score = 400
         self.max_score = 1000
-        self.fim_de_jogo=False
+        self.fim_de_jogo = False
         self.transicao_ativa = False
         self.transicao_alpha = 0
-        
+
         self.intro = IntroAnimation(self.gc.screen)
 
         # Configuração da barra de pontuação
         self.shake_duration = 0  # Duração do shake em loops
         self.score_bar_width = 300  # Largura máxima da barra
         self.score_bar_height = 30  # Altura da barra
-        self.score_bar_x = 10       # Posição X da barra
-        self.score_bar_y = 16       # Posição Y da barra
+        self.score_bar_x = 10  # Posição X da barra
+        self.score_bar_y = 16  # Posição Y da barra
         self.score_bar_color = (0, 75, 35)  # Cor da barra (verde)
         self.max_score = 1000  # Pontuação máxima para encher a barra
         self.gradient_colors = [
-        (0, 75, 35),    # Vermelho
-        (0, 100, 0),  # Laranja
-        (0, 114, 0),  # Amarelo
-        (56, 176, 0),    # Verde
-        (112, 224, 0),    # Azul
-        (158, 240, 26)   # Roxo
-        ]    
+            (0, 75, 35),  # Vermelho
+            (0, 100, 0),  # Laranja
+            (0, 114, 0),  # Amarelo
+            (56, 176, 0),  # Verde
+            (112, 224, 0),  # Azul
+            (158, 240, 26)  # Roxo
+        ]
 
-        self.cola = ColaUI(750,280)
-        self.janela = Window(730,5)
+        self.cola = ColaUI(750, 280)
+        self.janela = Window(730, 5)
 
         # Timer do jogo (em segundos)
         self.time_init = 100
         self.time_remaining = self.time_init
         self.last_time = pygame.time.get_ticks()
         self.font = pygame.font.Font("images\\DigitalDismay.otf", 36)
-        self.font_point = pygame.font.Font(None, 22) 
-        
+        self.font_point = pygame.font.Font(None, 22)
+
         self.pratoDisplay = PratoDisplay(self.gc.screen)
 
         # mesas
-        
-        self.filaMesa=FilaMesa()
-        self.mesa1= Mesa(360,490, self.filaMesa)
-        self.mesa2= Mesa(100,490, self.filaMesa)
-        self.mesa3= Mesa(220,420, self.filaMesa)
-        self.fila = Fila(gc,64*7,64*4.5, self.filaMesa )
 
-        #as baratas
-        self.barata = Barata(gc)
-        
+        self.filaMesa = FilaMesa()
+        self.mesa1 = Mesa(360, 490, self.filaMesa)
+        self.mesa2 = Mesa(100, 490, self.filaMesa)
+        self.mesa3 = Mesa(220, 420, self.filaMesa)
+        self.fila = Fila(self.gc, 64 * 7, 64 * 4.5, self.filaMesa)
+
+        # as baratas
+        self.barata = Barata(self.gc)
+
         # clientes
-        self.cliente = Cliente(gc,64*7,64*4.5, 20, "Caponata","bode",self.fila)
-        self.clienteControl = ClienteSpawner(self.gc,self.fila,0.2)
+        self.cliente = Cliente(self.gc, 64 * 7, 64 * 4.5, 20, "Caponata", "bode", self.fila)
+        self.clienteControl = ClienteSpawner(self.gc, self.fila, 0.2)
         self.fila.entra_cliente(self.cliente)
 
-        #as máquinas da cozinha
-        self.tabua = maquina.Tabua(gc, 64*3.5,64*4.4)
-        self.batedeira = maquina.Batedeira(gc, 348, 80)
-        self.forno = maquina.Forno(gc, 64*8, 64*1.5)
-        
-        
+        # as máquinas da cozinha
+        self.tabua = maquina.Tabua(self.gc, 64 * 3.5, 64 * 4.4)
+        self.batedeira = maquina.Batedeira(self.gc, 348, 80)
+        self.forno = maquina.Forno(self.gc, 64 * 8, 64 * 1.5)
+
         self.mesasGroup = pygame.sprite.Group()
         self.maquinasGroup = pygame.sprite.Group()
-        self.bancadaGroup= pygame.sprite.Group()
+        self.bancadaGroup = pygame.sprite.Group()
         self.maquinasGroup.add(self.tabua)
         self.maquinasGroup.add(self.batedeira)
         self.maquinasGroup.add(self.forno)
         self.mesasGroup.add(self.mesa3)
         self.mesasGroup.add(self.mesa1)
         self.mesasGroup.add(self.mesa2)
-        
-        
+
         # bancada de pratos
-        self.bancada = Bancada(gc,64*6,64*4.2)
+        self.bancada = Bancada(self.gc, 64 * 6, 64 * 4.2)
         self.bancadaGroup.add(self.bancada)
-        
-        #despensa
-        self.geladeira = Geladeira(self.gc, 64*3, 64)
-        self.despensa = Despensa(self.gc, 64*9, 64*1.5)
+
+        # despensa
+        self.geladeira = Geladeira(self.gc, 64 * 3, 64)
+        self.despensa = Despensa(self.gc, 64 * 9, 64 * 1.5)
 
         self.armazemGroup = pygame.sprite.Group()
         self.armazemGroup.add(self.geladeira)
         self.armazemGroup.add(self.despensa)
 
-        #lixo
-        self.lixo = Lixo(gc, -14, 36*6.1)
+        # lixo
+        self.lixo = Lixo(self.gc, 0, 227)
         self.lixoGroup = pygame.sprite.Group()
         self.lixoGroup.add(self.lixo)
 
-        #musica
+        # musica
         pygame.mixer.music.stop()
         self.volume = 0.2
         self.music = pygame.mixer.Sound('sounds\\music.mp3')
 
-        pygame.mixer.music.set_volume(self.volume)   
+        pygame.mixer.music.set_volume(self.volume)
         pygame.mixer.music.load('sounds\\music.mp3')
 
         self.musicNow = 0
 
     def run(self):
-        
+        self.reset()
         # Inicia a música de fundo
         pygame.mixer.music.play(-1)  # -1 para tocar em loop
         while True:
@@ -155,11 +157,12 @@ class Level:
                         self.transicao_alpha += 5  # Aumenta a opacidade lentamente
                     else:
                         self.fim_de_jogo = True  # Marca o fim definitivo do jogo
+                        return self.score
 
                     # Aplica a camada preta em cima da tela
                     self.gc.screen.blit(fade_surface, (0, 0))
 
-                    
+
 
                     # Redesenha o player por cima da máscara, para que o player fique iluminado
                     self.gc.screen.blit(self.gc.player.skin, self.gc.player.screenposition)

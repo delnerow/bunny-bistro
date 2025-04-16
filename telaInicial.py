@@ -25,6 +25,7 @@ class TelaInicial:
         img = pygame.image.load(path)
         size = img.get_size()
         return pygame.transform.scale(img, (int(size[0]*scale), int(size[1]*scale)))
+
     def tocar_musica(self):
         pygame.mixer.music.stop()
         pygame.mixer.music.load("sounds\\telaStart.mp3")  # seu arquivo de música

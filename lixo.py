@@ -7,8 +7,8 @@ import pygame
 class Lixo(ClickableSprite):
     def __init__(self,gc,x,y):
         self.gc = gc
-        self.image=pygame.image.load('images\\lixo.png').convert_alpha()
-        self.image= pygame.transform.scale(self.image, (80, 80))
+        self.image=pygame.image.load('images\\cozinha\\lixo.png').convert_alpha()
+        self.image= pygame.transform.scale(self.image, (40, 40))
         self.sound = pygame.mixer.Sound('sounds\\lixo.mp3')
         super().__init__(self.image,x,y,self.descartar)  
         # :indice_Receita:  Cada ingrediente tem um índice no código de receita
