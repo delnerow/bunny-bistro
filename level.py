@@ -2,6 +2,7 @@ import pygame, sys
 from ClienteSpawner import ClienteSpawner
 from fila import Fila
 from filaMesa import FilaMesa
+from introAnimation import IntroAnimation
 from mesa import Mesa
 from bancada import Bancada
 from cliente import Cliente
@@ -19,17 +20,16 @@ class Level:
         self.clock = pygame.time.Clock()
         self.background = pygame.image.load("images\cozinha1.png").convert_alpha()
         self.background = pygame.transform.scale2x(self.background)
-
         #controle de jogo
         self.gc = gc
         self.ui = UI() 
         self.score = 400
         self.max_score = 1000
-        
-        # pra transição de final de jogo
-        self.fim_de_jogo = False
-        self.transicao_alpha = 0  # transparência do fade
+        self.fim_de_jogo=False
         self.transicao_ativa = False
+        self.transicao_alpha = 0
+        
+        self.intro = IntroAnimation(self.gc.screen)
 
         # Configuração da barra de pontuação
         self.shake_duration = 0  # Duração do shake em loops
@@ -120,6 +120,7 @@ class Level:
         self.musicNow = 0
 
     def run(self):
+        
         # Inicia a música de fundo
         pygame.mixer.music.play(-1)  # -1 para tocar em loop
         while True:
@@ -128,35 +129,39 @@ class Level:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
-            
-            #atualização
-            if self.time_remaining>0 and not self.fim_de_jogo:
-                self.update(events)
+            if not self.intro.transition_done:
+                # Enquanto a intro não terminou: congelar o jogo
+                self.intro.update()
+                self.intro.draw()
+            else:
+                #atualização
+                if self.time_remaining>0 and not self.fim_de_jogo:
+                    self.update(events)
 
-            #impressão na tela
-            self.print()
-            
-            # Quando o tempo acabar e a transição ainda não tiver sido ativada
-            if self.time_remaining <= 0 and not self.transicao_ativa:
-                self.transicao_ativa = True  # Inicia a transição de escurecimento
-
-            if self.transicao_ativa:
-                # Cria a superfície preta semi-transparente
-                fade_surface = pygame.Surface(self.gc.screen.get_size()).convert_alpha()
-                fade_surface.fill((0, 0, 0, self.transicao_alpha))  # RGBA, com controle de opacidade
-
-                if self.transicao_alpha < 255:
-                    self.transicao_alpha += 5  # Aumenta a opacidade lentamente
-                else:
-                    self.fim_de_jogo = True  # Marca o fim definitivo do jogo
-
-                # Aplica a camada preta em cima da tela
-                self.gc.screen.blit(fade_surface, (0, 0))
-
+                #impressão na tela
+                self.print()
                 
+                # Quando o tempo acabar e a transição ainda não tiver sido ativada
+                if self.time_remaining <= 0 and not self.transicao_ativa:
+                    self.transicao_ativa = True  # Inicia a transição de escurecimento
 
-                # Redesenha o player por cima da máscara, para que o player fique iluminado
-                self.gc.screen.blit(self.gc.player.skin, self.gc.player.screenposition)
+                if self.transicao_ativa:
+                    # Cria a superfície preta semi-transparente
+                    fade_surface = pygame.Surface(self.gc.screen.get_size()).convert_alpha()
+                    fade_surface.fill((0, 0, 0, self.transicao_alpha))  # RGBA, com controle de opacidade
+
+                    if self.transicao_alpha < 255:
+                        self.transicao_alpha += 5  # Aumenta a opacidade lentamente
+                    else:
+                        self.fim_de_jogo = True  # Marca o fim definitivo do jogo
+
+                    # Aplica a camada preta em cima da tela
+                    self.gc.screen.blit(fade_surface, (0, 0))
+
+                    
+
+                    # Redesenha o player por cima da máscara, para que o player fique iluminado
+                    self.gc.screen.blit(self.gc.player.skin, self.gc.player.screenposition)
 
             # Atualiza a tela e o FPS
             pygame.display.flip()
@@ -170,7 +175,6 @@ class Level:
         self.fila.update(events)
         self.maquinasGroup.update(events)
         self.bancadaGroup.update(events)
-        #self.armazemGroup.update(events)
         self.lixoGroup.update(events)
         self.pratoDisplay.update_ingrediente(self.gc.player.prato)
         self.geladeira.update(events)
@@ -184,6 +188,7 @@ class Level:
         # Desenha o fundo
         self.gc.screen.blit(self.background, (0, 0))
         self.janela.print(self.gc.screen)
+        
         
         self.mesasGroup.draw(self.gc.screen)
         for mesa in self.mesasGroup:
