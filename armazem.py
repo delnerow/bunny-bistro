@@ -22,7 +22,7 @@ class Armazem(HoverSprite):
         self.x_menu = x_menu
         self.y_menu = y_menu
         self.menu_aberto = False 
-        self.menu_image = pygame.image.load("images/menu.png").convert_alpha()
+        self.menu_image = pygame.image.load("images\\menu.png").convert_alpha()
         self.items = items
         self.menu = Menu(gc, self.items, self.x_menu,self.y_menu)
         
@@ -66,7 +66,7 @@ class Geladeira(Armazem):
         self.x_menu = x+10
         self.y_menu = y-50
         self.position=0
-        self.image = pygame.image.load("images/geladeira.png").convert_alpha()
+        self.image = pygame.image.load("images\\geladeira.png").convert_alpha()
         self.image= pygame.transform.scale(self.image, (64, 64*2))
         self.items=[Tomate(gc, 0, 0),Cebola(gc,0, 0),Leite(gc, 0 , 0), Brocolis(gc, 0, 0)]
         super().__init__(self.image, gc, x, y,self.x_menu,self.y_menu,self.items, self.position)
@@ -76,7 +76,7 @@ class Despensa(Armazem):
         self.x_menu = x+20
         self.y_menu = y-50
         self.position =1
-        self.image = pygame.image.load("images/despensa.png").convert_alpha()
+        self.image = pygame.image.load("images\\despensa.png").convert_alpha()
         self.image= pygame.transform.scale(self.image, (64, 64))
         self.items=[Grao(gc, 0, 0),Farinha(gc, 0, 0)]
         super().__init__(self.image, gc, x, y,self.x_menu,self.y_menu,self.items,self.position)

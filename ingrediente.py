@@ -58,7 +58,7 @@ class Ingrediente(ClickableSprite):
 
 class Tomate(Ingrediente):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images\\food\Vegetables\Tomato.png').convert_alpha();
+        self.image=pygame.image.load('images\\food\\Vegetables\\Tomato.png').convert_alpha();
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__(0,gc,self.image,x,y)  
     # Carrega imagem do sprite e dimensiona
@@ -70,7 +70,7 @@ class Tomate(Ingrediente):
 
 class Cebola(Ingrediente):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images\\food\Vegetables\Onion.png').convert_alpha()
+        self.image=pygame.image.load('images\\food\\Vegetables\\Onion.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__(1,gc,self.image,x,y)  
     # Carrega imagem do sprite e dimensiona
@@ -82,7 +82,7 @@ class Cebola(Ingrediente):
 
 class Grao(Ingrediente):
     def __init__(self,gc, x, y):
-        self.image=pygame.image.load('images\\food\Vegetables\potato.png').convert_alpha()
+        self.image=pygame.image.load('images\\food\\Vegetables\\potato.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__(2, gc, self.image, x, y) 
     # Carrega imagem do sprite e dimensiona
@@ -94,7 +94,7 @@ class Grao(Ingrediente):
         
 class Farinha(Ingrediente):
     def __init__(self,gc, x, y):
-        self.image=pygame.image.load('images\\food\Sweets\Sugar.png').convert_alpha()
+        self.image=pygame.image.load('images\\food\\Sweets\\Sugar.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__(3, gc, self.image, x, y) 
     # Carrega imagem do sprite e dimensiona
@@ -106,7 +106,7 @@ class Farinha(Ingrediente):
         
 class Leite(Ingrediente):
     def __init__(self,gc, x, y):
-        self.image=pygame.image.load('images\\food\EggsandDairy\Milk1.png').convert_alpha()
+        self.image=pygame.image.load('images\\food\\EggsandDairy\\Milk1.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__(4,gc,self.image,x,y)  
     # Carrega imagem do sprite e dimensiona
@@ -118,7 +118,7 @@ class Leite(Ingrediente):
         
 class Brocolis(Ingrediente):
     def __init__(self,gc, x, y):
-        self.image=pygame.image.load('images\\food\Vegetables\Broccoli.png').convert_alpha()
+        self.image=pygame.image.load('images\\food\\Vegetables\\Broccoli.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
         super().__init__( 5, gc, self.image, x, y) 
     # Carrega imagem do sprite e dimensiona

@@ -4,7 +4,7 @@ from HoverSprite import HoverSprite
 
 class Barata(HoverSprite):
     def __init__(self, gc):
-        self.image = pygame.image.load("images/barata.png").convert_alpha()
+        self.image = pygame.image.load("images\\barata.png").convert_alpha()
         self.image= pygame.transform.scale(self.image, (32, 32))
         self.screen = gc.screen
         self.x0 = 100
@@ -27,7 +27,7 @@ class Barata(HoverSprite):
         self.t = 0
         self.f1 = 2.3
         self.f2 = 4
-        self.sound = pygame.mixer.Sound("sounds/barataviva.mp3")
+        self.sound = pygame.mixer.Sound("sounds\\barataviva.mp3")
 
     def mirar(self):
         print("muda a mira")

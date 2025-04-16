@@ -24,8 +24,7 @@ class Player:
         self.is_on_armazem = False
         self.using_machine_timer = 0
         
-        # Spritesheet do coelho
-        self.sheet = pygame.image.load("images\coelinho.png").convert_alpha()
+        self.sheet = pygame.image.load("images\\coelinho.png").convert_alpha()
 
         # Cria o vetor de sprites do coelho (a gente não deve usar todas...)
         self.skinVector = [get_image(self.sheet, 48,48, 3, (0,0,0), (int(x / 4), x % 4)) for x in range(16)]
@@ -54,8 +53,8 @@ class Player:
         
         self.movVec.extend([pos_geladeira, pos_armario, pos_fogao, pos_batedeira, pos_tabua, pos_prato, pos_lixo])
 
-        self.prepGunSound = pygame.mixer.Sound("sounds\gunPrepare.mp3")
-        self.shootSound = pygame.mixer.Sound("sounds\gunShoot.mp3")
+        self.prepGunSound = pygame.mixer.Sound("sounds\\gunPrepare.mp3")
+        self.shootSound = pygame.mixer.Sound("sounds\\gunShoot.mp3")
 
     def update(self):
         #atualiza a posição do coelho na tela

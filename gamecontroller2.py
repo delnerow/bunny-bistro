@@ -6,7 +6,7 @@ class Game:
         self.screen = pygame.display.set_mode((1280, 720))
         pygame.display.set_caption("tituloo")
         self.clock = pygame.time.Clock()
-        self.background = pygame.image.load("images\cozinha_demo.png").convert_alpha()
+        self.background = pygame.image.load("images\\cozinha_demo.png").convert_alpha()
 
     def run(self):
         while True:

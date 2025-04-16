@@ -4,7 +4,7 @@ import sys
 class LoadingScreen:
     def __init__(self, screen):
         self.screen = screen
-        self.spritesheet = pygame.image.load("images/loading_spritesheet.png").convert_alpha()
+        self.spritesheet = pygame.image.load("images\\loading_spritesheet.png").convert_alpha()
         
         # Definir as dimensões dos frames da animação
         self.frame_width = 64  # Largura de cada frame na spritesheet
