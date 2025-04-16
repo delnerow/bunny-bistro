@@ -113,19 +113,14 @@ class Level:
         self.lixoGroup.add(self.lixo)
 
         # musica
-        pygame.mixer.music.stop()
-        self.volume = 0.2
-        self.music = pygame.mixer.Sound('sounds\\music.mp3')
 
-        pygame.mixer.music.set_volume(self.volume)
-        pygame.mixer.music.load('sounds\\music.mp3')
-
+        self.gc.music_Manager.set_volume(0.2)
+        self.gc.music_Manager.tocar_musica('sounds\\music.mp3')
         self.musicNow = 0
 
     def run(self):
         self.reset()
         # Inicia a música de fundo
-        pygame.mixer.music.play(-1)  # -1 para tocar em loop
         while True:
             events = pygame.event.get()
             for event in events:
@@ -146,7 +141,7 @@ class Level:
                 
                 # Quando o tempo acabar e a transição ainda não tiver sido ativada
                 if self.time_remaining <= 0 and not self.transicao_ativa:
-                    pygame.mixer.music.stop()
+                    self.gc.music_Manager.parar_musica()
                     self.barata.sound.stop()  # Para o som da barata
                     self.transicao_ativa = True  # Inicia a transição de escurecimento
 

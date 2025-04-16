@@ -1,3 +1,4 @@
+from musicManager import MusicManager
 from prato import Prato
 from level import Level
 from player import Player
@@ -12,19 +13,17 @@ class GameController:
         icon = pygame.image.load("images\\icon.bmp")
         pygame.display.set_icon(icon)
         pygame.display.set_caption("Bunny-Bistro")
+        
         self.screen = pygame.display.set_mode((16*64, 9*64))
 
-        self.time=0
+        self.music_Manager = MusicManager()
         self.player = Player()
-        self.level = Level(self)
         self.start = TelaInicial(self)
+        self.level = Level(self)
         self.end = TelaFinal(self)
+        #self.clock = pygame.time.Clock()
 
-        self.state = "menu"  # <- Começa pelo menu
-        self.clock = pygame.time.Clock()
-
-        
-
+    
     def run(self):
         escolha_inicial = self.start.run()
         if escolha_inicial == "instrucoes":
@@ -38,8 +37,9 @@ class GameController:
 
         # Loop para jogar e tentar novamente
         while True:
+            self.level.reset()
             score = self.level.run()
-            if score == 1000:
+            if score >= 1000:
                 self.end.run_good()
                 break  # Ganhou, sai do loop de jogar/tentar
             else:
@@ -53,8 +53,3 @@ class GameController:
                     pass
                 else:
                     break
-
-
-
-    def printOI(self):
-        print("oi\n")

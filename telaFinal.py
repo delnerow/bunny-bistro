@@ -17,22 +17,16 @@ class TelaFinal:
 
         self.tentar_rect_base = pygame.Rect(360, 248, *self.botao_tente_novamente.get_size())
         self.sair_rect_base = pygame.Rect(360, 360, *self.botao_sair_normal.get_size())
-        self.tocar_musica()
 
     def load_scaled(self, path, scale):
         img = pygame.image.load(path)
         size = img.get_size()
         return pygame.transform.scale(img, (int(size[0] * scale), int(size[1] * scale)))
 
-    def tocar_musica(self):
-        pygame.mixer.music.stop()
-        pygame.mixer.music.load("sounds\\telaStart.mp3")  # seu arquivo de música
-        pygame.mixer.music.set_volume(0.5)  # volume de 0.0 até 1.0
-        pygame.mixer.music.play(-1)  # -1 = loop infinito
 
     def run_bad(self):
         running = True
-
+        self.gc.music_Manager.tocar_musica("sounds\\bad.mp3")
         while running:
             self.gc.screen.blit(self.background_bad, (0, 0))
             mouse_pos = pygame.mouse.get_pos()
@@ -83,7 +77,7 @@ class TelaFinal:
 
     def run_good(self):
         running = True
-
+        self.gc.music_Manager.tocar_musica("sounds\\good.mp3")
         self.sair_rect_base = pygame.Rect(670, 395, *self.botao_sair_normal.get_size())
 
         while running:
