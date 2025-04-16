@@ -6,7 +6,7 @@ def mostrar_tela_inicial():
 
     screen = pygame.display.set_mode((16*64, 9*64))
 
-    background = pygame.image.load("images/tela-inicial/tela-fundo.png")
+    background = pygame.image.load("images\\tela-inicial\\tela-fundo.png")
     background = pygame.transform.scale(background, (16*64, 9*64))
 
     def load_scaled(path, scale):
@@ -14,14 +14,14 @@ def mostrar_tela_inicial():
         size = img.get_size()
         return pygame.transform.scale(img, (int(size[0]*scale), int(size[1]*scale)))
 
-    botao_jogar_normal = load_scaled("images/tela-inicial/botao-jogar.png", 1.5)
-    botao_jogar_hover = load_scaled("images/tela-inicial/botao-jogar.png", 1.7)
+    botao_jogar_normal = load_scaled("images\\tela-inicial\\botao-jogar.png", 1.5)
+    botao_jogar_hover = load_scaled("images\\tela-inicial\\botao-jogar.png", 1.7)
 
-    botao_instrucoes_normal = load_scaled("images/tela-inicial/botao-instrucoes.png", 1.5)
-    botao_instrucoes_hover = load_scaled("images/tela-inicial/botao-instrucoes.png", 1.7)
+    botao_instrucoes_normal = load_scaled("images\\tela-inicial\\botao-instrucoes.png", 1.5)
+    botao_instrucoes_hover = load_scaled("images\\tela-inicial\\botao-instrucoes.png", 1.7)
 
-    botao_sair_normal = load_scaled("images/tela-inicial/botao-sair.png", 1.5)
-    botao_sair_hover = load_scaled("images/tela-inicial/botao-sair.png", 1.7)
+    botao_sair_normal = load_scaled("images\\tela-inicial\\botao-sair.png", 1.5)
+    botao_sair_hover = load_scaled("images\\tela-inicial\\botao-sair.png", 1.7)
 
     jogar_rect_base = pygame.Rect(550, 200, *botao_jogar_normal.get_size())
     instrucoes_rect_base = pygame.Rect(550, 310, *botao_instrucoes_normal.get_size())

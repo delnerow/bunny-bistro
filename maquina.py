@@ -67,11 +67,11 @@ class Maquina(ClickableSprite):
  
 class Tabua(Maquina):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images/tabua.png').convert_alpha();
+        self.image=pygame.image.load('images\\tabua.png').convert_alpha();
         self.image= pygame.transform.scale(self.image, (50, 50))
         super().__init__(gc,self.image,x,y)
         self.position = 4
-        self.sound = pygame.mixer.Sound('sounds/cortar.mp3')
+        self.sound = pygame.mixer.Sound('sounds\\cortar.mp3')
     
     def cozinhar(self):
         self.sound.play()
@@ -82,11 +82,11 @@ class Tabua(Maquina):
                
 class Batedeira(Maquina):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images/batedeira.png').convert_alpha();
+        self.image=pygame.image.load('images\\batedeira.png').convert_alpha();
         self.image= pygame.transform.scale(self.image, (40, 40))
         super().__init__(gc,self.image,x,y)
         self.position = 3
-        self.sound = pygame.mixer.Sound('sounds/bater.mp3')
+        self.sound = pygame.mixer.Sound('sounds\\bater.mp3')
         
     def cozinhar(self):
         self.sound.play()
@@ -97,11 +97,11 @@ class Batedeira(Maquina):
     
 class Forno(Maquina):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images/forno.png').convert_alpha()
+        self.image=pygame.image.load('images\\forno.png').convert_alpha()
         self.image= pygame.transform.scale(self.image, (64, 64))
         super().__init__(gc,self.image,x,y)
         self.position = 2
-        self.sound = pygame.mixer.Sound('sounds/forno.mp3')
+        self.sound = pygame.mixer.Sound('sounds\\forno.mp3')
     def cozinhar(self):
         self.sound.play()
         for i in range(len(self.prato_atual.ingredientes)):

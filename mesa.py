@@ -1,6 +1,6 @@
 
 
-pedidos={"Caponata":"images\pratos\caponata.png", "Hamburguer":"images\pratos\hamburguer.png","Quiche":"images\pratos\quiche.png"}
+pedidos={"Caponata":"images\\pratos\\caponata.png", "Hamburguer":"images\\pratos\\hamburguer.png","Quiche":"images\\pratos\\quiche.png"}
 
 import pygame
 
@@ -8,7 +8,7 @@ import pygame
 class Mesa(pygame.sprite.Sprite):
     def __init__(self,x,y, filaMesa):
         super().__init__()
-        self.image = pygame.image.load("images/mesa.png").convert_alpha()
+        self.image = pygame.image.load("images\\mesa.png").convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 2)
         self.rect = self.image.get_rect(center=(x, y))
         self.x=x

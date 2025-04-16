@@ -1,4 +1,4 @@
-pedidos={"Caponata":"images\pratos\caponata.png", "Hamburguer":"images\pratos\hamburguer.png","Quiche":"images\pratos\quiche.png"}
+pedidos={"Caponata":"images\\pratos\\caponata.png", "Hamburguer":"images\\pratos\\hamburguer.png","Quiche":"images\\pratos\\quiche.png"}
 
 import pygame
 from ClickSprite import ClickableSprite
@@ -54,7 +54,7 @@ class Cliente(ClickableSprite):
         # Se a cadeira exige que o cliente vire pra direita
 
         diretorio = especie+".png"
-        self.image = pygame.image.load("images/clientes\\"+diretorio).convert_alpha()
+        self.image = pygame.image.load("images\\clientes\\"+diretorio).convert_alpha()
         self.skinVector = [get_image(self.image, 27, 30, 3, None, (i, 0)) for i in range(2)]
         self.skin = self.skinVector[0]
         self.frame = 0
@@ -63,7 +63,7 @@ class Cliente(ClickableSprite):
         # Inicializar uma skin
         # Frame organiza a animação da spritesheet
         
-        self.balao_image = pygame.image.load("images/balao.png").convert_alpha()  # carrega a imagem do balão
+        self.balao_image = pygame.image.load("images\\balao.png").convert_alpha()  # carrega a imagem do balão
         self.balao_image = pygame.transform.scale_by(self.balao_image, 2)
         self.balao_offset = pygame.Vector2(-30, -70)
         # Carregar imagem do balão de pedido e dimensionar

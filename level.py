@@ -17,7 +17,7 @@ from barata import Barata
 class Level:
     def __init__(self, gc):
         self.clock = pygame.time.Clock()
-        self.background = pygame.image.load("images\cozinha1.png").convert_alpha()
+        self.background = pygame.image.load("images\\cozinha1.png").convert_alpha()
         self.background = pygame.transform.scale2x(self.background)
 
         #controle de jogo
@@ -55,7 +55,7 @@ class Level:
         self.time_init = 100
         self.time_remaining = self.time_init
         self.last_time = pygame.time.get_ticks()
-        self.font = pygame.font.Font("images\DigitalDismay.otf", 36) 
+        self.font = pygame.font.Font("images\\DigitalDismay.otf", 36)
         self.font_point = pygame.font.Font(None, 22) 
         
         self.pratoDisplay = PratoDisplay(self.gc.screen)
@@ -112,10 +112,10 @@ class Level:
 
         #musica
         self.volume = 0.2
-        self.music = pygame.mixer.Sound('sounds/music.mp3')
+        self.music = pygame.mixer.Sound('sounds\\music.mp3')
 
         pygame.mixer.music.set_volume(self.volume)   
-        pygame.mixer.music.load('sounds/music.mp3')
+        pygame.mixer.music.load('sounds\\music.mp3')
 
         self.musicNow = 0
 
@@ -227,14 +227,14 @@ class Level:
         if self.time_remaining <= self.time_init/2 and self.musicNow == 0:
             self.musicNow = 1
             pygame.mixer.music.fadeout(100)  # Fadeout da música atual (1 segundo)
-            pygame.mixer.music.load('sounds/music_fast.mp3')  # Carrega a nova música
+            pygame.mixer.music.load('sounds\\music_fast.mp3')  # Carrega a nova música
             pygame.mixer.music.play(-1, fade_ms=100)  # Toca a nova música com fadein (1 segundo)
 
 
         if self.time_remaining <= self.time_init/4 and self.musicNow == 1:
             self.musicNow = 2
             pygame.mixer.music.fadeout(100)  # Fadeout da música atual (1 segundo)
-            pygame.mixer.music.load('sounds/music_muitofast.mp3')  # Carrega a nova música
+            pygame.mixer.music.load('sounds\\music_muitofast.mp3')  # Carrega a nova música
             pygame.mixer.music.play(-1, fade_ms=100)  # Toca a nova música com fadein (1 segundo)
     
     def update_timer(self):

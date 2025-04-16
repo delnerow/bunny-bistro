@@ -3,7 +3,7 @@ import pygame
 # Imagem de Receitas
 class ColaUI():
     def __init__(self,x,y):
-        self.image = pygame.image.load("images/colas.png").convert_alpha()  # carrega a imagem do balão
+        self.image = pygame.image.load("images\\colas.png").convert_alpha()  # carrega a imagem do balão
         self.image = pygame.transform.scale_by(self.image, 0.4)
         self.x=x
         self.y=y
