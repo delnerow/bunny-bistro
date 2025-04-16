@@ -9,9 +9,8 @@ class Lixo(ClickableSprite):
         self.gc = gc
         self.image=pygame.image.load('images/lixo.png').convert_alpha()
         self.image= pygame.transform.scale(self.image, (32, 32))
-        self.sprite = ClickableSprite(self.image, x, y, self.descartar)
         self.sound = pygame.mixer.Sound('sounds/lixo.mp3')
-        super().__init__(self.image,self.x,self.y,self.alertar_Escolha)  
+        super().__init__(self.image,x,y,self.descartar)  
         # :indice_Receita:  Cada ingrediente tem um índice no código de receita
         # :estado_Receita:  Lista com a ordem dos preparos
         # :x:               Posição x da imagem do ingrediente 

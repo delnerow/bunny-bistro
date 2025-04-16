@@ -5,7 +5,7 @@ class Menu:
         self.screen = gc.screen
         self.x=x
         self.y=y
-        self.items = items  #lista de itens do menu
+        self.items = items 
         self.image = pygame.image.load("images/menu.png").convert_alpha()
         self.group = pygame.sprite.Group()
         padding = 32+16
@@ -15,6 +15,14 @@ class Menu:
             item.rect.y= self.y +(i//3)*padding
             self.group.add(item)
             i=i+1
+        # :screen: Superfície onde o menu será desenhado
+        # :x: Posição X do menu na tela
+        # :y: Posição Y do menu na tela
+        # :items: Lista de itens que compõem o menu
+        # :image: Imagem de fundo do menu
+        # :group: Grupo de sprites que serão desenhadas no menu
+        # :padding: Espaçamento horizontal e vertical entre os itens
+        
     def get_rect(self):
         return self.image.get_rect(topleft=(self.x, self.y))
 

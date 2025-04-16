@@ -78,15 +78,15 @@ class Level:
         self.mesasGroup = pygame.sprite.Group()
         self.maquinasGroup = pygame.sprite.Group()
         self.bancadaGroup= pygame.sprite.Group()
-        self.maquinasGroup.add(self.tabua.sprite)
-        self.maquinasGroup.add(self.batedeira.sprite)
-        self.maquinasGroup.add(self.forno.sprite)
+        self.maquinasGroup.add(self.tabua)
+        self.maquinasGroup.add(self.batedeira)
+        self.maquinasGroup.add(self.forno)
         self.mesasGroup.add(self.mesa1)
         self.mesasGroup.add(self.mesa2)
         
         # bancada de pratos
         self.bancada = Bancada(gc,64*6,64*4.2)
-        self.bancadaGroup.add(self.bancada.sprite)
+        self.bancadaGroup.add(self.bancada)
         
         #despensa
         self.geladeira = Geladeira(self.gc, 64*3, 64)
@@ -99,7 +99,7 @@ class Level:
         #lixo
         self.lixo = Lixo(gc, 10, 36*7)
         self.lixoGroup = pygame.sprite.Group()
-        self.lixoGroup.add(self.lixo.sprite)
+        self.lixoGroup.add(self.lixo)
 
         #musica
         self.volume = 0.2
@@ -147,11 +147,11 @@ class Level:
     def print(self):
         # Desenha o fundo
         self.gc.screen.blit(self.background, (0, 0))
-        self.janela.print(self.screen)
+        self.janela.print(self.gc.screen)
         
-        self.mesasGroup.draw(self.screen)
+        self.mesasGroup.draw(self.gc.screen)
         for mesa in self.mesasGroup:
-            mesa.print(self.screen)
+            mesa.print(self.gc.screen)
         # Exibe o timer na tela
         timer_text = self.font.render(f"{self.time_remaining}", True, (255, 255, 255))  # Texto branco
         self.gc.screen.blit(timer_text, (64*7.5+16, 14))  # Posição no mostrador

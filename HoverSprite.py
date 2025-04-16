@@ -11,10 +11,10 @@ class HoverSprite(pygame.sprite.Sprite):
         self.callback = callback
         self.exit_callback = exit_callback
         self.hovering = False  # Tracks hover state from previous frame
-    # Inicializa imagem do sprite e seu collider 
-    # além de função de callback para entrada do Hover e 
-    # callback para saída do Hover 
-    # O bool hovering indica se o mouse se encontra no collider
+        # Inicializa imagem do sprite e seu collider 
+        # além de função de callback para entrada do Hover e 
+        # callback para saída do Hover 
+        # O bool hovering indica se o mouse se encontra no collider
 
     def is_mouse_over(self, mouse_pos):
         return self.rect.collidepoint(mouse_pos)
