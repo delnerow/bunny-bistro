@@ -1,7 +1,7 @@
 # 🐰 Bunny Bistrô 
 Com o intuito de salvar o planeta da emissão de gases gerada pelas grandes fazendas e consumo de carne, um *Coelhinho Chef** abre um restaurante vegano. Sua aventura culinária encontra desafios ao esbarrar em *Clientes** insatisfeitos e *Baratas* perturbando o ambiente.
 
-# Instruções de Jogo
+# 📃 Instruções de Jogo
 
 **Bunny Bistrô** é um jogo **Point & Click Topdown 2D**, com estética em **Pixel Art**. Você jogará como um adorável **Coelhinho Chef**, preparando deliciosos pratos para seus clientes famintos. Abaixo estão todas as instruções que você precisa para dominar a cozinha:
 
