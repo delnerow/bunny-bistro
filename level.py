@@ -101,7 +101,7 @@ class Level:
 
         # despensa
         self.geladeira = Geladeira(self.gc, 64 * 3, 64)
-        self.despensa = Despensa(self.gc, 64 * 9, 64 * 1.5)
+        self.despensa = Despensa(self.gc, 64 * 10.48, 64 * 1.99)
 
         self.armazemGroup = pygame.sprite.Group()
         self.armazemGroup.add(self.geladeira)

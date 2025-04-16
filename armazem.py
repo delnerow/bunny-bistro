@@ -76,8 +76,8 @@ class Despensa(Armazem):
         self.x_menu = x+20
         self.y_menu = y-50
         self.position =1
-        self.image = pygame.image.load("images\\despensa.png").convert_alpha()
-        self.image= pygame.transform.scale(self.image, (64, 64))
+        self.image = pygame.image.load("images\\cozinha\\despensa.png").convert_alpha()
+        self.image= pygame.transform.scale(self.image, (35, 35))
         self.items=[Grao(gc, 0, 0),Farinha(gc, 0, 0)]
         super().__init__(self.image, gc, x, y,self.x_menu,self.y_menu,self.items,self.position)
     

@@ -44,7 +44,7 @@ class Player:
         
         #declara as posições do player na cozinha
         pos_geladeira = Vector2(64*2.5, 64*1.5) #0
-        pos_armario = Vector2(64*8.5, 64*1.5)   #1
+        pos_armario = Vector2(64*9.5, 64*1.5)   #1
         pos_fogao = Vector2(64*7.5, 64*1.5)     #2
         pos_batedeira = Vector2(64*5.65,64*1.5) #3
         pos_tabua = Vector2(64*13.50, 64*1.5)         #4

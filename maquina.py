@@ -97,7 +97,7 @@ class Batedeira(Maquina):
     
 class Forno(Maquina):
     def __init__(self,gc,x,y):
-        self.image=pygame.image.load('images\\forno.png').convert_alpha()
+        self.image=pygame.image.load('images\\cozinha\\fogoes\\fogao_nivel1.png').convert_alpha()
         self.image= pygame.transform.scale(self.image, (64, 64))
         super().__init__(gc,self.image,x,y)
         self.position = 2
