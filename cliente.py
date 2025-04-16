@@ -90,7 +90,8 @@ class Cliente(ClickableSprite):
                     self.__score=0
                 prato.ingredientes = []
                 self.gc.player.prato = None
-                self.gc.level.score= self.gc.level.score+self.satisfacao()
+                #self.gc.level.score= self.gc.level.score+self.satisfacao()
+                self.gc.level.change_score(self.satisfacao())
                 self.fila.sai_cliente(self)
 
     # Só come se não estiver servido e se existir um prato com o coelinho

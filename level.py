@@ -27,6 +27,7 @@ class Level:
         self.max_score = 1000
 
         # Configuração da barra de pontuação
+        self.shake_duration = 0  # Duração do shake em loops
         self.score_bar_width = 300  # Largura máxima da barra
         self.score_bar_height = 30  # Altura da barra
         self.score_bar_x = 10       # Posição X da barra
@@ -247,11 +248,36 @@ class Level:
                 if section_x < self.score_bar_x + current_width:
                     pygame.draw.rect(self.gc.screen, color, 
                                     (section_x, self.score_bar_y, 1, self.score_bar_height))
+        
         # Desenha o contorno da barra
-        pygame.draw.rect(self.gc.screen, (233, 216, 166), 
+        if self.shake_duration > 0:
+            if self.shake_duration//4 % 2 == 0:
+                color = (255, 0, 0)
+            else:
+                color = (255, 255, 255)
+            pygame.draw.rect(self.gc.screen, color, 
                 (self.score_bar_x, self.score_bar_y, self.score_bar_width, self.score_bar_height), 4)
+            self.shake_duration -= 1
+
+        if self.shake_duration < 0:
+            if self.shake_duration//4 % 2 == 0:
+                color = (0, 255, 0)
+            else:
+                color = (255, 255, 255)
+            pygame.draw.rect(self.gc.screen, color, 
+                (self.score_bar_x, self.score_bar_y, self.score_bar_width, self.score_bar_height), 4)
+            self.shake_duration += 1
+        
+        else:
+            pygame.draw.rect(self.gc.screen, (233, 216, 166), 
+                    (self.score_bar_x, self.score_bar_y, self.score_bar_width, self.score_bar_height), 4)
         
     def change_score(self, score):
         self.score += score
         if self.score < 0:
             self.score = 0
+        if score < 0:
+            self.shake_duration = 50
+        else:
+            self.shake_duration = -50
+        
