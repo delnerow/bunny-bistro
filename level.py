@@ -146,6 +146,8 @@ class Level:
                 
                 # Quando o tempo acabar e a transição ainda não tiver sido ativada
                 if self.time_remaining <= 0 and not self.transicao_ativa:
+                    pygame.mixer.music.stop()
+                    self.barata.sound.stop()  # Para o som da barata
                     self.transicao_ativa = True  # Inicia a transição de escurecimento
 
                 if self.transicao_ativa:
