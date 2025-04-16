@@ -1,4 +1,5 @@
-from telaInicial import mostrar_tela_inicial
+# importando modulos
+from gameController import GameController
 
-if __name__ == "__main__":
-    mostrar_tela_inicial()
+game = GameController()
+game.run()
