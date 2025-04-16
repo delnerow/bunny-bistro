@@ -1,5 +1,5 @@
 # importando modulos
-from gameController import GameController
+from src.core.gameController import GameController
 
 game = GameController()
 game.run()
