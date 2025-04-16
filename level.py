@@ -67,9 +67,9 @@ class Level:
         # mesas
 
         self.filaMesa = FilaMesa()
-        self.mesa1 = Mesa(360, 490, self.filaMesa)
-        self.mesa2 = Mesa(100, 490, self.filaMesa)
-        self.mesa3 = Mesa(220, 420, self.filaMesa)
+        self.mesa1 = Mesa(550, 490, self.filaMesa)
+        self.mesa2 = Mesa(150, 490, self.filaMesa)
+        self.mesa3 = Mesa(350, 440, self.filaMesa)
         self.fila = Fila(self.gc, 64 * 7, 64 * 4.5, self.filaMesa)
 
         # as baratas

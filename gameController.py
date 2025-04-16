@@ -30,7 +30,7 @@ class GameController:
         if escolha_inicial == "instrucoes":
             tela_instrucoes = TelaInstrucoes(self)
             resultado_instrucoes = tela_instrucoes.run()
-            if resultado_instrucoes == "voltar": # se clicar em fechar a guia o jogo não encerra: atenção
+            if resultado_instrucoes == "voltar": # todo: se clicar em fechar a guia o jogo não encerra, atenção
                 self.run()
                 return
         if escolha_inicial == "sair":

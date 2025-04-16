@@ -15,7 +15,7 @@ def get_image(sheet, width, height, scale, colour, position):
 
 class Window():
     def __init__(self,x,y):
-        self.image = pygame.image.load("images\\window.png").convert_alpha()
+        self.image = pygame.image.load("images\\animacoes\\window.png").convert_alpha()
         frame_height = self.image.get_height() // 66
         frame_width = self.image.get_width()
         self.frames = [get_image(self.image, frame_width, frame_height, 3, None, (0, i)) for i in range(66)]

@@ -7,10 +7,10 @@ class IntroAnimation:
         self.overlay_alpha = 255
         self.fade_speed = 3
 
-        self.logo = pygame.image.load("images/logo.png").convert_alpha()
+        self.logo = pygame.image.load("images\\animacoes\\logo.png").convert_alpha()
         self.logo = pygame.transform.scale_by(self.logo, 0.5)
 
-        self.spritesheet = pygame.image.load("images/animacao.png").convert_alpha()
+        self.spritesheet = pygame.image.load("images\\animacoes\\animacao.png").convert_alpha()
         self.num_frames = 5
         self.frame_width = self.spritesheet.get_width()
         self.frame_height = self.spritesheet.get_height() // self.num_frames

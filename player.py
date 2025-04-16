@@ -71,8 +71,8 @@ class Player:
         #verifica se está usando máquina
         elif self.using_machine_timer > 0:
             k=1
-            if self.position==4:
-                k=0
+            #if self.position==4:
+            #    k=0
             
             self.skin = self.skinVector[k+4*(self.frame//40)]
             self.using_machine_timer -= 1
