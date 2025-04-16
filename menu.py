@@ -7,7 +7,7 @@ class Menu:
         self.x=x
         self.y=y
         self.items = items 
-        self.image = pygame.image.load("images\\menu.png").convert_alpha()
+        self.image = pygame.image.load("images\\cozinha\\menu.png").convert_alpha()
         self.group = pygame.sprite.Group()
         padding = 32+16
         i =0

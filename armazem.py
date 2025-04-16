@@ -22,7 +22,7 @@ class Armazem(HoverSprite):
         self.x_menu = x_menu
         self.y_menu = y_menu
         self.menu_aberto = False 
-        self.menu_image = pygame.image.load("images\\menu.png").convert_alpha()
+        self.menu_image = pygame.image.load("images\\cozinha\\menu.png").convert_alpha()
         self.items = items
         self.menu = Menu(gc, self.items, self.x_menu,self.y_menu)
         

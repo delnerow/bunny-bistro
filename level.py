@@ -83,7 +83,7 @@ class Level:
         # as máquinas da cozinha
         self.tabua = maquina.Tabua(self.gc, 64 * 14.05, 64 * 1.4)
         self.batedeira = maquina.Batedeira(self.gc, 405, 80)
-        self.forno = maquina.Forno(self.gc, 64 * 8, 64 * 1.5)
+        self.forno = maquina.Forno(self.gc, 64 * 9, 64 * 1.5)
 
         self.mesasGroup = pygame.sprite.Group()
         self.maquinasGroup = pygame.sprite.Group()
@@ -96,7 +96,7 @@ class Level:
         self.mesasGroup.add(self.mesa2)
 
         # bancada de pratos
-        self.bancada = Bancada(self.gc, 64 * 6, 64 * 4.2)
+        self.bancada = Bancada(self.gc, 64 * 2, 64 * 4.2)
         self.bancadaGroup.add(self.bancada)
 
         # despensa
