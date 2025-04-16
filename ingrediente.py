@@ -1,143 +1,132 @@
 
-from copy import deepcopy
 import pygame
 from ClickSprite import ClickableSprite
 
-
-class Ingrediente:
-    def __init__(self, nome, indiceReceita,gc1, image,x,y):
-        self.nome=nome
-        self.indiceReceita = indiceReceita
-        self.gc = gc1
+# Ingredientes, que combinados e preparados num certa ordem geram um prato de comida
+class Ingrediente(ClickableSprite):
+    def __init__(self, indice_Receita,gc1, image,x,y):
+        self.indice_Receita = indice_Receita
+        self.estado_Receita=[]
         self.x=x
         self.y=y
-        self.estadoReceita=[]
-        self.sprite = ClickableSprite(image,self.x,self.y,self.alertarEscolha)
+        self.gc = gc1
         self.sound = pygame.mixer.Sound("sounds\\vup.mp3")
         self.sound2 = pygame.mixer.Sound("sounds\\menu.mp3")
-        self.sound2.set_volume(0.3)  # Define o volume de sound2 para 50% #
-    # Um nome para identificar o ingrediente
-    # o índice no código carteado de receita
-    # bools indicando o estado culinário do ingrediente
-    #
-    # DISCLAIMER: talvez um ingrediente sprite n seja o mesmo que um ingrediente no prato
-    #
+        self.sound2.set_volume(0.3)
+        super().__init__(image,self.x,self.y,self.alertar_Escolha)  
+        # :indice_Receita:  Cada ingrediente tem um índice no código de receita
+        # :estado_Receita:  Lista com a ordem dos preparos
+        # :x:               Posição x da imagem do ingrediente 
+        # :y:               Posição y da imagem do ingrediente
+        # :gc:              GameController para acessar prato e score 
+        # :sound:           Som de ingrediente inserio no prato 
+        # :sound2:          Som de erro, quando o prato está cheio/sem prato
+        
     def cortar(self):
-        self.__cortado= True
-        if self.estadoReceita.count(1) == 0:
-            self.estadoReceita.append(1)
-    #
-    # corta o ingrediente
-    #
+        if self.estado_Receita.count(1) == 0:
+            self.estado_Receita.append(1)
+    # Preparo de cortar
     
     def bater(self):
-        self.__batido= True
-        if self.estadoReceita.count(2) == 0:
-            self.estadoReceita.append(2)
-    #
-    # bate o ingrediente
-    #
-    def assar(self):
-        self.__assado= True
-        if self.estadoReceita.count(3) == 0:
-            self.estadoReceita.append(3)
-    #
-    # assa o ingrediente
-    #
-    def restaurar(self):
-        self.estadoReceita = []
-    #
-    # restaura o ingrediente
-    #
+        if self.estado_Receita.count(2) == 0:
+            self.estado_Receita.append(2)
+    # Preparo de bater
     
-    def alertarEscolha(self):
-        #self.gc.level.player.prato.add_ingrediente(self.__clonar__())
+    def assar(self):
+        if self.estado_Receita.count(3) == 0:
+            self.estado_Receita.append(3)
+    # Preparo de assar
+    
+    def alertar_Escolha(self):
         if(self.gc.player.prato != None):
             self.gc.player.prato.add_ingrediente(self.__clonar__())
-            if(len(self.gc.player.prato.ingredientes)<5):
+            if(len(self.gc.player.prato.ingredientes)<=5):
                 self.sound.play()
             else:
                 self.sound2.play()
-        
-    #
-    # um ingrediente clicado informa o GameController dessa escolha
-    # altera um parâmetro do gameController (ou será melhor uma função só para isso?)
+    # Se há um prato clonar o ingrediente clicado para o prato
+    # Se foi possível adicionar, tocar som de sucesso 
+    # caso contrário som de erro
     
     def __clonar__(self):
-        # just create a new instance 
-        raise NotImplementedError("Subclasses must implement this method")
-
+        raise NotImplementedError("Subclasse sobrescreve esse método")
+    # Cria uma nova instancia do objeto, a depender da subclasse
     
-    def estadoNumerico(self):
-        
-        return tuple(self.estadoReceita)
-    #
-    # definindo qual o estado culinário do ingrediente
-    # transformando lista de algarismos num número
-    #
+    def estado_Numerico(self):
+        return tuple(self.estado_Receita)
+    # Definindo qual o estado e ordem de preparo do ingrediente
+
 class Tomate(Ingrediente):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images\\food\Vegetables\Tomato.png').convert_alpha();
         self.image = pygame.transform.scale_by(self.image, 3)
-        super().__init__("Tomate", 0,gc,self.image,x,y)  
-    #
-    # carrega imagem do sprite
-    # define nome e índice na lei da receita
-    #
+        super().__init__(0,gc,self.image,x,y)  
+    # Carrega imagem do sprite e dimensiona
+    # Define índice do ingrediente na lei da receita
     
     def __clonar__(self): 
         return Tomate(self.gc,0,0) 
-    #
-    # cria nova instância de Tomate
-    #
+    # Cria nova instância de Tomate
 
 class Cebola(Ingrediente):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images\\food\Vegetables\Onion.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
-        super().__init__("Cebola", 1,gc,self.image,x,y)  
-    #
-    # carrega imagem do sprite
-    # define nome e índice na lei da receita
-    #
+        super().__init__(1,gc,self.image,x,y)  
+    # Carrega imagem do sprite e dimensiona
+    # Define índice do ingrediente na lei da receita
      
     def __clonar__(self):
         return Cebola(self.gc,0,0)  
-    #
-    # cria nova instância de Ceebola
-    #
+    # Cria nova instância de Cebola
 
 class Grao(Ingrediente):
     def __init__(self,gc, x, y):
         self.image=pygame.image.load('images\\food\Vegetables\potato.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
-        super().__init__("Grão de Bico", 2, gc, self.image, x, y) 
+        super().__init__(2, gc, self.image, x, y) 
+    # Carrega imagem do sprite e dimensiona
+    # Define índice do ingrediente na lei da receita
+    
     def __clonar__(self):
         return Grao(self.gc,0,0) 
+    # Cria nova instância de Grão de Bico
         
 class Farinha(Ingrediente):
     def __init__(self,gc, x, y):
         self.image=pygame.image.load('images\\food\Sweets\Sugar.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
-        super().__init__("Farinha", 3, gc, self.image, x, y) 
+        super().__init__(3, gc, self.image, x, y) 
+    # Carrega imagem do sprite e dimensiona
+    # Define índice do ingrediente na lei da receita
+    
     def __clonar__(self):
         return Farinha(self.gc,0,0) 
+    # Cria nova instância de Farinha
         
 class Leite(Ingrediente):
     def __init__(self,gc, x, y):
         self.image=pygame.image.load('images\\food\EggsandDairy\Milk1.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
-        super().__init__("Leite Vegetal", 4,gc,self.image,x,y)  
+        super().__init__(4,gc,self.image,x,y)  
+    # Carrega imagem do sprite e dimensiona
+    # Define índice do ingrediente na lei da receita
+    
     def __clonar__(self):
         return Leite(self.gc,0,0) 
+    # Cria nova instância de leite Vegetal
         
 class Brocolis(Ingrediente):
     def __init__(self,gc, x, y):
         self.image=pygame.image.load('images\\food\Vegetables\Broccoli.png').convert_alpha()
         self.image = pygame.transform.scale_by(self.image, 3)
-        super().__init__("Brócolis", 5, gc, self.image, x, y) 
+        super().__init__( 5, gc, self.image, x, y) 
+    # Carrega imagem do sprite e dimensiona
+    # Define índice do ingrediente na lei da receita
+    
     def __clonar__(self):
         return Brocolis(self.gc,0,0) 
+    # Cria nova instância de Brocolis
         
         
        

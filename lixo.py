@@ -2,28 +2,34 @@ from prato import Prato
 from ClickSprite import ClickableSprite
 import pygame
 
-class Lixo:
+
+# Objeto destruidor de pratos que sairam errado
+class Lixo(ClickableSprite):
     def __init__(self,gc,x,y):
         self.gc = gc
         self.image=pygame.image.load('images/lixo.png').convert_alpha()
-        self.image= pygame.transform.scale(self.image, (32, 32))
-        self.sprite = ClickableSprite(self.image, x, y, self.descartar)
+        self.image= pygame.transform.scale(self.image, (80, 80))
         self.sound = pygame.mixer.Sound('sounds/lixo.mp3')
+        super().__init__(self.image,x,y,self.descartar)  
+        # :indice_Receita:  Cada ingrediente tem um índice no código de receita
+        # :estado_Receita:  Lista com a ordem dos preparos
+        # :x:               Posição x da imagem do ingrediente 
+        # :y:               Posição y da imagem do ingrediente
+        # :gc:              GameController para acessar prato e score 
+        # :sound:           Som de ingrediente inserio no prato 
+        # :sound2:          Som de erro, quando o prato está cheio/sem prato
     
     def descartar(self):
         self.gc.player.move(6)
         bandeja = self.gc.player.prato
         if (bandeja == None):
             return
-        print("descartar")
         if not bandeja.esta_vazio():
-            bandeja.restaurar_prato()
             bandeja.limpar_comida()
-            self.gc.printarPrato()
             self.sound.play()
         else:
             print("Erro: nada na bandeja")
-    #
-    # lixo
-    # ele lixea
-    #
+        # Faz o player mover até a maquina, 
+        # se existir um prato limpa a comida e toca som
+    
+    

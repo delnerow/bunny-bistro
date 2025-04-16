@@ -51,13 +51,13 @@ while len(balcao)>0:
     action = input("o que coelhinho deseja fazer?")
     if action == "t":
         tabua.ocupar(bandeja)
-        tabua.free(bandeja)
+        tabua.desocupar(bandeja)
     elif action == "b":
         batedeira.ocupar(bandeja)
-        batedeira.free(bandeja)
+        batedeira.desocupar(bandeja)
     elif action == "f":
         forno.ocupar(bandeja)
-        forno.free(bandeja)
+        forno.desocupar(bandeja)
     elif action == "n":
         bandeja.limpar_comida()
     elif action == "i":

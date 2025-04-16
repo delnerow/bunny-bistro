@@ -29,6 +29,18 @@ class Window():
         
         self.x=x
         self.y=y
+        # :image: Sprite sheet da janela (com todas as animações)
+        # :frame_height: Altura de cada frame da animação
+        # :frame_width: Largura de cada frame da animação
+        # :frames: Lista com todos os frames de animação da janela
+        # :current_frame: Índice do frame atual da animação
+        # :timer: Controla o tempo decorrido (não usado aqui, mas pode ser útil para sincronizar)
+        # :frame_counter: Contador para controlar a troca de frames
+        # :frame_speed: Intervalo de frames para trocar a imagem (quanto menor, mais rápido)
+        # :frame_duration: Tempo entre frames (pode ajustar para mudar a velocidade da animação)
+        # :skin: Imagem atual da janela (já redimensionada)
+        # :x: Posição X da janela na tela
+        # :y: Posição Y da janela na tela
         
     def update(self):
         self.frame_counter += 1
@@ -37,7 +49,9 @@ class Window():
             self.current_frame = (self.current_frame + 1) % len(self.frames)
             self.skin = self.frames[self.current_frame]
             self.skin = pygame.transform.scale_by(self.skin, 0.15)
-
+    # Atualiza a janela, trocando os frames conforme o tempo de animação
 
     def print(self,screen):
         screen.blit(self.skin, (self.x, self.y))
+    # Desenha a janela na tela na posição especificada
+        

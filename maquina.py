@@ -1,20 +1,23 @@
 from prato import Prato
 from ClickSprite import ClickableSprite
 import pygame
-class Maquina:
+
+# Classe base para todas as máquinas de cozinha
+class Maquina(ClickableSprite):
     def __init__(self,gc,image,x,y):
         self.prato_atual= Prato()
         self.__ocupada=False
         self.gc=gc
         self.x=x
         self.y=y
-        self.sprite = ClickableSprite(image,x,y,self.ocupar)
         self.position = 0
-        
-    #
-    # inicializa uma máqina (superclasse)
-    # e desocupada
-    # 
+        super().__init__(image,x,y,self.ocupar)
+        # :prato_atual:     Prato que está sendo preparado na máquina
+        # :ocupada:         Flag de controle para saber se a máquina está em uso
+        # :gc:              GameController, para acessar o contexto geral do jogo 
+        # :x:               Posição X da máquina no jogoe
+        # :y:               Posição Y da máquina no jogo 
+        # :position:        ID de posição no layout do jogo
     
     def ocupar(self):
         bandeja = self.gc.player.prato
@@ -30,35 +33,27 @@ class Maquina:
                 print("Erro: nada na bandeja")
         else:
             print("Erro: máquina ocupada")
-        
-    #
-    # esvazia ingredientes da bandeja
-    # ocupa a máquina
-    # começa a operar
-    #
+    # Se o prato do jogador não estiver vazio e a máquina estiver livre,
+    # transfere ingredientes da bandeja para a máquina e inicia o processamento.
     
     def __operar(self):
         if(not self.prato_atual.esta_vazio()):
-            #lançar minigame
             success = True
             if success:
                 self.cozinhar()
             else:
                 print("Erro: falhou no minigame")   
                 
-    # Iniciaria minigame para ver se irá realmente cozinhar
-    # e começa a cozinhar
-    #
+    # Se os ingredientes estiverem prontos, chama o método cozinhar.
+    # Substituível por minigame real no futuro.
     
     def cozinhar(self):
         
-        raise NotImplementedError("Subclasses must implement this method")
-    # 
-    # Cada subclasse tem o seu próprio
-    # dependendo da maquina da cozinha
-    #
+        raise NotImplementedError("Subclasse sobresscreve esse método")
+    # Método abstrato para definir o que a máquina fará com os ingredientes.
+    # Cada subclasse (ex: Forno, Tabua) deve implementar sua versão específica.
     
-    def free(self):
+    def desocupar(self):
         bandeja=self.gc.player.prato
         if bandeja != None and bandeja.ingredientes==[] and not self.prato_atual.esta_vazio():
             bandeja.ingredientes=self.prato_atual.ingredientes
@@ -67,10 +62,9 @@ class Maquina:
             #self.gc.printarPrato()
         else:
             print("Erro: bandeja cheia/maquina já vazia")
-    #
-    # retorna ingredientes à bandeja
-    # e se desocupa
-    #
+        # Transfere os ingredientes processados da máquina de volta para a bandeja
+        # e libera a máquina.
+ 
 class Tabua(Maquina):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images/tabua.png').convert_alpha();
@@ -83,28 +77,24 @@ class Tabua(Maquina):
         self.sound.play()
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].cortar()
-        self.free()
-    #
-    # tabua de corte
-    # ela corta
-    #
+        self.desocupar()
+    # Ao processar, todos os ingredientes serão cortados.
                
 class Batedeira(Maquina):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images/batedeira.png').convert_alpha();
-        self.image= pygame.transform.scale(self.image, (64, 64))
+        self.image= pygame.transform.scale(self.image, (40, 40))
         super().__init__(gc,self.image,x,y)
         self.position = 3
         self.sound = pygame.mixer.Sound('sounds/bater.mp3')
+        
     def cozinhar(self):
         self.sound.play()
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].bater()
-        self.free()
-    #
-    # batedeira
-    # ela bate
-    #
+        self.desocupar()
+    # Ao processar, todos os ingredientes serão batidos.
+    
 class Forno(Maquina):
     def __init__(self,gc,x,y):
         self.image=pygame.image.load('images/forno.png').convert_alpha()
@@ -116,8 +106,5 @@ class Forno(Maquina):
         self.sound.play()
         for i in range(len(self.prato_atual.ingredientes)):
             self.prato_atual.ingredientes[i].assar()
-        self.free()
-    #
-    # forno
-    # ele assa
-    #
+        self.desocupar()
+    # Ao processar, todos os ingredientes serão assados.

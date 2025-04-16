@@ -3,36 +3,34 @@ pedidos={"invalido":"images/prato.png", "Caponata":"images/pratos/caponata.png",
 preparos={1:"images//knife.png", 2:"images/whisk42x42.png",3:"images//fire16x16.png"}
 
 
+# Display de UI com ingredientes atuais e possível prato feito
 class PratoDisplay():
     def __init__(self, screen):
         self.screen = screen
         self.width = 300
         self.height = 100
-        #
-        # tela do jogo 
-        # comprimento do menu 
-        # altura do menu
-        #
+        
+        # :scree:       Tela do jogo 
+        # :width:       Comprimento do menu 
+        # :height:      Altura do menu
+
         
         self.items = []  
         self.tamanho_item = 16
         self.x_padding = 10
         self.y_padding=10
         
-        #
-        # items para serem displayados 
-        # tamanho do sprite do item
-        # espaço entre itens
-        #
+        # :items: Lista de ingredientes a serem exibidos
+        # :tamanho_item: Tamanho do sprite de cada ingrediente
+        # :x_padding: Espaço horizontal entre itens
+        # :y_padding: Espaço vertical entre itens
+
         
         self.receita = ""
         self.receita_image = None
         
-        #
-        # receita a ser displayada 
-        # fonte do texto
-        # cor do texto
-        #
+        # :receita: Nome da receita validada 
+        # :receita_image: Imagem da receita a ser mostrada#
 
 
     def update_ingrediente(self, prato):
@@ -46,11 +44,8 @@ class PratoDisplay():
             self.receita="sem prato"
             self.receita_image = None
         
-        
-        #
-        # atualiza os itens pelos ingredientes do prato
-        # atualiza receita pela validacao do prato
-        #
+    # Atualiza os itens com os ingredientes do prato
+    # e busca a imagem da receita validada, se houver
         
         
     def display(self, x, y):
@@ -59,7 +54,7 @@ class PratoDisplay():
         y0=y-40
         for item in self.items:
             
-            for estado in item.estadoNumerico():
+            for estado in item.estado_Numerico():
                 ye=y0
                 xe=x0
                 preparo_image = pygame.image.load(preparos[estado]).convert_alpha()
@@ -76,7 +71,7 @@ class PratoDisplay():
                     factor =2.5
                 preparo_image = pygame.transform.scale_by(preparo_image,factor)
                 self.screen.blit(preparo_image, (xe, ye))
-            self.screen.blit(item.sprite.image, (x0, y0))
+            self.screen.blit(item.image, (x0, y0))
             x0 += self.tamanho_item + self.x_padding
             
             
@@ -85,8 +80,6 @@ class PratoDisplay():
             receita_x = x + 160
             receita_y = y +40
             self.screen.blit(self.receita_image, (receita_x,receita_y))
-        #
-        # menu eh um retangulo marrom 
-        # texto
-        #
+    # Exibe os ingredientes e a imagem da receita (se houver)
+    # na tela, com o layout definido
     
