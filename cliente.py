@@ -63,7 +63,7 @@ class Cliente(ClickableSprite):
         # Inicializar uma skin
         # Frame organiza a animação da spritesheet
         
-        self.balao_image = pygame.image.load("images\\balao.png").convert_alpha()  # carrega a imagem do balão
+        self.balao_image = pygame.image.load("images\\clientes\\balao.png").convert_alpha()  # carrega a imagem do balão
         self.balao_image = pygame.transform.scale_by(self.balao_image, 2)
         self.balao_offset = pygame.Vector2(-30, -70)
         # Carregar imagem do balão de pedido e dimensionar

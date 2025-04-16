@@ -66,7 +66,7 @@ class Geladeira(Armazem):
         self.x_menu = x+10
         self.y_menu = y-50
         self.position=0
-        self.image = pygame.image.load("images\\geladeira.png").convert_alpha()
+        self.image = pygame.image.load("images\\cozinha\\geladeiras\\geladeira_nivel1.png").convert_alpha()
         self.image= pygame.transform.scale(self.image, (64, 64*2))
         self.items=[Tomate(gc, 0, 0),Cebola(gc,0, 0),Leite(gc, 0 , 0), Brocolis(gc, 0, 0)]
         super().__init__(self.image, gc, x, y,self.x_menu,self.y_menu,self.items, self.position)
