@@ -36,9 +36,9 @@ Com o intuito de salvar o planeta da emissão de gases gerada pelas grandes faze
 
 Você pode preparar **3 pratos diferentes**:
 
-1. **Hamburguer Vegano**
-2. **Quiche**
-3. **Caponata**
+1. 🍔 **Hamburguer Vegano**
+2. 🥧**Quiche**
+3. 🥘**Caponata**
 
 ---
 
