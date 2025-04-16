@@ -97,7 +97,7 @@ class Level:
         self.armazemGroup.add(self.despensa)
 
         #lixo
-        self.lixo = Lixo(gc, 10, 36*7)
+        self.lixo = Lixo(gc, -14, 36*6.1)
         self.lixoGroup = pygame.sprite.Group()
         self.lixoGroup.add(self.lixo)
 
