@@ -1,6 +1,6 @@
 import pygame
 pedidos={"invalido":"images\\cozinha\\prato.png", "Caponata":"images\\pratos\\caponata.png", "Hamburguer":"images\\pratos\\hamburguer.png","Quiche":"images\\pratos\\quiche.png"}
-preparos={1:"images\\knife.png", 2:"images\\whisk42x42.png",3:"images\\fire16x16.png"}
+preparos={1:"images\\pratos\\preparos\\knife.png", 2:"images\\pratos\\preparos\\whisk42x42.png",3:"images\\pratos\\preparos\\fire16x16.png"}
 
 
 # Display de UI com ingredientes atuais e possível prato feito
