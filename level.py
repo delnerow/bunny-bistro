@@ -111,6 +111,7 @@ class Level:
         self.lixoGroup.add(self.lixo)
 
         #musica
+        pygame.mixer.music.stop()
         self.volume = 0.2
         self.music = pygame.mixer.Sound('sounds\\music.mp3')
 

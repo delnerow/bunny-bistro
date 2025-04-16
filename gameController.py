@@ -2,7 +2,7 @@ from prato import Prato
 from level import Level
 from player import Player
 import pygame
-
+from telaInicial import TelaInicial
 class GameController:
     def __init__(self):
         pygame.init()
@@ -16,10 +16,17 @@ class GameController:
         self.time=0
         self.player = Player()
         self.level = Level(self)
+        self.start=TelaInicial(self)
 
+        self.state = "menu"  # <- Começa pelo menu
+        self.clock = pygame.time.Clock()
+
+        
 
     def run(self):
-        self.level.run()
+        escolha = self.start.run()
+        if escolha == "jogar":
+            self.level.run()
 
     def printOI(self):
         print("oi\n")
