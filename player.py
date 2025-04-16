@@ -1,5 +1,4 @@
-#código do jogador como movimento, interação com o ambiente e ações
-#além das imagens
+
 import pygame
 from pygame.math import Vector2
 from prato import *
@@ -14,31 +13,36 @@ def get_image(sheet, width, height, scale, colour, position):
 	image.set_colorkey(colour)
 	return image
 
-
+# Jogador com movimento, interação com o ambiente e ações além das imagens
 class Player:
     def __init__(self):
-        self.screenposition = Vector2(64*3,64*3) #posição na tela, para print
+        # Posição na tela, para print
+        self.screenposition = Vector2(64*3,64*3) 
 
-        #posição do coelho na cozinha (em que máquina ele está)
+        # Posição do coelho na cozinha (em que máquina ele está)
         self.position = 0 
         self.is_on_armazem = False
         self.using_machine_timer = 0
         
+        # Spritesheet do coelho
         self.sheet = pygame.image.load("images\coelinho.png").convert_alpha()
 
-        #cria o vetor de sprites do coelho (a gente não deve usar todas...)
+        # Cria o vetor de sprites do coelho (a gente não deve usar todas...)
         self.skinVector = [get_image(self.sheet, 48,48, 3, (0,0,0), (int(x / 4), x % 4)) for x in range(16)]
         self.skin = self.skinVector[0]
 
-        #frame do coelho: alterna entre imagens na mesma 
-        # direção pra ele ter movimento mesmo parado :D 
+        # Frame do coelho: alterna entre imagens na mesma 
+        # Direção pra ele ter movimento mesmo parado :D 
         self.frame = 0
-        self.mira = False #coelho está com a arma
+        # coelho está com a arma
+        self.mira = False 
 
-        #inicia o prato do coelho como NONE!!!
+        # Inicia o prato do coelho como NONE!!!
         self.prato = None
 
+        # Lista de posições fixas na cozinha para cada estação
         self.movVec = []
+        
         #declara as posições do player na cozinha
         pos_geladeira = Vector2(64*2.5, 64*1.5) #0
         pos_armario = Vector2(64*8.5, 64*1.5)   #1
@@ -47,6 +51,7 @@ class Player:
         pos_tabua = Vector2(64*3, 64*3)         #4
         pos_prato = Vector2(64*4, 64*3)         #5
         pos_lixo = Vector2(32*0.5, 64*3)        #6
+        
         self.movVec.extend([pos_geladeira, pos_armario, pos_fogao, pos_batedeira, pos_tabua, pos_prato, pos_lixo])
 
         self.prepGunSound = pygame.mixer.Sound("sounds\gunPrepare.mp3")
@@ -96,16 +101,15 @@ class Player:
 
     def machine_using(self):
         self.using_machine_timer = 30
+    # Coelho olha por pouco tempo na maquina quando usa
     
     def mirar(self):
         self.mira = not self.mira
+    # Alterna o estado de mira do coelho
 
     def engatilhar(self):
-        #prepara a arma para atirar
         self.prepGunSound.play()
-
+    # Prepara a arma para atirar
+    
     def shoot(self):
         self.shootSound.play()
-
-    def printOi(self):
-        print("oi")
