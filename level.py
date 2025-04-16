@@ -259,7 +259,7 @@ class Level:
                 (self.score_bar_x, self.score_bar_y, self.score_bar_width, self.score_bar_height), 4)
             self.shake_duration -= 1
 
-        if self.shake_duration < 0:
+        elif self.shake_duration < 0:
             if self.shake_duration//4 % 2 == 0:
                 color = (0, 255, 0)
             else:
@@ -276,7 +276,7 @@ class Level:
         self.score += score
         if self.score < 0:
             self.score = 0
-        if score < 0:
+        if score <= 0:
             self.shake_duration = 50
         else:
             self.shake_duration = -50

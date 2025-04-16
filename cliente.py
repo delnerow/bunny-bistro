@@ -87,7 +87,7 @@ class Cliente(ClickableSprite):
                     self.servido_certo=True
                     self.__score=100
                 else:
-                    self.__score=0
+                    self.__score=-10
                 prato.ingredientes = []
                 self.gc.player.prato = None
                 #self.gc.level.score= self.gc.level.score+self.satisfacao()
