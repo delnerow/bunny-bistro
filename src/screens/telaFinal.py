@@ -1,113 +1,50 @@
 import pygame
+from src.screens.tela import Tela
+from src.screens.tela import asset_path
 
-class TelaFinal:
-    def __init__(self, gc):
-        self.gc = gc
-        self.background_bad = pygame.image.load("assets\\images\\tela_final\\tela_bad_end.jpg")
-        self.background_bad = pygame.transform.scale(self.background_bad, (16 * 64, 9 * 64))
-        self.background_good = pygame.image.load("assets\\images\\tela_final\\tela_good_end.jpg")
-        self.background_good = pygame.transform.scale(self.background_good, (16 * 64, 9 * 64))
-        self.clock = pygame.time.Clock()
+class TelaFinal(Tela):
+    def __init__(self, gc, end_type): # Recebe 'good' or 'bad'
+        self.end_type = end_type
+        if end_type == "good":
+            background_p = asset_path("assets/images/tela/tela_final_good.jpg")
+            music_path = asset_path("assets/sounds/good.mp3")
+        else: # Assume "bad"
+            background_p = asset_path("assets/images/tela/tela_final_bad.jpg")
+            music_path = asset_path("assets/sounds/bad.mp3")
 
-        self.botao_tente_novamente = self.load_scaled("assets\\images\\tela_final\\botao_tente_novamente.png", 1.5)
-        self.botao_tente_hover = self.load_scaled("assets\\images\\tela_final\\botao_tente_novamente.png", 1.7)
+        super().__init__(gc, background_p)
+        self.music_path = music_path # Armazena para usar no on_enter
 
-        self.botao_sair_normal = self.load_scaled("assets\\images\\tela_final\\botao_sair.png", 1.5)
-        self.botao_sair_hover = self.load_scaled("assets\\images\\tela_final\\botao_sair.png", 1.7)
+        # Adicionar botões baseado no tipo de final
+        if end_type == "good":
+            self.add_button('sair',
+                            asset_path("assets/images/tela/botao_sair.png"), # Reutiliza botão sair
+                            asset_path("assets/images/tela/botao_sair.png"),
+                            (670, 395), # Posição específica do Good End
+                            "sair",
+                            scale_normal=1.5, scale_hover=1.7)
+        else: # Bad End
+            self.add_button('tentar',
+                            asset_path("assets/images/tela/botao_tente_novamente.png"),
+                            asset_path("assets/images/tela/botao_tente_novamente.png"),
+                            (360, 248),
+                            "tentar", # Ação para reiniciar ou voltar
+                            scale_normal=1.5, scale_hover=1.7)
+            self.add_button('sair',
+                            asset_path("assets/images/tela/botao_sair.png"),
+                            asset_path("assets/images/tela/botao_sair.png"),
+                            (360, 360), # Posição específica do Bad End
+                            "sair",
+                            scale_normal=1.5, scale_hover=1.7)
 
-        self.tentar_rect_base = pygame.Rect(360, 248, *self.botao_tente_novamente.get_size())
-        self.sair_rect_base = pygame.Rect(360, 360, *self.botao_sair_normal.get_size())
+    def on_enter(self):
+        #Toca a música apropriada para o final.
+        if hasattr(self.gc, 'music_Manager'):
+            self.gc.music_Manager.tocar_musica(self.music_path)
 
-    def load_scaled(self, path, scale):
-        img = pygame.image.load(path)
-        size = img.get_size()
-        return pygame.transform.scale(img, (int(size[0] * scale), int(size[1] * scale)))
-
-
-    def run_bad(self):
-        running = True
-        self.gc.music_Manager.tocar_musica("assets\\sounds\\bad.mp3")
-        while running:
-            self.gc.screen.blit(self.background_bad, (0, 0))
-            mouse_pos = pygame.mouse.get_pos()
-            cursor_changed = False
-
-            # TENTAR
-            if self.tentar_rect_base.collidepoint(mouse_pos):
-                botao = self.botao_tente_hover
-                rect = botao.get_rect(center=self.tentar_rect_base.center)
-                pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
-                cursor_changed = True
-            else:
-                botao = self.botao_tente_novamente
-                rect = self.tentar_rect_base
-            self.gc.screen.blit(botao, rect.topleft)
-
-            # SAIR
-            if self.sair_rect_base.collidepoint(mouse_pos):
-                botao = self.botao_sair_hover
-                rect = botao.get_rect(center=self.sair_rect_base.center)
-                pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
-                cursor_changed = True
-            else:
-                botao = self.botao_sair_normal
-                rect = self.sair_rect_base
-            self.gc.screen.blit(botao, rect.topleft)
-
-            if not cursor_changed:
-                pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.mixer.music.fadeout(1000)  # Fade ao sair
-                    return "sair"
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.tentar_rect_base.collidepoint(event.pos):
-                        pygame.mixer.music.fadeout(1000)  # Fade ao sair
-                        pygame.time.delay(1000)
-                        pygame.mixer.music.load("assets\\sounds\\music.mp3")
-                        print("tentar")
-                        return "tentar"
-                    elif self.sair_rect_base.collidepoint(event.pos):
-                        pygame.mixer.music.fadeout(1000)  # Fade ao sair
-                        return "sair"
-
-            pygame.display.flip()
-            self.clock.tick(60)
-
-    def run_good(self):
-        running = True
-        self.gc.music_Manager.tocar_musica("assets\\sounds\\good.mp3")
-        self.sair_rect_base = pygame.Rect(670, 395, *self.botao_sair_normal.get_size())
-
-        while running:
-            self.gc.screen.blit(self.background_good, (0, 0))
-            mouse_pos = pygame.mouse.get_pos()
-            cursor_changed = False
-
-            # SAIR
-            if self.sair_rect_base.collidepoint(mouse_pos):
-                botao = self.botao_sair_hover
-                rect = botao.get_rect(center=self.sair_rect_base.center)
-                pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_HAND)
-                cursor_changed = True
-            else:
-                botao = self.botao_sair_normal
-                rect = self.sair_rect_base
-            self.gc.screen.blit(botao, rect.topleft)
-
-            if not cursor_changed:
-                pygame.mouse.set_cursor(pygame.SYSTEM_CURSOR_ARROW)
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.mixer.music.fadeout(1000)  # Fade ao sair
-                    return "sair"
-                elif event.type == pygame.MOUSEBUTTONDOWN:
-                    if self.sair_rect_base.collidepoint(event.pos):
-                        pygame.mixer.music.fadeout(1000)  # Fade ao sair
-                        return "sair"
-
-            pygame.display.flip()
-            self.clock.tick(60)
-
+    def on_exit(self, action):
+        #Fadeout para sair ou tentar novamente.
+        super().on_exit(action) # Chama o on_exit base (trata 'sair')
+        if action == "tentar": # Ação específica do Bad End
+             if hasattr(self.gc, 'music_Manager'):
+                 pygame.mixer.music.fadeout(1000)
